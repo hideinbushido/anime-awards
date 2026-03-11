@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { Menu, X, Trophy, Globe } from 'lucide-react';
+import { Menu, X, Trophy, Globe, LogIn } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export default function Navbar() {
@@ -74,6 +74,15 @@ export default function Navbar() {
             >
               <Globe className="w-4 h-4" />
               <span className="uppercase font-medium">{otherLocale}</span>
+            </Link>
+
+            {/* Admin login */}
+            <Link
+              href={`/${locale}/admin/login`}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            >
+              <LogIn className="w-4 h-4" />
+              <span className="hidden sm:block">Connexion</span>
             </Link>
 
             {/* Mobile menu button */}
