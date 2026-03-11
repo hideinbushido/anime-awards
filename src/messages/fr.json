@@ -1,0 +1,250 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "categories": "Catégories",
+    "nominees": "Nominés",
+    "vote": "Voter",
+    "faq": "FAQ",
+    "admin": "Admin"
+  },
+  "home": {
+    "hero": {
+      "edition": "Édition 2026",
+      "title": "Anime Awards",
+      "subtitle": "Les récompenses anime de la communauté",
+      "slogan": "Votez pour vos animés, personnages et moments préférés de l'année.",
+      "ctaNominees": "Voir les nominés",
+      "ctaVote": "Voter maintenant",
+      "votingOpen": "Les votes sont ouverts !",
+      "votingClosed": "Les votes sont fermés",
+      "votingOpensSoon": "Les votes ouvrent bientôt"
+    },
+    "countdown": {
+      "voteClose": "Fermeture des votes dans",
+      "live": "Live TikTok dans",
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes",
+      "seconds": "Secondes",
+      "votingClosed": "Les votes sont fermés",
+      "liveStarted": "Le live a commencé !"
+    },
+    "howItWorks": {
+      "title": "Comment ça marche ?",
+      "step1Title": "Découvrez les nominés",
+      "step1Desc": "Parcourez toutes les catégories et les nominés de cette édition.",
+      "step2Title": "Votez",
+      "step2Desc": "Choisissez votre favori dans chaque catégorie et envoyez votre vote.",
+      "step3Title": "Suivez le live",
+      "step3Desc": "Rejoignez notre live TikTok pour découvrir les gagnants en direct !"
+    },
+    "featured": {
+      "title": "Catégories principales",
+      "seeAll": "Voir toutes les catégories",
+      "nominees": "nominés"
+    },
+    "tiktok": {
+      "title": "Suivez-nous sur TikTok",
+      "subtitle": "Restez informé de toute l'actualité de l'événement et soyez le premier à voir les résultats en live.",
+      "follow": "Suivre sur TikTok"
+    }
+  },
+  "about": {
+    "title": "À propos",
+    "subtitle": "Qui sommes-nous ?",
+    "description": "Les Anime Awards sont un événement communautaire annuel célébrant les meilleurs animes, personnages et moments de l'année. Créé par et pour les fans, cet événement donne la parole à la communauté pour élire ses favoris.",
+    "whyTitle": "Pourquoi cet événement ?",
+    "whyDesc": "Parce que les fans méritent d'avoir leur mot à dire. Nous croyons que la communauté est la meilleure juge pour récompenser ce qui l'a fait vibrer tout au long de l'année.",
+    "whoTitle": "Qui peut voter ?",
+    "whoDesc": "Tout le monde ! L'événement est ouvert à tous les fans d'anime, sans restriction d'âge ou de localisation. Un seul vote par personne.",
+    "howTitle": "Comment sont choisis les gagnants ?",
+    "howDesc": "Les gagnants sont déterminés uniquement par les votes de la communauté. Aucun jury, aucun algorithme — que la voix du public.",
+    "ceremonyTitle": "La cérémonie finale",
+    "ceremonyDesc": "Les gagnants sont annoncés lors d'un live TikTok exclusif. Une soirée de célébration pour toute la communauté."
+  },
+  "categories": {
+    "title": "Catégories",
+    "subtitle": "Découvrez toutes les catégories de cette édition",
+    "seeNominees": "Voir les nominés",
+    "nominees": "nominés",
+    "noCategories": "Aucune catégorie disponible pour le moment."
+  },
+  "nominees": {
+    "title": "Nominés",
+    "subtitle": "Découvrez tous les nominés de cette édition",
+    "filterAll": "Toutes les catégories",
+    "noNominees": "Aucun nominé disponible pour le moment.",
+    "voteNow": "Voter maintenant"
+  },
+  "vote": {
+    "title": "Voter",
+    "subtitle": "Faites entendre votre voix",
+    "nameLabel": "Votre nom / pseudo",
+    "namePlaceholder": "Ex: SakuraChan99",
+    "emailLabel": "Email (optionnel)",
+    "emailPlaceholder": "votre@email.com",
+    "countryLabel": "Pays (optionnel)",
+    "countryPlaceholder": "France",
+    "chooseNominee": "Choisissez un nominé",
+    "required": "obligatoire",
+    "acceptRules": "J'accepte le règlement de l'événement et je certifie ne voter qu'une seule fois.",
+    "submit": "Envoyer mon vote",
+    "submitting": "Envoi en cours...",
+    "votingClosed": "Les votes sont fermés",
+    "votingClosedDesc": "Merci à tous ceux qui ont voté ! Rendez-vous sur le live TikTok pour découvrir les gagnants.",
+    "votingNotOpen": "Les votes ne sont pas encore ouverts",
+    "votingNotOpenDesc": "Revenez bientôt pour voter pour vos favoris.",
+    "errors": {
+      "nameRequired": "Votre nom est requis",
+      "allCategoriesRequired": "Vous devez voter dans toutes les catégories",
+      "acceptRules": "Vous devez accepter le règlement",
+      "submitFailed": "Une erreur est survenue. Veuillez réessayer."
+    }
+  },
+  "confirmation": {
+    "title": "Vote enregistré !",
+    "subtitle": "Merci d'avoir participé aux Anime Awards 2026",
+    "message": "Votre vote a bien été pris en compte. Rendez-vous sur notre live TikTok pour découvrir les gagnants en direct !",
+    "liveDate": "Date du live :",
+    "followTiktok": "Suivre sur TikTok",
+    "share": "Partager le site",
+    "inviteFriends": "Invitez vos amis à voter !",
+    "inviteDesc": "Plus on est de fous, plus on rit ! Partagez le lien pour que vos amis puissent voter aussi.",
+    "backHome": "Retour à l'accueil"
+  },
+  "faq": {
+    "title": "FAQ & Règlement",
+    "subtitle": "Toutes vos questions, nos réponses",
+    "questions": [
+      {
+        "q": "Qui peut voter ?",
+        "a": "Tout le monde peut voter ! L'événement est ouvert à tous les fans d'anime, sans restriction d'âge ni de localisation."
+      },
+      {
+        "q": "Peut-on voter plusieurs fois ?",
+        "a": "Non, un seul vote par personne est autorisé. Tout vote multiple sera détecté et annulé."
+      },
+      {
+        "q": "Comment les gagnants sont-ils choisis ?",
+        "a": "Les gagnants sont déterminés uniquement par le nombre de votes reçus. Le nominé avec le plus de votes dans chaque catégorie remporte le prix."
+      },
+      {
+        "q": "Quand les résultats seront-ils annoncés ?",
+        "a": "Les résultats seront annoncés lors du live TikTok final. La date exacte est indiquée sur la page d'accueil."
+      },
+      {
+        "q": "Peut-on voir les résultats avant le live ?",
+        "a": "Non, les résultats restent secrets jusqu'au live pour préserver le suspense et l'expérience communautaire."
+      },
+      {
+        "q": "Que se passe-t-il en cas d'égalité ?",
+        "a": "En cas d'égalité parfaite entre deux nominés, l'organisateur se réserve le droit de trancher ou de déclarer deux gagnants ex-aequo."
+      },
+      {
+        "q": "Puis-je modifier mon vote après l'avoir soumis ?",
+        "a": "Non, une fois votre vote soumis, il ne peut pas être modifié. Prenez bien le temps de faire vos choix avant de valider."
+      },
+      {
+        "q": "Les votes sont-ils vérifiés ?",
+        "a": "Oui, nous mettons en place des systèmes anti-spam pour détecter et supprimer les votes multiples ou frauduleux."
+      }
+    ]
+  },
+  "admin": {
+    "login": {
+      "title": "Connexion Admin",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "error": "Email ou mot de passe incorrect"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "totalVotes": "Votes total",
+      "categories": "Catégories",
+      "nominees": "Nominés",
+      "status": "Statut",
+      "recentVotes": "Derniers votes",
+      "export": "Exporter les résultats"
+    },
+    "categories": {
+      "title": "Gestion des catégories",
+      "add": "Ajouter une catégorie",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "titleFr": "Titre (FR)",
+      "titleEn": "Titre (EN)",
+      "descFr": "Description (FR)",
+      "descEn": "Description (EN)",
+      "order": "Ordre",
+      "active": "Actif",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "confirmDelete": "Confirmer la suppression ?"
+    },
+    "nominees": {
+      "title": "Gestion des nominés",
+      "add": "Ajouter un nominé",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "name": "Nom",
+      "anime": "Anime",
+      "imageUrl": "URL de l'image",
+      "descFr": "Description (FR)",
+      "descEn": "Description (EN)",
+      "category": "Catégorie",
+      "active": "Actif",
+      "save": "Enregistrer",
+      "cancel": "Annuler"
+    },
+    "votes": {
+      "title": "Gestion des votes",
+      "voter": "Votant",
+      "date": "Date",
+      "country": "Pays",
+      "details": "Détails",
+      "export": "Exporter CSV"
+    },
+    "settings": {
+      "title": "Paramètres de l'événement",
+      "eventName": "Nom de l'événement",
+      "year": "Année",
+      "status": "Statut",
+      "voteOpenDate": "Ouverture des votes",
+      "voteCloseDate": "Fermeture des votes",
+      "liveDate": "Date du live",
+      "tiktokUrl": "Lien TikTok",
+      "instagramUrl": "Lien Instagram",
+      "discordUrl": "Lien Discord",
+      "save": "Enregistrer les paramètres"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "categories": "Catégories",
+      "nominees": "Nominés",
+      "votes": "Votes",
+      "settings": "Paramètres",
+      "logout": "Déconnexion"
+    }
+  },
+  "status": {
+    "draft": "Brouillon",
+    "preparation": "Préparation",
+    "voting_open": "Votes ouverts",
+    "voting_closed": "Votes fermés",
+    "results_published": "Résultats publiés"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "back": "Retour",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}
