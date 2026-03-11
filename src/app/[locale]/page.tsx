@@ -99,15 +99,17 @@ export default async function HomePage({
               <Link
                 href={`/${locale}/vote`}
                 className="group flex items-center gap-2 px-8 py-4 rounded-xl text-black font-bold text-lg transition-all btn-gold"
+                style={{ boxShadow: '0 0 25px rgba(212,160,23,0.45), 0 0 60px rgba(212,160,23,0.15)' }}
               >
                 <Trophy className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                {t('hero.ctaVote')}
+                Voter maintenant
               </Link>
               <Link
-                href={`/${locale}/nominees`}
-                className="flex items-center gap-2 px-8 py-4 border border-[#d4a017]/30 hover:border-[#d4a017]/70 rounded-xl text-[#f0c040] hover:text-white font-semibold text-lg transition-all hover:bg-[#d4a017]/5"
+                href={`/${locale}/categories`}
+                className="flex items-center gap-2 px-8 py-4 border border-[#d4a017]/40 hover:border-[#d4a017]/80 rounded-xl text-[#f0c040] hover:text-white font-semibold text-lg transition-all hover:bg-[#d4a017]/5"
+                style={{ boxShadow: '0 0 15px rgba(212,160,23,0.15)' }}
               >
-                {t('hero.ctaNominees')}
+                Voir les Catégories
                 <ChevronRight className="w-5 h-5" />
               </Link>
             </div>
@@ -193,77 +195,105 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* ─── Featured Categories ───────────────────────────────────────── */}
-        <section className="py-20 bg-[#070707]" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
-          <div className="container-mobile">
-            <div className="flex items-center justify-between mb-10">
-              <h2 className="text-3xl sm:text-4xl font-black">
-                <span style={{
-                  background: 'linear-gradient(135deg, #f0c040, #d4a017)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>{t('featured.title')}</span>
-              </h2>
-              <Link
-                href={`/${locale}/categories`}
-                className="flex items-center gap-1 text-[#d4a017] hover:text-[#f0c040] text-sm font-medium transition-colors"
-              >
-                {t('featured.seeAll')}
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
+        {/* ─── Animateurs du LIVE ────────────────────────────────────────── */}
+        <section className="relative py-24 overflow-hidden" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
+          {/* Vidéo de fond */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{ opacity: 0.2 }}
+          >
+            <source src="/Gold_fond.mp4" type="video/mp4" />
+          </video>
+          {/* Overlay */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,7,7,0.75)' }} />
 
-            {featuredCategories.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {featuredCategories.map((cat: any) => (
-                  <Link
-                    key={cat.id}
-                    href={`/${locale}/nominees?category=${cat.id}`}
-                    className="bg-[#0e0e0e] rounded-xl p-6 card-glow group"
-                    style={{ border: '1px solid rgba(212,160,23,0.15)' }}
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4a017] to-[#6d28d9] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <Trophy className="w-5 h-5 text-white" />
-                      </div>
-                      <span className="text-xs text-[#d4a017]/60 bg-[#d4a017]/5 border border-[#d4a017]/20 px-2 py-1 rounded-full">
-                        {cat.nomineeCount ?? '—'} {t('featured.nominees')}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-white text-lg mb-1">
-                      {locale === 'fr' ? cat.titleFr : cat.titleEn}
-                    </h3>
-                    <p className="text-gray-500 text-sm line-clamp-2">
-                      {locale === 'fr' ? cat.descriptionFr : cat.descriptionEn}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  { title: 'Best Anime', desc: 'Le meilleur anime de l\'année' },
-                  { title: 'Best Character', desc: 'Le personnage préféré des fans' },
-                  { title: 'Best Opening', desc: 'L\'opening le plus mémorable' },
-                  { title: 'Best Villain', desc: 'Le meilleur antagoniste' },
-                  { title: 'Best Fight', desc: 'Le combat le plus épique' },
-                  { title: 'Most Emotional', desc: 'L\'anime qui a fait pleurer' },
-                ].map((cat, i) => (
+          <div className="container-mobile relative z-10">
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+              {/* GAUCHE — Cadres photos */}
+              <div className="flex-1 flex flex-col sm:flex-row gap-6 items-center justify-center">
+                {/* Cadre présentateur 1 */}
+                <div className="group relative flex flex-col items-center gap-3">
                   <div
-                    key={i}
-                    className="bg-[#0e0e0e] rounded-xl p-6 opacity-70"
-                    style={{ border: '1px solid rgba(212,160,23,0.12)' }}
+                    className="w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                    style={{
+                      border: '2px solid rgba(212,160,23,0.4)',
+                      background: 'linear-gradient(135deg, #0e0e0e, #1a1200)',
+                      boxShadow: '0 0 30px rgba(212,160,23,0.1)',
+                    }}
                   >
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4a017]/40 to-[#6d28d9]/40 flex items-center justify-center mb-3">
-                      <Trophy className="w-5 h-5 text-white/50" />
+                    {/* Remplace par une balise <img> quand tu as la photo */}
+                    <div className="flex flex-col items-center gap-3 opacity-40">
+                      <Users className="w-12 h-12 text-[#d4a017]" />
+                      <span className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase">Photo</span>
                     </div>
-                    <h3 className="font-bold text-white text-lg mb-1">{cat.title}</h3>
-                    <p className="text-gray-500 text-sm">{cat.desc}</p>
                   </div>
-                ))}
+                  <div className="text-center">
+                    <p className="text-white font-bold text-sm">Présentateur 1</p>
+                    <p className="text-[#d4a017]/60 text-xs">Animateur</p>
+                  </div>
+                </div>
+
+                {/* Cadre présentateur 2 */}
+                <div className="group relative flex flex-col items-center gap-3">
+                  <div
+                    className="w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                    style={{
+                      border: '2px solid rgba(212,160,23,0.4)',
+                      background: 'linear-gradient(135deg, #0e0e0e, #1a1200)',
+                      boxShadow: '0 0 30px rgba(212,160,23,0.1)',
+                    }}
+                  >
+                    <div className="flex flex-col items-center gap-3 opacity-40">
+                      <Users className="w-12 h-12 text-[#d4a017]" />
+                      <span className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase">Photo</span>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-white font-bold text-sm">Présentateur 2</p>
+                    <p className="text-[#d4a017]/60 text-xs">Animateur</p>
+                  </div>
+                </div>
               </div>
-            )}
+
+              {/* DROITE — Texte centré */}
+              <div className="flex-1 text-center lg:text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4a017]/30 bg-[#d4a017]/5 text-[#d4a017] text-xs font-semibold tracking-widest uppercase mb-6">
+                  <Star className="w-3 h-3" />
+                  TikTok Live
+                </div>
+                <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 leading-tight">
+                  Les Animateurs<br />
+                  <span style={{
+                    background: 'linear-gradient(135deg, #f0c040, #d4a017)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}>du LIVE</span>
+                </h2>
+                <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#d4a017] to-transparent mx-auto lg:mx-auto mb-6 opacity-50" />
+                <p className="text-gray-400 text-base max-w-sm mx-auto mb-8 leading-relaxed">
+                  Découvrez qui animera la cérémonie officielle des Anime Awards 2026 en direct sur TikTok.
+                </p>
+                <a
+                  href="https://www.tiktok.com/@ricokouame"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-black transition-all btn-gold"
+                  style={{ boxShadow: '0 0 20px rgba(212,160,23,0.35)' }}
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-black">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" />
+                  </svg>
+                  Suivre le Live
+                </a>
+              </div>
+
+            </div>
           </div>
         </section>
 
@@ -286,23 +316,18 @@ export default async function HomePage({
                 {t('tiktok.title')}
               </h2>
               <p className="text-gray-400 max-w-xl mx-auto mb-8">{t('tiktok.subtitle')}</p>
-              {event?.tiktokUrl ? (
-                <a
-                  href={event.tiktokUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-100 transition-all hover:scale-105"
-                >
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-black">
-                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" />
-                  </svg>
-                  {t('tiktok.follow')}
-                </a>
-              ) : (
-                <span className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-gray-400 font-bold rounded-xl cursor-not-allowed">
-                  {t('tiktok.follow')}
-                </span>
-              )}
+              <a
+                href="https://www.tiktok.com/@ricokouame"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-100 transition-all hover:scale-105"
+                style={{ boxShadow: '0 0 20px rgba(255,255,255,0.15)' }}
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-black">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" />
+                </svg>
+                {t('tiktok.follow')}
+              </a>
             </div>
           </div>
         </section>
