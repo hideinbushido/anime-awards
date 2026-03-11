@@ -45,10 +45,18 @@ export default function Footer() {
             </Link>
           </div>
 
-          {/* Copyright */}
-          <p className="text-sm text-gray-600">
-            © 2026 Anime Awards. All rights reserved.
-          </p>
+          {/* Copyright + Admin */}
+          <div className="flex flex-col items-center md:items-end gap-1">
+            <p className="text-sm text-gray-600">
+              © 2026 Anime Awards. All rights reserved.
+            </p>
+            <Link
+              href={`/${locale}/admin/login`}
+              className="text-xs text-gray-700 hover:text-gray-500 transition-colors"
+            >
+              Connexion admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
