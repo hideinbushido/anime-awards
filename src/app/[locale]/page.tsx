@@ -296,9 +296,9 @@ export default async function HomePage({
           <div className="container-mobile">
             <div className="rounded-3xl p-8 sm:p-12 text-center"
               style={{
-                background: 'linear-gradient(135deg, #0e0e0e 0%, rgba(109,40,217,0.1) 50%, #0e0e0e 100%)',
-                border: '1px solid rgba(212,160,23,0.2)',
-                boxShadow: '0 0 60px rgba(109,40,217,0.1), inset 0 0 60px rgba(212,160,23,0.03)',
+                background: 'linear-gradient(135deg, #e0d64c 0%, rgba(3, 3, 3, 0.1) 50%, #4e4c2f 100%)',
+                border: '1px solid rgba(0, 0, 0, 0.2)',
+                boxShadow: '0 0 60px rgba(78, 85, 53, 0.36), inset 0 0 60px rgba(163, 142, 90, 0.03)',
               }}
             >
               <div className="w-16 h-16 rounded-2xl bg-black border border-[#d4a017]/30 flex items-center justify-center mx-auto mb-6">
