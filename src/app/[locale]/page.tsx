@@ -52,7 +52,7 @@ export default async function HomePage({
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 0.45 }}
+            style={{ opacity: 1.00 }}
           >
             <source src="/Gold_fond.mp4" type="video/mp4" />
           </video>
@@ -200,7 +200,7 @@ export default async function HomePage({
           {/* ── FOND VIDÉO SECTION 3 — change uniquement le nom du fichier ── */}
           <video autoPlay loop muted playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 0.25 }}
+            style={{ opacity: 1.50 }}
           >
             <source src="/section3_fond.mp4" type="video/mp4" />
           </video>
