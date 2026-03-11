@@ -196,72 +196,57 @@ export default async function HomePage({
         </section>
 
         {/* ─── Animateurs du LIVE ────────────────────────────────────────── */}
-        <section className="relative py-24 overflow-hidden" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
-          {/* Vidéo de fond */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 0.2 }}
-          >
-            <source src="/Gold_fond.mp4" type="video/mp4" />
-          </video>
-          {/* Overlay */}
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,7,7,0.75)' }} />
-
+        <section className="relative py-24 overflow-hidden bg-[#070707]" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
           <div className="container-mobile relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
               {/* GAUCHE — Cadres photos */}
-              <div className="flex-1 flex flex-col sm:flex-row gap-6 items-center justify-center">
+              <div className="flex-shrink-0 flex flex-col sm:flex-row gap-8 items-center justify-center">
                 {/* Cadre présentateur 1 */}
-                <div className="group relative flex flex-col items-center gap-3">
+                <div className="group relative flex flex-col items-center gap-4">
                   <div
-                    className="w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                    className="w-56 h-72 sm:w-64 sm:h-80 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
                     style={{
                       border: '2px solid rgba(212,160,23,0.4)',
                       background: 'linear-gradient(135deg, #0e0e0e, #1a1200)',
-                      boxShadow: '0 0 30px rgba(212,160,23,0.1)',
+                      boxShadow: '0 0 40px rgba(212,160,23,0.12)',
                     }}
                   >
-                    {/* Remplace par une balise <img> quand tu as la photo */}
                     <div className="flex flex-col items-center gap-3 opacity-40">
-                      <Users className="w-12 h-12 text-[#d4a017]" />
+                      <Users className="w-14 h-14 text-[#d4a017]" />
                       <span className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase">Photo</span>
                     </div>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-sm">Présentateur 1</p>
-                    <p className="text-[#d4a017]/60 text-xs">Animateur</p>
+                    <p className="text-white font-bold">Présentateur 1</p>
+                    <p className="text-[#d4a017]/60 text-sm">Animateur</p>
                   </div>
                 </div>
 
                 {/* Cadre présentateur 2 */}
-                <div className="group relative flex flex-col items-center gap-3">
+                <div className="group relative flex flex-col items-center gap-4">
                   <div
-                    className="w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                    className="w-56 h-72 sm:w-64 sm:h-80 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
                     style={{
                       border: '2px solid rgba(212,160,23,0.4)',
                       background: 'linear-gradient(135deg, #0e0e0e, #1a1200)',
-                      boxShadow: '0 0 30px rgba(212,160,23,0.1)',
+                      boxShadow: '0 0 40px rgba(212,160,23,0.12)',
                     }}
                   >
                     <div className="flex flex-col items-center gap-3 opacity-40">
-                      <Users className="w-12 h-12 text-[#d4a017]" />
+                      <Users className="w-14 h-14 text-[#d4a017]" />
                       <span className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase">Photo</span>
                     </div>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-sm">Présentateur 2</p>
-                    <p className="text-[#d4a017]/60 text-xs">Animateur</p>
+                    <p className="text-white font-bold">Présentateur 2</p>
+                    <p className="text-[#d4a017]/60 text-sm">Animateur</p>
                   </div>
                 </div>
               </div>
 
-              {/* DROITE — Texte centré */}
-              <div className="flex-1 text-center lg:text-center">
+              {/* DROITE — Texte décalé à droite */}
+              <div className="flex-1 text-center lg:text-right lg:pl-8">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4a017]/30 bg-[#d4a017]/5 text-[#d4a017] text-xs font-semibold tracking-widest uppercase mb-6">
                   <Star className="w-3 h-3" />
                   TikTok Live
@@ -275,15 +260,15 @@ export default async function HomePage({
                     backgroundClip: 'text',
                   }}>du LIVE</span>
                 </h2>
-                <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#d4a017] to-transparent mx-auto lg:mx-auto mb-6 opacity-50" />
-                <p className="text-gray-400 text-base max-w-sm mx-auto mb-8 leading-relaxed">
+                <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#d4a017] to-transparent mx-auto lg:ml-auto lg:mr-0 mb-6 opacity-50" />
+                <p className="text-gray-400 text-base max-w-sm mx-auto lg:ml-auto lg:mr-0 mb-8 leading-relaxed">
                   Découvrez qui animera la cérémonie officielle des Anime Awards 2026 en direct sur TikTok.
                 </p>
                 <a
                   href="https://www.tiktok.com/@ricokouame"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-black transition-all btn-gold"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-black transition-all btn-gold lg:float-right"
                   style={{ boxShadow: '0 0 20px rgba(212,160,23,0.35)' }}
                 >
                   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-black">
