@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #f0f0f5;
-  --primary: #8b5cf6;
-  --primary-dark: #7c3aed;
-  --secondary: #f59e0b;
-  --accent: #ec4899;
-  --card-bg: #111118;
-  --card-border: #1e1e2e;
-  --muted: #6b7280;
+  --background: #070707;
+  --foreground: #f5f0e8;
+  --primary: #d4a017;
+  --primary-dark: #b8860b;
+  --secondary: #6d28d9;
+  --accent: #f0c040;
+  --card-bg: #0e0e0e;
+  --card-border: #1e1600;
+  --muted: #6b6040;
 }
 
 * {
@@ -27,38 +27,56 @@ body {
   min-height: 100vh;
 }
 
-/* Anime gradient text */
+/* Gold gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #8b5cf6, #ec4899, #f59e0b);
+  background: linear-gradient(135deg, #f0c040, #d4a017, #c9a227);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glowing card effect */
+/* Purple accent text */
+.gradient-text-purple {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9, #4c1d95);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glowing card effect — gold */
 .card-glow {
   transition: all 0.3s ease;
 }
 .card-glow:hover {
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 30px rgba(212, 160, 23, 0.25);
   transform: translateY(-2px);
+  border-color: rgba(212, 160, 23, 0.4) !important;
 }
 
-/* Anime background pattern */
+/* Stage spotlight background */
 .anime-bg {
-  background-color: #0a0a0f;
+  background-color: #070707;
   background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse at 50% 0%, rgba(109, 40, 217, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 60%, rgba(212, 160, 23, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 70%, rgba(109, 40, 217, 0.08) 0%, transparent 45%);
 }
 
-/* Hero gradient */
+/* Hero gradient — spotlight from top */
 .hero-gradient {
-  background: linear-gradient(
-    180deg,
-    rgba(139, 92, 246, 0.2) 0%,
-    rgba(10, 10, 15, 0) 100%
+  background: radial-gradient(
+    ellipse 80% 60% at 50% -10%,
+    rgba(109, 40, 217, 0.25) 0%,
+    transparent 70%
+  );
+}
+
+/* Gold spotlight ring */
+.spotlight-ring {
+  background: radial-gradient(
+    ellipse 60% 40% at 50% 100%,
+    rgba(212, 160, 23, 0.12) 0%,
+    transparent 70%
   );
 }
 
@@ -67,10 +85,10 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
+  background: #070707;
 }
 ::-webkit-scrollbar-thumb {
-  background: #8b5cf6;
+  background: #d4a017;
   border-radius: 3px;
 }
 
@@ -80,14 +98,19 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
-  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.8); }
+@keyframes pulse-glow-gold {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 160, 23, 0.4); }
+  50% { box-shadow: 0 0 50px rgba(212, 160, 23, 0.8), 0 0 80px rgba(212, 160, 23, 0.3); }
 }
 
-@keyframes shimmer {
+@keyframes shimmer-gold {
   0% { background-position: -1000px 0; }
   100% { background-position: 1000px 0; }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .float-animation {
@@ -95,14 +118,33 @@ body {
 }
 
 .pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow-gold 2.5s ease-in-out infinite;
+}
+
+/* Gold shimmer button */
+.btn-gold {
+  background: linear-gradient(135deg, #d4a017, #f0c040, #b8860b);
+  background-size: 200% auto;
+  transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-gold:hover {
+  background-position: right center;
+  transform: scale(1.04);
+  box-shadow: 0 0 30px rgba(212, 160, 23, 0.5);
 }
 
 /* Nominee card selected state */
 .nominee-card-selected {
-  border-color: #8b5cf6 !important;
-  background: rgba(139, 92, 246, 0.1) !important;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  border-color: #d4a017 !important;
+  background: rgba(212, 160, 23, 0.08) !important;
+  box-shadow: 0 0 20px rgba(212, 160, 23, 0.25);
+}
+
+/* Gold divider */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4a017, transparent);
+  opacity: 0.3;
 }
 
 /* Mobile-first responsive helpers */
