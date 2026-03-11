@@ -197,6 +197,15 @@ export default async function HomePage({
 
         {/* ─── Animateurs du LIVE ────────────────────────────────────────── */}
         <section className="relative py-24 overflow-hidden bg-[#070707]" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
+          {/* ── FOND VIDÉO SECTION 3 — change uniquement le nom du fichier ── */}
+          <video autoPlay loop muted playsInline
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{ opacity: 0.25 }}
+          >
+            <source src="/section3_fond.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,7,7,0.7)' }} />
+          {/* ────────────────────────────────────────────────────────────── */}
           <div className="container-mobile relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
@@ -249,7 +258,7 @@ export default async function HomePage({
               <div className="flex-1 text-center lg:text-right lg:pl-8">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4a017]/30 bg-[#d4a017]/5 text-[#d4a017] text-xs font-semibold tracking-widest uppercase mb-6">
                   <Star className="w-3 h-3" />
-                  TikTok Live
+                  Présentation
                 </div>
                 <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 leading-tight">
                   Les Animateurs<br />
@@ -262,7 +271,7 @@ export default async function HomePage({
                 </h2>
                 <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#d4a017] to-transparent mx-auto lg:ml-auto lg:mr-0 mb-6 opacity-50" />
                 <p className="text-gray-400 text-base max-w-sm mx-auto lg:ml-auto lg:mr-0 mb-8 leading-relaxed">
-                  Découvrez qui animera la cérémonie officielle des Anime Awards 2026 en direct sur TikTok.
+                  Découvrez qui animera la cérémonie officielle en direct sur TikTok.
                 </p>
                 <a
                   href="https://www.tiktok.com/@ricokouame"
