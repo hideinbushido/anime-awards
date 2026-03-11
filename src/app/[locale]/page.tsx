@@ -45,38 +45,22 @@ export default async function HomePage({
       <main>
         {/* ─── Hero — Style Prestige/Or ──────────────────────────────────── */}
         <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 overflow-hidden bg-[#070707]">
-          {/* Spotlight radial depuis le haut */}
-          <div className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse 80% 55% at 50% -5%, rgba(109,40,217,0.3) 0%, transparent 65%)',
-            }}
-          />
-          {/* Lueur or depuis le bas */}
-          <div className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse 70% 30% at 50% 105%, rgba(212,160,23,0.15) 0%, transparent 60%)',
-            }}
-          />
+          {/* Vidéo de fond */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{ opacity: 0.45 }}
+          >
+            <source src="/Gold_fond.mp4" type="video/mp4" />
+          </video>
 
-          {/* Particules dorées */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(25)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full"
-                style={{
-                  left: `${(i * 37 + 10) % 100}%`,
-                  top: `${(i * 53 + 5) % 100}%`,
-                  width: `${(i % 3) + 1}px`,
-                  height: `${(i % 3) + 1}px`,
-                  background: i % 2 === 0 ? '#d4a017' : '#6d28d9',
-                  opacity: 0.3,
-                  animation: `float ${4 + (i % 4)}s ease-in-out infinite`,
-                  animationDelay: `${(i % 5) * 0.6}s`,
-                }}
-              />
-            ))}
-          </div>
+          {/* Overlay sombre pour lisibilité du texte */}
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, rgba(7,7,7,0.4) 0%, rgba(7,7,7,0.2) 50%, rgba(7,7,7,0.7) 100%)' }}
+          />
 
           <div className="container-mobile text-center z-10 py-20">
             {/* Badge prestige */}
