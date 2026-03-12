@@ -139,11 +139,17 @@ export default async function HomePage({
         </section>
 
         {/* ─── How it works ─────────────────────────────────────────────── */}
-        <section className="py-20" style={{
+        <section className="relative py-20 overflow-hidden" style={{
           borderTop: '1px solid rgba(99,102,241,0.15)',
           background: 'linear-gradient(160deg, #07071a 0%, #050510 40%, #080820 70%, #050515 100%)',
         }}>
-          <div className="container-mobile">
+          {/* Glow haut-droit bleu */}
+          <div className="absolute top-0 right-0 w-[500px] h-[350px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top right, rgba(59,130,246,0.1) 0%, transparent 70%)' }} />
+          {/* Glow bas-gauche violet */}
+          <div className="absolute bottom-0 left-0 w-[500px] h-[350px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(139,92,246,0.1) 0%, transparent 70%)' }} />
+          <div className="container-mobile relative z-10">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-black mb-3">
                 <span style={{
@@ -190,13 +196,20 @@ export default async function HomePage({
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ opacity: 0.85 }}
           >
-            <source src="/style_fond.mp4" type="video/mp4" />
+            <source src="/style4_fond.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(5,5,16,0.75)' }} />
-          <div className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at top left, rgba(99,102,241,0.12) 0%, transparent 70%)' }} />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at bottom right, rgba(59,130,246,0.1) 0%, transparent 70%)' }} />
+          {/* Overlay dégradé principal */}
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: 'linear-gradient(135deg, rgba(5,5,16,0.85) 0%, rgba(10,8,30,0.7) 40%, rgba(5,10,25,0.8) 100%)' }} />
+          {/* Glow coin haut-gauche indigo */}
+          <div className="absolute top-0 left-0 w-[600px] h-[500px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top left, rgba(99,102,241,0.18) 0%, transparent 65%)' }} />
+          {/* Glow coin bas-droit bleu */}
+          <div className="absolute bottom-0 right-0 w-[600px] h-[500px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom right, rgba(59,130,246,0.15) 0%, transparent 65%)' }} />
+          {/* Ligne de dégradé bas → fond suivant */}
+          <div className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, transparent, rgba(5,5,16,0.95))' }} />
           {/* ────────────────────────────────────────────────────────────── */}
           <div className="container-mobile relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -288,8 +301,20 @@ export default async function HomePage({
         </section>
 
         {/* ─── TikTok CTA ───────────────────────────────────────────────── */}
-        <section className="py-20 bg-[#050510]" style={{ borderTop: '1px solid rgba(99,102,241,0.15)' }}>
-          <div className="container-mobile">
+        <section className="relative py-20 overflow-hidden" style={{
+          borderTop: '1px solid rgba(99,102,241,0.15)',
+          background: 'linear-gradient(160deg, #07071a 0%, #050510 35%, #080825 65%, #050515 100%)',
+        }}>
+          {/* Glow centre-haut violet */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top, rgba(99,102,241,0.14) 0%, transparent 70%)' }} />
+          {/* Glow bas-gauche bleu */}
+          <div className="absolute bottom-0 left-0 w-[400px] h-[250px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(59,130,246,0.1) 0%, transparent 70%)' }} />
+          {/* Glow bas-droit violet */}
+          <div className="absolute bottom-0 right-0 w-[400px] h-[250px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom right, rgba(139,92,246,0.08) 0%, transparent 70%)' }} />
+          <div className="container-mobile relative z-10">
             <div className="rounded-2xl p-8 sm:p-12 text-center"
               style={{
                 background: 'rgba(10,10,24,0.7)',
@@ -298,7 +323,9 @@ export default async function HomePage({
                 backdropFilter: 'blur(16px)',
               }}
             >
-              <div className="w-16 h-16 rounded-2xl bg-black border border-[#d4a017]/30 flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                style={{ background: 'rgba(10,10,30,0.9)', border: '1px solid rgba(99,102,241,0.35)', boxShadow: '0 0 20px rgba(99,102,241,0.2)' }}
+              >
                 <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
                   <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" />
                 </svg>
