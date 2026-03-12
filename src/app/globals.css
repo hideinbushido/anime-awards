@@ -168,6 +168,16 @@ body {
   opacity: 0.5;
 }
 
+/* ── Category card hover ── */
+.category-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.category-card:hover {
+  border-color: rgba(201,162,39,0.55) !important;
+  box-shadow: 0 0 30px rgba(201,162,39,0.18), 0 8px 30px rgba(0,0,0,0.4);
+  transform: translateY(-4px);
+}
+
 /* ── Container responsive ── */
 .container-mobile {
   width: 100%;
