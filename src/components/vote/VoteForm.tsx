@@ -103,17 +103,17 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
   return (
     <form onSubmit={handleSubmit} noValidate>
       {/* Progress bar */}
-      <div className="sticky top-16 z-40 bg-[#0a0a0f]/95 backdrop-blur-md border-b border-[#1e1e2e] py-3 mb-8">
+      <div className="sticky top-16 z-40 bg-[#07060a]/95 backdrop-blur-md border-b border-[#2a1e0a] py-3 mb-8">
         <div className="container-mobile">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-gray-400">
+            <span className="text-[#9a8870]">
               {completedCategories}/{totalCategories} catégories
             </span>
-            <span className="text-purple-400 font-medium">{Math.round(progress)}%</span>
+            <span className="text-[#c9a227] font-medium">{Math.round(progress)}%</span>
           </div>
           <div className="h-2 bg-[#1e1e2e] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-purple-600 to-pink-600 rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-[#c9a227] to-[#9e7c1e] rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -122,14 +122,14 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
 
       <div className="max-w-3xl mx-auto">
         {/* Voter info */}
-        <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-6 mb-8">
+        <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-bold text-white mb-4">Vos informations</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#c5baa0] mb-2">
                 {t('nameLabel')}{' '}
-                <span className="text-purple-400 text-xs">({t('required')})</span>
+                <span className="text-[#c9a227] text-xs">({t('required')})</span>
               </label>
               <input
                 type="text"
@@ -140,8 +140,8 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                 }}
                 placeholder={t('namePlaceholder')}
                 className={clsx(
-                  'w-full bg-[#0a0a0f] border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors',
-                  errors.name ? 'border-red-500' : 'border-[#1e1e2e]'
+                  'w-full bg-[#07060a] border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors',
+                  errors.name ? 'border-red-500' : 'border-[#2a1e0a]'
                 )}
                 data-error={errors.name ? 'name' : undefined}
               />
@@ -154,7 +154,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-[#c5baa0] mb-2">
                   {t('emailLabel')}
                 </label>
                 <input
@@ -162,11 +162,11 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                   value={voterEmail}
                   onChange={(e) => setVoterEmail(e.target.value)}
                   placeholder={t('emailPlaceholder')}
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-[#c5baa0] mb-2">
                   {t('countryLabel')}
                 </label>
                 <input
@@ -174,7 +174,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                   value={voterCountry}
                   onChange={(e) => setVoterCountry(e.target.value)}
                   placeholder={t('countryPlaceholder')}
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors"
                 />
               </div>
             </div>
@@ -193,8 +193,8 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
               <div
                 key={cat.id}
                 className={clsx(
-                  'bg-[#111118] border rounded-2xl overflow-hidden transition-all',
-                  selected ? 'border-purple-500/50' : hasError ? 'border-red-500/50' : 'border-[#1e1e2e]'
+                  'bg-[#0f0d09] border rounded-2xl overflow-hidden transition-all',
+                  selected ? 'border-[#c9a227]/50' : hasError ? 'border-red-500/50' : 'border-[#2a1e0a]'
                 )}
                 data-error={hasError ? cat.id : undefined}
               >
@@ -210,7 +210,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                         'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
                         selected
                           ? 'bg-green-600'
-                          : 'bg-gradient-to-br from-purple-600 to-pink-600'
+                          : 'bg-gradient-to-br from-[#c9a227] to-[#9e7c1e]'
                       )}
                     >
                       {selected ? (
@@ -221,13 +221,13 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-500">#{idx + 1}</span>
+                        <span className="text-xs text-[#665544]">#{idx + 1}</span>
                         <h3 className="font-bold text-white">
                           {locale === 'fr' ? cat.titleFr : cat.titleEn}
                         </h3>
                       </div>
                       {selected && (
-                        <p className="text-xs text-green-400 mt-0.5">
+                        <p className="text-xs text-[#c9a227] mt-0.5">
                           ✓ {nominees.find((n) => n.id === selected)?.name}
                         </p>
                       )}
@@ -237,16 +237,16 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                     </div>
                   </div>
                   {isExpanded ? (
-                    <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-[#9a8870] flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-[#9a8870] flex-shrink-0" />
                   )}
                 </button>
 
                 {/* Nominees */}
                 {isExpanded && (
-                  <div className="px-5 pb-5 border-t border-[#1e1e2e] pt-4">
-                    <p className="text-xs text-gray-500 mb-4">
+                  <div className="px-5 pb-5 border-t border-[#2a1e0a] pt-4">
+                    <p className="text-xs text-[#665544] mb-4">
                       {locale === 'fr' ? cat.descriptionFr : cat.descriptionEn}
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -256,10 +256,10 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                           type="button"
                           onClick={() => handleSelectNominee(cat.id, nominee.id)}
                           className={clsx(
-                            'relative bg-[#0a0a0f] border rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]',
+                            'relative bg-[#07060a] border rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]',
                             selected === nominee.id
-                              ? 'border-purple-500 shadow-[0_0_20px_rgba(139,92,246,0.3)]'
-                              : 'border-[#1e1e2e] hover:border-purple-500/40'
+                              ? 'border-[#c9a227] shadow-[0_0_20px_rgba(201,162,39,0.3)]'
+                              : 'border-[#2a1e0a] hover:border-[#c9a227]/40'
                           )}
                         >
                           <div className="relative aspect-[3/4]">
@@ -272,14 +272,14 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
                             {selected === nominee.id && (
-                              <div className="absolute top-2 right-2 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                              <div className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center">
                                 <CheckCircle className="w-4 h-4 text-white" />
                               </div>
                             )}
                           </div>
                           <div className="p-2">
                             <p className="font-semibold text-white text-xs leading-tight">{nominee.name}</p>
-                            <p className="text-purple-400 text-xs">{nominee.anime}</p>
+                            <p className="text-[#c9a227] text-xs">{nominee.anime}</p>
                           </div>
                         </button>
                       ))}
@@ -292,7 +292,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
         </div>
 
         {/* Accept rules */}
-        <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-6 mb-8">
+        <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-6 mb-8">
           <label className="flex items-start gap-3 cursor-pointer">
             <div className="relative mt-0.5">
               <input
@@ -307,13 +307,13 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
               <div
                 className={clsx(
                   'w-5 h-5 rounded border-2 flex items-center justify-center transition-all',
-                  acceptRules ? 'bg-purple-600 border-purple-600' : 'border-gray-600'
+                  acceptRules ? 'bg-[#c9a227] border-[#c9a227]' : 'border-[#2a1e0a]'
                 )}
               >
                 {acceptRules && <CheckCircle className="w-3 h-3 text-white" />}
               </div>
             </div>
-            <span className="text-gray-300 text-sm">{t('acceptRules')}</span>
+            <span className="text-[#c5baa0] text-sm">{t('acceptRules')}</span>
           </label>
           {errors.rules && (
             <p className="text-red-400 text-xs mt-2 flex items-center gap-1 ml-8">
@@ -326,7 +326,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
         <button
           type="submit"
           disabled={submitting}
-          className="w-full py-5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl text-white font-bold text-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] flex items-center justify-center gap-2"
+          className="w-full py-5 bg-gradient-to-r from-[#c9a227] to-[#9e7c1e]  disabled:opacity-50 disabled:cursor-not-allowed rounded text-black font-bold text-lg transition-all hover:scale-[1.02]  flex items-center justify-center gap-2"
         >
           {submitting ? (
             <>

@@ -124,7 +124,7 @@ export default function NomineesAdmin() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#c9a227] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -139,7 +139,7 @@ export default function NomineesAdmin() {
         </h1>
         <button
           onClick={openCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-medium transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] text-white rounded-xl text-sm font-medium transition-all"
         >
           <Plus className="w-4 h-4" />
           Ajouter
@@ -155,8 +155,8 @@ export default function NomineesAdmin() {
             className={clsx(
               'px-3 py-1.5 rounded-lg text-sm font-medium transition-all',
               activeCategory === cat.id
-                ? 'bg-purple-600 text-white'
-                : 'bg-[#111118] border border-[#1e1e2e] text-gray-400 hover:text-white'
+                ? 'bg-[#c9a227] text-white'
+                : 'bg-[#0f0d09] border border-[#2a1e0a] text-[#9a8870] hover:text-white'
             )}
           >
             {cat.titleFr}{' '}
@@ -169,65 +169,65 @@ export default function NomineesAdmin() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-[#111118] border border-purple-500/30 rounded-2xl p-6 mb-6">
+        <div className="bg-[#0f0d09] border border-[#c9a227]/30 rounded-2xl p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-bold text-white">
               {editingId ? 'Modifier le nominé' : 'Nouveau nominé'}
             </h2>
-            <button onClick={() => setShowForm(false)} className="text-gray-500 hover:text-white">
+            <button onClick={() => setShowForm(false)} className="text-[#665544] hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Nom *</label>
+              <label className="block text-xs text-[#665544] mb-1">Nom *</label>
               <input
                 value={form.name}
                 onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Frieren"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Anime *</label>
+              <label className="block text-xs text-[#665544] mb-1">Anime *</label>
               <input
                 value={form.anime}
                 onChange={(e) => setForm((p) => ({ ...p, anime: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Sousou no Frieren"
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-xs text-gray-500 mb-1">URL de l'image</label>
+              <label className="block text-xs text-[#665544] mb-1">URL de l'image</label>
               <input
                 value={form.imageUrl}
                 onChange={(e) => setForm((p) => ({ ...p, imageUrl: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Description (FR)</label>
+              <label className="block text-xs text-[#665544] mb-1">Description (FR)</label>
               <textarea
                 value={form.descriptionFr}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionFr: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500 h-20 resize-none"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Description (EN)</label>
+              <label className="block text-xs text-[#665544] mb-1">Description (EN)</label>
               <textarea
                 value={form.descriptionEn}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionEn: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500 h-20 resize-none"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Catégorie *</label>
+              <label className="block text-xs text-[#665544] mb-1">Catégorie *</label>
               <select
                 value={form.categoryId}
                 onChange={(e) => setForm((p) => ({ ...p, categoryId: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
               >
                 <option value="">Choisir...</option>
                 {categories.map((cat) => (
@@ -238,13 +238,13 @@ export default function NomineesAdmin() {
               </select>
             </div>
             <div className="flex items-center gap-3">
-              <label className="text-xs text-gray-500">Actif</label>
+              <label className="text-xs text-[#665544]">Actif</label>
               <button
                 type="button"
                 onClick={() => setForm((p) => ({ ...p, active: !p.active }))}
                 className={clsx(
                   'relative w-11 h-6 rounded-full transition-colors',
-                  form.active ? 'bg-purple-600' : 'bg-gray-600'
+                  form.active ? 'bg-[#c9a227]' : 'bg-gray-600'
                 )}
               >
                 <div
@@ -258,7 +258,7 @@ export default function NomineesAdmin() {
           </div>
           {form.imageUrl && (
             <div className="mt-4">
-              <p className="text-xs text-gray-500 mb-2">Aperçu de l'image :</p>
+              <p className="text-xs text-[#665544] mb-2">Aperçu de l'image :</p>
               <Image
                 src={form.imageUrl}
                 alt="Aperçu"
@@ -273,14 +273,14 @@ export default function NomineesAdmin() {
           <div className="flex justify-end gap-3 mt-4">
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 border border-[#1e1e2e] rounded-xl text-gray-400 hover:text-white text-sm transition-all"
+              className="px-4 py-2 border border-[#2a1e0a] rounded-xl text-[#9a8870] hover:text-white text-sm transition-all"
             >
               Annuler
             </button>
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-xl text-white text-sm font-medium transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] rounded-xl text-white text-sm font-medium transition-all disabled:opacity-50"
             >
               {saving ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -298,9 +298,9 @@ export default function NomineesAdmin() {
         {currentNominees.map((nominee) => (
           <div
             key={nominee.id}
-            className="bg-[#111118] border border-[#1e1e2e] rounded-xl overflow-hidden group"
+            className="bg-[#0f0d09] border border-[#2a1e0a] rounded-xl overflow-hidden group"
           >
-            <div className="relative aspect-[3/4] bg-[#0a0a0f]">
+            <div className="relative aspect-[3/4] bg-[#07060a]">
               <Image
                 src={nominee.imageUrl || `https://placehold.co/300x400/111118/8b5cf6?text=${encodeURIComponent(nominee.name)}`}
                 alt={nominee.name}
@@ -310,17 +310,17 @@ export default function NomineesAdmin() {
               />
               {!nominee.active && (
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <span className="text-xs text-gray-400 bg-black/80 px-2 py-1 rounded">Inactif</span>
+                  <span className="text-xs text-[#9a8870] bg-black/80 px-2 py-1 rounded">Inactif</span>
                 </div>
               )}
             </div>
             <div className="p-3">
               <p className="font-semibold text-white text-xs truncate">{nominee.name}</p>
-              <p className="text-purple-400 text-xs truncate">{nominee.anime}</p>
+              <p className="text-[#c9a227] text-xs truncate">{nominee.anime}</p>
               <div className="flex items-center gap-1 mt-2">
                 <button
                   onClick={() => openEdit(nominee)}
-                  className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                  className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-[#9a8870] hover:text-white hover:bg-white/5 rounded-lg transition-all"
                 >
                   <Pencil className="w-3 h-3" />
                 </button>
@@ -334,7 +334,7 @@ export default function NomineesAdmin() {
                     </button>
                     <button
                       onClick={() => setDeleteConfirm(null)}
-                      className="flex-1 flex items-center justify-center py-1.5 text-xs text-gray-400 hover:bg-white/5 rounded-lg transition-all"
+                      className="flex-1 flex items-center justify-center py-1.5 text-xs text-[#9a8870] hover:bg-white/5 rounded-lg transition-all"
                     >
                       <X className="w-3 h-3" />
                     </button>
@@ -342,7 +342,7 @@ export default function NomineesAdmin() {
                 ) : (
                   <button
                     onClick={() => setDeleteConfirm(nominee.id)}
-                    className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                    className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-[#9a8870] hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
                   >
                     <Trash2 className="w-3 h-3" />
                   </button>
@@ -352,7 +352,7 @@ export default function NomineesAdmin() {
           </div>
         ))}
         {currentNominees.length === 0 && (
-          <div className="col-span-full text-center py-12 text-gray-500 text-sm">
+          <div className="col-span-full text-center py-12 text-[#665544] text-sm">
             Aucun nominé dans cette catégorie.
           </div>
         )}

@@ -31,18 +31,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/90 backdrop-blur-md border-b border-[#1e1e2e]">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b"
+      style={{ background: 'rgba(7,6,10,0.92)', backdropFilter: 'blur(16px)', borderColor: 'rgba(201,162,39,0.15)' }}
+    >
       <div className="container-mobile">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Trophy className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform"
+              style={{ background: 'linear-gradient(135deg, #c9a227, #e8c54a)' }}
+            >
+              <Trophy className="w-4 h-4 text-black" />
             </div>
             <span className="font-bold text-white hidden sm:block">
               <span className="gradient-text">Anime</span> Awards
             </span>
-            <span className="text-xs text-purple-400 hidden sm:block">2026</span>
+            <span className="text-xs hidden sm:block" style={{ color: '#c9a227' }}>2026</span>
           </Link>
 
           {/* Desktop nav */}
@@ -54,11 +58,12 @@ export default function Navbar() {
                 className={clsx(
                   'px-4 py-2 rounded-lg text-sm font-medium transition-all',
                   link.highlight
-                    ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                    ? 'text-black font-bold'
                     : isActive(link.href)
-                    ? 'text-purple-400 bg-purple-400/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'text-[#e8c54a]'
+                    : 'text-[#9a8870] hover:text-white hover:bg-white/5'
                 )}
+                style={link.highlight ? { background: 'linear-gradient(135deg, #c9a227, #e8c54a)', color: '#07060a' } : {}}
               >
                 {link.label}
               </Link>
@@ -67,28 +72,28 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-2">
-            {/* Language switcher */}
             <Link
               href={switchLocalePath}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm transition-all"
+              style={{ color: '#9a8870' }}
             >
               <Globe className="w-4 h-4" />
               <span className="uppercase font-medium">{otherLocale}</span>
             </Link>
 
-            {/* Admin login */}
             <Link
               href={`/${locale}/admin/login`}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm transition-all"
+              style={{ color: '#9a8870' }}
             >
               <LogIn className="w-4 h-4" />
               <span className="hidden sm:block">Connexion</span>
             </Link>
 
-            {/* Mobile menu button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+              className="md:hidden p-2 rounded-lg transition-all"
+              style={{ color: '#9a8870' }}
             >
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -97,7 +102,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden py-3 border-t border-[#1e1e2e]">
+          <div className="md:hidden py-3 border-t" style={{ borderColor: 'rgba(201,162,39,0.12)' }}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -105,12 +110,15 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={clsx(
                   'flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all mb-1',
-                  link.highlight
-                    ? 'bg-purple-600 hover:bg-purple-700 text-white'
-                    : isActive(link.href)
-                    ? 'text-purple-400 bg-purple-400/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  link.highlight ? 'text-black font-bold' : ''
                 )}
+                style={
+                  link.highlight
+                    ? { background: 'linear-gradient(135deg, #c9a227, #e8c54a)', color: '#07060a' }
+                    : isActive(link.href)
+                    ? { color: '#e8c54a', background: 'rgba(201,162,39,0.08)' }
+                    : { color: '#9a8870' }
+                }
               >
                 {link.label}
               </Link>

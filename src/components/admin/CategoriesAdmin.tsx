@@ -129,7 +129,7 @@ export default function CategoriesAdmin() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#c9a227] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -142,7 +142,7 @@ export default function CategoriesAdmin() {
         </h1>
         <button
           onClick={openCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-medium transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] text-white rounded-xl text-sm font-medium transition-all"
         >
           <Plus className="w-4 h-4" />
           Ajouter
@@ -151,67 +151,67 @@ export default function CategoriesAdmin() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-[#111118] border border-purple-500/30 rounded-2xl p-6 mb-6">
+        <div className="bg-[#0f0d09] border border-[#c9a227]/30 rounded-2xl p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-bold text-white">
               {editingId ? 'Modifier la catégorie' : 'Nouvelle catégorie'}
             </h2>
-            <button onClick={() => setShowForm(false)} className="text-gray-500 hover:text-white">
+            <button onClick={() => setShowForm(false)} className="text-[#665544] hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Titre (FR) *</label>
+              <label className="block text-xs text-[#665544] mb-1">Titre (FR) *</label>
               <input
                 value={form.titleFr}
                 onChange={(e) => setForm((p) => ({ ...p, titleFr: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Best Anime"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Titre (EN) *</label>
+              <label className="block text-xs text-[#665544] mb-1">Titre (EN) *</label>
               <input
                 value={form.titleEn}
                 onChange={(e) => setForm((p) => ({ ...p, titleEn: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Best Anime"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Description (FR)</label>
+              <label className="block text-xs text-[#665544] mb-1">Description (FR)</label>
               <textarea
                 value={form.descriptionFr}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionFr: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500 h-20 resize-none"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Description (EN)</label>
+              <label className="block text-xs text-[#665544] mb-1">Description (EN)</label>
               <textarea
                 value={form.descriptionEn}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionEn: e.target.value }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500 h-20 resize-none"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Ordre</label>
+              <label className="block text-xs text-[#665544] mb-1">Ordre</label>
               <input
                 type="number"
                 value={form.order}
                 onChange={(e) => setForm((p) => ({ ...p, order: parseInt(e.target.value) || 1 }))}
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
               />
             </div>
             <div className="flex items-center gap-3">
-              <label className="text-xs text-gray-500">Actif</label>
+              <label className="text-xs text-[#665544]">Actif</label>
               <button
                 type="button"
                 onClick={() => setForm((p) => ({ ...p, active: !p.active }))}
                 className={clsx(
                   'relative w-11 h-6 rounded-full transition-colors',
-                  form.active ? 'bg-purple-600' : 'bg-gray-600'
+                  form.active ? 'bg-[#c9a227]' : 'bg-gray-600'
                 )}
               >
                 <div
@@ -226,14 +226,14 @@ export default function CategoriesAdmin() {
           <div className="flex justify-end gap-3 mt-4">
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 border border-[#1e1e2e] rounded-xl text-gray-400 hover:text-white text-sm transition-all"
+              className="px-4 py-2 border border-[#2a1e0a] rounded-xl text-[#9a8870] hover:text-white text-sm transition-all"
             >
               Annuler
             </button>
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-xl text-white text-sm font-medium transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] rounded-xl text-white text-sm font-medium transition-all disabled:opacity-50"
             >
               {saving ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -251,17 +251,17 @@ export default function CategoriesAdmin() {
         {categories.map((cat) => (
           <div
             key={cat.id}
-            className="bg-[#111118] border border-[#1e1e2e] rounded-xl p-4 flex items-center gap-4"
+            className="bg-[#0f0d09] border border-[#2a1e0a] rounded-xl p-4 flex items-center gap-4"
           >
-            <GripVertical className="w-4 h-4 text-gray-600 flex-shrink-0" />
+            <GripVertical className="w-4 h-4 text-[#3a2e1e] flex-shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <p className="font-semibold text-white truncate">{cat.titleFr}</p>
-                <span className="text-gray-500 text-xs">/</span>
-                <p className="text-gray-400 text-sm truncate">{cat.titleEn}</p>
+                <span className="text-[#665544] text-xs">/</span>
+                <p className="text-[#9a8870] text-sm truncate">{cat.titleEn}</p>
               </div>
               {cat.descriptionFr && (
-                <p className="text-gray-600 text-xs mt-0.5 truncate">{cat.descriptionFr}</p>
+                <p className="text-[#3a2e1e] text-xs mt-0.5 truncate">{cat.descriptionFr}</p>
               )}
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
@@ -271,14 +271,14 @@ export default function CategoriesAdmin() {
                   'px-2 py-1 rounded-lg text-xs font-medium transition-all',
                   cat.active
                     ? 'text-green-400 bg-green-400/10'
-                    : 'text-gray-500 bg-gray-500/10'
+                    : 'text-[#665544] bg-gray-500/10'
                 )}
               >
                 {cat.active ? 'Actif' : 'Inactif'}
               </button>
               <button
                 onClick={() => openEdit(cat)}
-                className="p-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                className="p-1.5 text-[#9a8870] hover:text-white hover:bg-white/5 rounded-lg transition-all"
               >
                 <Pencil className="w-4 h-4" />
               </button>
@@ -292,7 +292,7 @@ export default function CategoriesAdmin() {
                   </button>
                   <button
                     onClick={() => setDeleteConfirm(null)}
-                    className="p-1.5 text-gray-400 hover:bg-white/5 rounded-lg transition-all"
+                    className="p-1.5 text-[#9a8870] hover:bg-white/5 rounded-lg transition-all"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -300,7 +300,7 @@ export default function CategoriesAdmin() {
               ) : (
                 <button
                   onClick={() => setDeleteConfirm(cat.id)}
-                  className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                  className="p-1.5 text-[#9a8870] hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -309,7 +309,7 @@ export default function CategoriesAdmin() {
           </div>
         ))}
         {categories.length === 0 && (
-          <div className="text-center py-16 text-gray-500">
+          <div className="text-center py-16 text-[#665544]">
             Aucune catégorie. Cliquez sur "Ajouter" pour commencer.
           </div>
         )}

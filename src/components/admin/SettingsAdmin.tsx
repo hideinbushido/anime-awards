@@ -87,7 +87,7 @@ export default function SettingsAdmin() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#c9a227] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -101,7 +101,7 @@ export default function SettingsAdmin() {
         {!event && (
           <button
             onClick={() => setCreatingNew(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-medium transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] text-white rounded-xl text-sm font-medium transition-all"
           >
             <Plus className="w-4 h-4" />
             Créer l'événement
@@ -110,11 +110,11 @@ export default function SettingsAdmin() {
       </div>
 
       {!event && !creatingNew ? (
-        <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-8 text-center">
-          <p className="text-gray-400 mb-4">Aucun événement configuré.</p>
+        <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-8 text-center">
+          <p className="text-[#9a8870] mb-4">Aucun événement configuré.</p>
           <button
             onClick={() => setCreatingNew(true)}
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-all"
+            className="px-6 py-3 bg-[#c9a227] hover:bg-[#9e7c1e] text-white rounded-xl font-medium transition-all"
           >
             Créer le premier événement
           </button>
@@ -122,32 +122,32 @@ export default function SettingsAdmin() {
       ) : (
         <div className="space-y-6 max-w-2xl">
           {/* Infos de base */}
-          <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-6">
+          <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-6">
             <h2 className="font-bold text-white mb-4">Informations de l'événement</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
-                <label className="block text-xs text-gray-500 mb-1">Nom de l'événement</label>
+                <label className="block text-xs text-[#665544] mb-1">Nom de l'événement</label>
                 <input
                   value={form.name}
                   onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Année</label>
+                <label className="block text-xs text-[#665544] mb-1">Année</label>
                 <input
                   type="number"
                   value={form.year}
                   onChange={(e) => setForm((p) => ({ ...p, year: parseInt(e.target.value) || 2026 }))}
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Statut</label>
+                <label className="block text-xs text-[#665544] mb-1">Statut</label>
                 <select
                   value={form.status}
                   onChange={(e) => setForm((p) => ({ ...p, status: e.target.value as EventStatus }))}
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 >
                   {STATUS_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -157,58 +157,58 @@ export default function SettingsAdmin() {
                 </select>
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-xs text-gray-500 mb-1">Description</label>
+                <label className="block text-xs text-[#665544] mb-1">Description</label>
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500 h-20 resize-none"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
                 />
               </div>
             </div>
           </div>
 
           {/* Dates */}
-          <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-6">
+          <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-6">
             <h2 className="font-bold text-white mb-4">Dates importantes</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Ouverture des votes</label>
+                <label className="block text-xs text-[#665544] mb-1">Ouverture des votes</label>
                 <input
                   type="datetime-local"
                   value={form.voteOpenDate ? form.voteOpenDate.replace('Z', '') : ''}
                   onChange={(e) =>
                     setForm((p) => ({ ...p, voteOpenDate: new Date(e.target.value).toISOString() }))
                   }
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Fermeture des votes</label>
+                <label className="block text-xs text-[#665544] mb-1">Fermeture des votes</label>
                 <input
                   type="datetime-local"
                   value={form.voteCloseDate ? form.voteCloseDate.replace('Z', '') : ''}
                   onChange={(e) =>
                     setForm((p) => ({ ...p, voteCloseDate: new Date(e.target.value).toISOString() }))
                   }
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Date du live TikTok</label>
+                <label className="block text-xs text-[#665544] mb-1">Date du live TikTok</label>
                 <input
                   type="datetime-local"
                   value={form.liveDate ? form.liveDate.replace('Z', '') : ''}
                   onChange={(e) =>
                     setForm((p) => ({ ...p, liveDate: new Date(e.target.value).toISOString() }))
                   }
-                  className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
             </div>
           </div>
 
           {/* Réseaux sociaux */}
-          <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-6">
+          <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-6">
             <h2 className="font-bold text-white mb-4">Réseaux sociaux</h2>
             <div className="space-y-3">
               {[
@@ -217,12 +217,12 @@ export default function SettingsAdmin() {
                 { key: 'discordUrl', label: 'Discord', placeholder: 'https://discord.gg/...' },
               ].map((field) => (
                 <div key={field.key}>
-                  <label className="block text-xs text-gray-500 mb-1">{field.label}</label>
+                  <label className="block text-xs text-[#665544] mb-1">{field.label}</label>
                   <input
                     value={(form as any)[field.key]}
                     onChange={(e) => setForm((p) => ({ ...p, [field.key]: e.target.value }))}
                     placeholder={field.placeholder}
-                    className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                   />
                 </div>
               ))}
@@ -233,7 +233,7 @@ export default function SettingsAdmin() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 rounded-xl text-white font-bold transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#c9a227] to-[#9e7c1e] hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 rounded-xl text-white font-bold transition-all"
           >
             {saving ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

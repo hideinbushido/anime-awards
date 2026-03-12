@@ -9,55 +9,53 @@ export default function Footer() {
   const locale = useLocale();
 
   return (
-    <footer className="border-t border-[#1e1e2e] mt-20">
+    <footer className="mt-20 border-t" style={{ borderColor: 'rgba(201,162,39,0.12)' }}>
       <div className="container-mobile py-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-              <Trophy className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg, #c9a227, #e8c54a)' }}
+            >
+              <Trophy className="w-4 h-4 text-black" />
             </div>
             <span className="font-bold text-white">
               <span className="gradient-text">Anime</span> Awards{' '}
-              <span className="text-purple-400">2026</span>
+              <span style={{ color: '#c9a227' }}>2026</span>
             </span>
           </Link>
 
           {/* Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
-            <Link href={`/${locale}`} className="hover:text-white transition-colors">
-              {t('home')}
-            </Link>
-            <Link href={`/${locale}/about`} className="hover:text-white transition-colors">
-              {t('about')}
-            </Link>
-            <Link href={`/${locale}/categories`} className="hover:text-white transition-colors">
-              {t('categories')}
-            </Link>
-            <Link href={`/${locale}/nominees`} className="hover:text-white transition-colors">
-              {t('nominees')}
-            </Link>
-            <Link href={`/${locale}/vote`} className="hover:text-white transition-colors">
-              {t('vote')}
-            </Link>
-            <Link href={`/${locale}/faq`} className="hover:text-white transition-colors">
-              {t('faq')}
-            </Link>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm" style={{ color: '#665544' }}>
+            {[t('home'), t('about'), t('categories'), t('nominees'), t('vote'), t('faq')].map((label, i) => {
+              const paths = ['', '/about', '/categories', '/nominees', '/vote', '/faq'];
+              return (
+                <Link key={i} href={`/${locale}${paths[i]}`}
+                  className="transition-colors hover:text-[#c9a227]"
+                  style={{ color: '#665544' }}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Copyright + Admin */}
+          {/* Copyright */}
           <div className="flex flex-col items-center md:items-end gap-1">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm" style={{ color: '#3a2e1e' }}>
               © 2026 Anime Awards. All rights reserved.
             </p>
-            <Link
-              href={`/${locale}/admin/login`}
-              className="text-xs text-gray-700 hover:text-gray-500 transition-colors"
+            <Link href={`/${locale}/admin/login`}
+              className="text-xs transition-colors hover:text-[#c9a227]"
+              style={{ color: '#3a2e1e' }}
             >
               Connexion admin
             </Link>
           </div>
         </div>
+
+        {/* Ligne décorative */}
+        <div className="mt-8 gold-divider" />
       </div>
     </footer>
   );

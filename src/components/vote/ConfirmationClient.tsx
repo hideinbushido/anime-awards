@@ -23,7 +23,7 @@ export default function ConfirmationClient({ shareLabel }: { shareLabel: string 
   return (
     <button
       onClick={handleShare}
-      className="flex items-center gap-2 px-6 py-3 border border-[#1e1e2e] hover:border-purple-500/50 text-gray-300 hover:text-white font-semibold rounded-xl transition-all"
+      className="flex items-center gap-2 px-6 py-3 border border-[#2a1e0a] hover:border-[#c9a227]/50 text-gray-300 hover:text-white font-semibold rounded-xl transition-all"
     >
       <Share2 className="w-5 h-5" />
       {shareLabel}

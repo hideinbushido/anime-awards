@@ -46,16 +46,16 @@ export default async function VotePage({
             <h1 className="text-4xl sm:text-5xl font-black mb-4">
               <span className="gradient-text">{t('title')}</span>
             </h1>
-            <p className="text-gray-400 text-lg">{t('subtitle')}</p>
+            <p className="text-[#9a8870] text-lg">{t('subtitle')}</p>
           </div>
 
           {/* Voting closed */}
           {isVotingClosed && (
             <div className="max-w-2xl mx-auto text-center">
-              <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-10">
-                <Lock className="w-12 h-12 text-gray-500 mx-auto mb-4" />
+              <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-10">
+                <Lock className="w-12 h-12 text-[#665544] mx-auto mb-4" />
                 <h2 className="text-2xl font-bold text-white mb-3">{t('votingClosed')}</h2>
-                <p className="text-gray-400">{t('votingClosedDesc')}</p>
+                <p className="text-[#9a8870]">{t('votingClosedDesc')}</p>
                 {event?.tiktokUrl && (
                   <a
                     href={event.tiktokUrl}
@@ -73,13 +73,13 @@ export default async function VotePage({
           {/* Voting not open yet */}
           {!firebaseError && !event && (
             <div className="max-w-2xl mx-auto text-center">
-              <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-10">
-                <AlertTriangle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
+              <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-10">
+                <AlertTriangle className="w-12 h-12 text-[#c9a227] mx-auto mb-4" />
                 <h2 className="text-2xl font-bold text-white mb-3">{t('votingNotOpen')}</h2>
-                <p className="text-gray-400">{t('votingNotOpenDesc')}</p>
+                <p className="text-[#9a8870]">{t('votingNotOpenDesc')}</p>
                 <Link
                   href={`/${locale}`}
-                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-700 transition-all"
+                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 btn-gold font-bold rounded transition-all"
                 >
                   Retour à l'accueil
                 </Link>
@@ -90,14 +90,14 @@ export default async function VotePage({
           {/* Firebase not configured */}
           {firebaseError && (
             <div className="max-w-2xl mx-auto text-center">
-              <div className="bg-[#111118] border border-amber-500/30 rounded-2xl p-10">
-                <AlertTriangle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
+              <div className="bg-[#0f0d09] border rounded-2xl p-10">
+                <AlertTriangle className="w-12 h-12 text-[#c9a227] mx-auto mb-4" />
                 <h2 className="text-2xl font-bold text-white mb-3">Configuration requise</h2>
-                <p className="text-gray-400 mb-4">
+                <p className="text-[#9a8870] mb-4">
                   Firebase n'est pas encore configuré. Ajoutez vos variables d'environnement dans{' '}
-                  <code className="text-amber-400 text-sm">.env.local</code> pour activer le vote.
+                  <code className="text-[#c9a227] text-sm">.env.local</code> pour activer le vote.
                 </p>
-                <div className="bg-[#0a0a0f] rounded-xl p-4 text-left text-sm text-gray-400 font-mono">
+                <div className="bg-[#07060a] rounded-xl p-4 text-left text-sm text-[#9a8870] font-mono">
                   <p>NEXT_PUBLIC_FIREBASE_API_KEY=...</p>
                   <p>NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...</p>
                   <p>NEXT_PUBLIC_FIREBASE_PROJECT_ID=...</p>

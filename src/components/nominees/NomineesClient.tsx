@@ -41,8 +41,8 @@ export default function NomineesClient({
           className={clsx(
             'px-4 py-2 rounded-full text-sm font-medium transition-all',
             !activeCategory
-              ? 'bg-purple-600 text-white'
-              : 'bg-[#111118] border border-[#1e1e2e] text-gray-400 hover:text-white hover:border-purple-500/50'
+              ? 'bg-[#c9a227] text-white'
+              : 'bg-[#0f0d09] border border-[#2a1e0a] text-[#9a8870] hover:text-white hover:border-[#c9a227]/50'
           )}
         >
           {filterAllLabel}
@@ -54,8 +54,8 @@ export default function NomineesClient({
             className={clsx(
               'px-4 py-2 rounded-full text-sm font-medium transition-all',
               activeCategory === cat.id
-                ? 'bg-purple-600 text-white'
-                : 'bg-[#111118] border border-[#1e1e2e] text-gray-400 hover:text-white hover:border-purple-500/50'
+                ? 'bg-[#c9a227] text-white'
+                : 'bg-[#0f0d09] border border-[#2a1e0a] text-[#9a8870] hover:text-white hover:border-[#c9a227]/50'
             )}
           >
             {locale === 'fr' ? cat.titleFr : cat.titleEn}
@@ -70,7 +70,7 @@ export default function NomineesClient({
           return (
             <div key={cat.id}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a227] to-[#9e7c1e] flex items-center justify-center flex-shrink-0">
                   <Trophy className="w-4 h-4 text-white" />
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-white">
@@ -89,14 +89,14 @@ export default function NomineesClient({
       </div>
 
       {filteredCategories.length === 0 && (
-        <div className="text-center py-20 text-gray-500">{noNomineesLabel}</div>
+        <div className="text-center py-20 text-[#665544]">{noNomineesLabel}</div>
       )}
 
       {/* Vote CTA */}
       <div className="mt-16 text-center">
         <Link
           href={voteHref}
-          className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl text-white font-bold text-lg transition-all hover:scale-105"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#c9a227] to-[#9e7c1e] hover:from-purple-700 hover:to-pink-700 rounded-xl text-white font-bold text-lg transition-all hover:scale-105"
         >
           <Trophy className="w-5 h-5" />
           {voteNowLabel}
@@ -108,8 +108,8 @@ export default function NomineesClient({
 
 function NomineeCard({ nominee, locale }: { nominee: Nominee; locale: string }) {
   return (
-    <div className="bg-[#111118] border border-[#1e1e2e] rounded-xl overflow-hidden card-glow group">
-      <div className="relative aspect-[3/4] overflow-hidden bg-[#0a0a0f]">
+    <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-xl overflow-hidden card-glow group">
+      <div className="relative aspect-[3/4] overflow-hidden bg-[#07060a]">
         <Image
           src={nominee.imageUrl || `https://placehold.co/300x400/111118/8b5cf6?text=${encodeURIComponent(nominee.name)}`}
           alt={nominee.name}
@@ -121,9 +121,9 @@ function NomineeCard({ nominee, locale }: { nominee: Nominee; locale: string }) 
       </div>
       <div className="p-3">
         <h3 className="font-bold text-white text-sm leading-tight">{nominee.name}</h3>
-        <p className="text-purple-400 text-xs mt-0.5">{nominee.anime}</p>
+        <p className="text-[#c9a227] text-xs mt-0.5">{nominee.anime}</p>
         {(locale === 'fr' ? nominee.descriptionFr : nominee.descriptionEn) && (
-          <p className="text-gray-500 text-xs mt-1 line-clamp-2">
+          <p className="text-[#665544] text-xs mt-1 line-clamp-2">
             {locale === 'fr' ? nominee.descriptionFr : nominee.descriptionEn}
           </p>
         )}

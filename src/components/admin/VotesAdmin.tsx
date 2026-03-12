@@ -71,7 +71,7 @@ export default function VotesAdmin() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#c9a227] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -83,11 +83,11 @@ export default function VotesAdmin() {
           <h1 className="text-2xl sm:text-3xl font-black text-white">
             <span className="gradient-text">Votes</span>
           </h1>
-          <p className="text-gray-500 text-sm mt-1">{votes.length} votes enregistrés</p>
+          <p className="text-[#665544] text-sm mt-1">{votes.length} votes enregistrés</p>
         </div>
         <button
           onClick={handleExport}
-          className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-medium transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] text-white rounded-xl text-sm font-medium transition-all"
         >
           <Download className="w-4 h-4" />
           Exporter CSV
@@ -96,13 +96,13 @@ export default function VotesAdmin() {
 
       {/* Search */}
       <div className="relative mb-6">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#665544]" />
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Rechercher par nom ou email..."
-          className="w-full bg-[#111118] border border-[#1e1e2e] rounded-xl pl-10 pr-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-purple-500"
+          className="w-full bg-[#0f0d09] border border-[#2a1e0a] rounded-xl pl-10 pr-4 py-3 text-white text-sm placeholder-[#3a2e1e] focus:outline-none focus:border-[#c9a227]"
         />
       </div>
 
@@ -111,21 +111,21 @@ export default function VotesAdmin() {
         {filteredVotes.map((vote) => (
           <div
             key={vote.id}
-            className="bg-[#111118] border border-[#1e1e2e] rounded-xl overflow-hidden"
+            className="bg-[#0f0d09] border border-[#2a1e0a] rounded-xl overflow-hidden"
           >
             <button
               onClick={() => setExpandedVote(expandedVote === vote.id ? null : vote.id)}
               className="w-full flex items-center justify-between p-4 text-left"
             >
               <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a227] to-[#9e7c1e] flex items-center justify-center flex-shrink-0">
                   <span className="text-white text-xs font-bold">
                     {vote.voterName.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 <div>
                   <p className="font-semibold text-white text-sm">{vote.voterName}</p>
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="flex items-center gap-2 text-xs text-[#665544]">
                     {vote.voterEmail && <span>{vote.voterEmail}</span>}
                     {vote.voterCountry && (
                       <>
@@ -147,26 +147,26 @@ export default function VotesAdmin() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">{vote.answers.length} votes</span>
+                <span className="text-xs text-[#665544]">{vote.answers.length} votes</span>
                 {expandedVote === vote.id ? (
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                  <ChevronDown className="w-4 h-4 text-[#9a8870]" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                  <ChevronRight className="w-4 h-4 text-[#9a8870]" />
                 )}
               </div>
             </button>
 
             {expandedVote === vote.id && (
-              <div className="px-4 pb-4 border-t border-[#1e1e2e] pt-3">
+              <div className="px-4 pb-4 border-t border-[#2a1e0a] pt-3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {vote.answers.map((answer) => {
                     const nominee = nomineesMap[answer.nomineeId];
                     return (
                       <div
                         key={answer.categoryId}
-                        className="flex items-center justify-between bg-[#0a0a0f] rounded-lg px-3 py-2"
+                        className="flex items-center justify-between bg-[#07060a] rounded-lg px-3 py-2"
                       >
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-[#665544]">
                           {getCategoryTitle(answer.categoryId)}
                         </span>
                         <span className="text-xs text-white font-medium">
@@ -181,7 +181,7 @@ export default function VotesAdmin() {
           </div>
         ))}
         {filteredVotes.length === 0 && (
-          <div className="text-center py-16 text-gray-500">Aucun vote trouvé.</div>
+          <div className="text-center py-16 text-[#665544]">Aucun vote trouvé.</div>
         )}
       </div>
     </div>

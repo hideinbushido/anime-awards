@@ -19,7 +19,6 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
       if (!auth) throw new Error('Firebase not configured');
       await signInWithEmailAndPassword(auth, email, password);
@@ -31,54 +30,68 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: '#07060a' }}>
+      {/* Projecteur */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.12) 0%, transparent 65%)' }} />
+
+      <div className="w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center mx-auto mb-4">
-            <Trophy className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+            style={{ background: 'linear-gradient(135deg, #c9a227, #e8c54a)', boxShadow: '0 0 30px rgba(201,162,39,0.3)' }}
+          >
+            <Trophy className="w-8 h-8 text-black" />
           </div>
           <h1 className="text-2xl font-black text-white">
             <span className="gradient-text">Anime Awards</span> 2026
           </h1>
-          <p className="text-gray-500 text-sm mt-1">Espace administrateur</p>
+          <p className="text-sm mt-1" style={{ color: '#665544' }}>Espace administrateur</p>
         </div>
 
         {/* Card */}
-        <div className="bg-[#111118] border border-[#1e1e2e] rounded-2xl p-8">
+        <div className="rounded-2xl p-8"
+          style={{ background: 'rgba(15,13,9,0.95)', border: '1px solid rgba(201,162,39,0.2)', boxShadow: '0 0 40px rgba(201,162,39,0.08)' }}
+        >
           <div className="flex items-center gap-2 mb-6">
-            <Lock className="w-5 h-5 text-purple-400" />
+            <Lock className="w-5 h-5" style={{ color: '#c9a227' }} />
             <h2 className="text-lg font-bold text-white">Connexion Admin</h2>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+              <label className="block text-sm font-medium mb-2" style={{ color: '#c5baa0' }}>Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@example.com"
                 required
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full rounded-xl px-4 py-3 text-white placeholder-[#3a2e1e] focus:outline-none transition-colors"
+                style={{ background: '#07060a', border: '1px solid rgba(201,162,39,0.2)' }}
+                onFocus={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.6)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.2)'}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Mot de passe
-              </label>
+              <label className="block text-sm font-medium mb-2" style={{ color: '#c5baa0' }}>Mot de passe</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full bg-[#0a0a0f] border border-[#1e1e2e] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full rounded-xl px-4 py-3 text-white placeholder-[#3a2e1e] focus:outline-none transition-colors"
+                style={{ background: '#07060a', border: '1px solid rgba(201,162,39,0.2)' }}
+                onFocus={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.6)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.2)'}
               />
             </div>
 
             {error && (
-              <div className="flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+              <div className="flex items-center gap-2 text-sm rounded-xl px-4 py-3"
+                style={{ color: '#ef4444', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)' }}
+              >
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 {error}
               </div>
@@ -87,13 +100,13 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl text-white font-bold transition-all flex items-center justify-center gap-2"
+              className="w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-bold transition-all flex items-center justify-center gap-2 btn-gold"
+              style={{ boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}
             >
-              {loading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                'Se connecter'
-              )}
+              {loading
+                ? <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                : 'Se connecter'
+              }
             </button>
           </form>
         </div>

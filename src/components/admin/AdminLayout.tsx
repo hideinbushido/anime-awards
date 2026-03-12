@@ -58,16 +58,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#c9a227] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   const Sidebar = () => (
     <div className="flex flex-col h-full">
-      <div className="p-6 border-b border-[#1e1e2e]">
+      <div className="p-6 border-b border-[#2a1e0a]">
         <Link href={`/${locale}/admin/dashboard`} className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a227] to-[#9e7c1e] flex items-center justify-center">
             <Trophy className="w-4 h-4 text-white" />
           </div>
           <div>
@@ -89,7 +89,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               className={clsx(
                 'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all',
                 isActive
-                  ? 'bg-purple-600 text-white'
+                  ? 'bg-[#c9a227] text-black'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               )}
             >
@@ -100,7 +100,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         })}
       </nav>
 
-      <div className="p-4 border-t border-[#1e1e2e]">
+      <div className="p-4 border-t border-[#2a1e0a]">
         <button
           onClick={handleLogout}
           className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
@@ -115,7 +115,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen flex">
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-[#111118] border-r border-[#1e1e2e] fixed inset-y-0 left-0 z-40">
+      <aside className="hidden lg:flex flex-col w-64 bg-[#0f0d09] border-r border-[#2a1e0a] fixed inset-y-0 left-0 z-40">
         <Sidebar />
       </aside>
 
@@ -126,7 +126,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="absolute inset-0 bg-black/50"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="relative z-10 w-64 bg-[#111118] border-r border-[#1e1e2e] flex flex-col">
+          <aside className="relative z-10 w-64 bg-[#0f0d09] border-r border-[#2a1e0a] flex flex-col">
             <Sidebar />
           </aside>
         </div>
@@ -135,7 +135,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main content */}
       <div className="flex-1 lg:ml-64 flex flex-col">
         {/* Mobile topbar */}
-        <header className="lg:hidden flex items-center justify-between px-4 h-14 bg-[#111118] border-b border-[#1e1e2e] sticky top-0 z-30">
+        <header className="lg:hidden flex items-center justify-between px-4 h-14 bg-[#0f0d09] border-b border-[#2a1e0a] sticky top-0 z-30">
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 text-gray-400 hover:text-white"
