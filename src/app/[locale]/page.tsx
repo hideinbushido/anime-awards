@@ -43,8 +43,8 @@ export default async function HomePage({
     <>
       <Navbar />
       <main>
-        {/* ─── Hero — Style Prestige/Or ──────────────────────────────────── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 overflow-hidden bg-[#070707]">
+        {/* ─── Hero — Style Anime Energy ─────────────────────────────────── */}
+        <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 overflow-hidden bg-[#05050f]">
           {/* Vidéo de fond */}
           <video
             autoPlay
@@ -52,19 +52,29 @@ export default async function HomePage({
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 1.00 }}
+            style={{ opacity: 0.85 }}
           >
             <source src="/Gold_fond.mp4" type="video/mp4" />
           </video>
 
-          {/* Overlay sombre pour lisibilité du texte */}
+          {/* Overlay énergie */}
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(7,7,7,0.4) 0%, rgba(7,7,7,0.2) 50%, rgba(7,7,7,0.7) 100%)' }}
+            style={{ background: 'linear-gradient(to bottom, rgba(5,5,15,0.5) 0%, rgba(5,5,15,0.2) 50%, rgba(5,5,15,0.8) 100%)' }}
+          />
+          {/* Glow violet haut */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse, rgba(124,58,237,0.25) 0%, transparent 70%)' }}
+          />
+          {/* Glow rose bas-droite */}
+          <div className="absolute bottom-0 right-0 w-[500px] h-[300px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom right, rgba(236,72,153,0.15) 0%, transparent 70%)' }}
           />
 
           <div className="container-mobile text-center z-10 py-20">
-            {/* Badge prestige */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#d4a017]/40 bg-[#d4a017]/10 text-[#f0c040] text-sm font-semibold mb-8 tracking-wider uppercase">
+            {/* Badge énergie */}
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#7c3aed]/50 bg-[#7c3aed]/10 text-[#a855f7] text-sm font-semibold mb-8 tracking-wider uppercase"
+              style={{ boxShadow: '0 0 20px rgba(124,58,237,0.2)' }}
+            >
               <Star className="w-4 h-4" />
               {heroLabel}
             </div>
@@ -72,22 +82,26 @@ export default async function HomePage({
             {/* Titre */}
             <h1 className="text-5xl sm:text-7xl md:text-9xl font-black mb-4 leading-none tracking-tight">
               <span style={{
-                background: 'linear-gradient(135deg, #f0c040, #d4a017, #c9a227)',
+                background: 'linear-gradient(135deg, #a855f7, #3b82f6, #ec4899)',
+                backgroundSize: '200% auto',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
+                animation: 'gradient-shift 4s ease infinite',
               }}>Anime</span>
               <br />
-              <span className="text-white">Awards</span>
+              <span className="text-white drop-shadow-[0_0_30px_rgba(124,58,237,0.5)]">Awards</span>
             </h1>
 
-            {/* Ligne or */}
+            {/* Ligne neon */}
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4a017]" />
-              <p className="text-[#d4a017] text-lg sm:text-xl font-bold tracking-[0.3em] uppercase">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#7c3aed]" />
+              <p className="text-[#a855f7] text-lg sm:text-xl font-bold tracking-[0.3em] uppercase"
+                style={{ textShadow: '0 0 20px rgba(168,85,247,0.6)' }}
+              >
                 {t('hero.edition')}
               </p>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4a017]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#ec4899]" />
             </div>
 
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-12">
@@ -98,16 +112,27 @@ export default async function HomePage({
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <Link
                 href={`/${locale}/vote`}
-                className="group flex items-center gap-2 px-8 py-4 rounded-xl text-black font-bold text-lg transition-all btn-gold"
-                style={{ boxShadow: '0 0 25px rgba(212,160,23,0.45), 0 0 60px rgba(212,160,23,0.15)' }}
+                className="group flex items-center gap-2 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all btn-gold"
+                style={{ boxShadow: '0 0 25px rgba(124,58,237,0.5), 0 0 60px rgba(236,72,153,0.2)', animation: 'pulse-neon 2.5s ease-in-out infinite' }}
               >
                 <Trophy className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 Voter maintenant
               </Link>
               <Link
                 href={`/${locale}/categories`}
-                className="flex items-center gap-2 px-8 py-4 border border-[#d4a017]/40 hover:border-[#d4a017]/80 rounded-xl text-[#f0c040] hover:text-white font-semibold text-lg transition-all hover:bg-[#d4a017]/5"
-                style={{ boxShadow: '0 0 15px rgba(212,160,23,0.15)' }}
+                className="flex items-center gap-2 px-8 py-4 border rounded-xl text-[#a855f7] hover:text-white font-semibold text-lg transition-all"
+                style={{
+                  borderColor: 'rgba(124,58,237,0.5)',
+                  boxShadow: '0 0 15px rgba(124,58,237,0.15)',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(236,72,153,0.7)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 25px rgba(236,72,153,0.3)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(124,58,237,0.5)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 15px rgba(124,58,237,0.15)';
+                }}
               >
                 Voir les Catégories
                 <ChevronRight className="w-5 h-5" />
@@ -116,7 +141,9 @@ export default async function HomePage({
 
             {/* Countdown */}
             {event && isVotingOpen && (
-              <div className="bg-[#0e0e0e]/90 border border-[#d4a017]/25 rounded-2xl p-6 sm:p-8 max-w-lg mx-auto mb-8 shadow-[0_0_40px_rgba(212,160,23,0.1)]">
+              <div className="bg-[#0a0a1a]/90 border border-[#7c3aed]/30 rounded-2xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
+                style={{ boxShadow: '0 0 40px rgba(124,58,237,0.15)' }}
+              >
                 <CountdownTimer
                   targetDate={event.voteCloseDate}
                   label={t('countdown.voteClose')}
@@ -124,7 +151,9 @@ export default async function HomePage({
               </div>
             )}
             {event && !isVotingOpen && event.liveDate && (
-              <div className="bg-[#0e0e0e]/90 border border-[#d4a017]/25 rounded-2xl p-6 sm:p-8 max-w-lg mx-auto mb-8 shadow-[0_0_40px_rgba(212,160,23,0.1)]">
+              <div className="bg-[#0a0a1a]/90 border border-[#7c3aed]/30 rounded-2xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
+                style={{ boxShadow: '0 0 40px rgba(124,58,237,0.15)' }}
+              >
                 <CountdownTimer
                   targetDate={event.liveDate}
                   label={t('countdown.live')}
@@ -135,18 +164,18 @@ export default async function HomePage({
         </section>
 
         {/* ─── How it works ─────────────────────────────────────────────── */}
-        <section className="py-20 bg-[#070707]" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
+        <section className="py-20 bg-[#05050f]" style={{ borderTop: '1px solid rgba(124,58,237,0.2)' }}>
           <div className="container-mobile">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-black mb-3">
                 <span style={{
-                  background: 'linear-gradient(135deg, #f0c040, #d4a017)',
+                  background: 'linear-gradient(135deg, #a855f7, #3b82f6, #ec4899)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                 }}>{t('howItWorks.title')}</span>
               </h2>
-              <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#d4a017] to-transparent mx-auto opacity-50" />
+              <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent mx-auto opacity-50" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
               {[
@@ -154,7 +183,7 @@ export default async function HomePage({
                   icon: Tv,
                   title: t('howItWorks.step1Title'),
                   desc: t('howItWorks.step1Desc'),
-                  color: 'from-[#6d28d9] to-[#4c1d95]',
+                  color: 'from-[#7c3aed] to-[#4c1d95]',
                   step: '01',
                   href: `/${locale}/nominees`,
                 },
@@ -162,7 +191,7 @@ export default async function HomePage({
                   icon: Trophy,
                   title: t('howItWorks.step2Title'),
                   desc: t('howItWorks.step2Desc'),
-                  color: 'from-[#d4a017] to-[#b8860b]',
+                  color: 'from-[#2563eb] to-[#7c3aed]',
                   step: '02',
                   href: `/${locale}/vote`,
                 },
@@ -170,7 +199,7 @@ export default async function HomePage({
                   icon: Play,
                   title: t('howItWorks.step3Title'),
                   desc: t('howItWorks.step3Desc'),
-                  color: 'from-[#6d28d9] to-[#d4a017]',
+                  color: 'from-[#ec4899] to-[#7c3aed]',
                   step: '03',
                   href: event?.tiktokUrl || '#',
                 },
@@ -178,12 +207,13 @@ export default async function HomePage({
                 <Link
                   key={i}
                   href={item.href}
-                  className="group bg-[#0e0e0e] border rounded-2xl p-8 card-glow text-center"
-                  style={{ borderColor: 'rgba(212,160,23,0.15)' }}
+                  className="group bg-[#0a0a1a] border rounded-2xl p-8 card-glow text-center"
+                  style={{ borderColor: 'rgba(124,58,237,0.2)' }}
                 >
-                  <div className="text-6xl font-black mb-4" style={{ color: 'rgba(212,160,23,0.1)' }}>{item.step}</div>
+                  <div className="text-6xl font-black mb-4" style={{ color: 'rgba(124,58,237,0.15)' }}>{item.step}</div>
                   <div
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(212,160,23,0.2)]`}
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}
+                    style={{ boxShadow: '0 0 20px rgba(124,58,237,0.3)' }}
                   >
                     <item.icon className="w-7 h-7 text-white" />
                   </div>
@@ -196,15 +226,20 @@ export default async function HomePage({
         </section>
 
         {/* ─── Animateurs du LIVE ────────────────────────────────────────── */}
-        <section className="relative py-24 overflow-hidden bg-[#070707]" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
+        <section className="relative py-24 overflow-hidden bg-[#05050f]" style={{ borderTop: '1px solid rgba(124,58,237,0.2)' }}>
           {/* ── FOND VIDÉO SECTION 3 — change uniquement le nom du fichier ── */}
           <video autoPlay loop muted playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 1.50 }}
+            style={{ opacity: 0.9 }}
           >
             <source src="/section3_fond.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,7,7,0.7)' }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(5,5,15,0.72)' }} />
+          {/* Glow neon overlay */}
+          <div className="absolute top-0 left-0 w-[400px] h-[400px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top left, rgba(124,58,237,0.15) 0%, transparent 70%)' }} />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom right, rgba(236,72,153,0.12) 0%, transparent 70%)' }} />
           {/* ────────────────────────────────────────────────────────────── */}
           <div className="container-mobile relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -216,19 +251,19 @@ export default async function HomePage({
                   <div
                     className="w-56 h-72 sm:w-64 sm:h-80 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
                     style={{
-                      border: '2px solid rgba(212,160,23,0.4)',
-                      background: 'linear-gradient(135deg, #0e0e0e, #1a1200)',
-                      boxShadow: '0 0 40px rgba(212,160,23,0.12)',
+                      border: '2px solid rgba(124,58,237,0.5)',
+                      background: 'linear-gradient(135deg, #0a0a1a, #1a0a2e)',
+                      boxShadow: '0 0 40px rgba(124,58,237,0.2)',
                     }}
                   >
                     <div className="flex flex-col items-center gap-3 opacity-40">
-                      <Users className="w-14 h-14 text-[#d4a017]" />
-                      <span className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase">Photo</span>
+                      <Users className="w-14 h-14 text-[#a855f7]" />
+                      <span className="text-[#a855f7] text-xs font-semibold tracking-widest uppercase">Photo</span>
                     </div>
                   </div>
                   <div className="text-center">
                     <p className="text-white font-bold">Présentateur 1</p>
-                    <p className="text-[#d4a017]/60 text-sm">Animateur</p>
+                    <p className="text-[#a855f7]/60 text-sm">Animateur</p>
                   </div>
                 </div>
 
@@ -237,39 +272,41 @@ export default async function HomePage({
                   <div
                     className="w-56 h-72 sm:w-64 sm:h-80 rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
                     style={{
-                      border: '2px solid rgba(212,160,23,0.4)',
-                      background: 'linear-gradient(135deg, #0e0e0e, #1a1200)',
-                      boxShadow: '0 0 40px rgba(212,160,23,0.12)',
+                      border: '2px solid rgba(236,72,153,0.5)',
+                      background: 'linear-gradient(135deg, #0a0a1a, #2a0a1e)',
+                      boxShadow: '0 0 40px rgba(236,72,153,0.2)',
                     }}
                   >
                     <div className="flex flex-col items-center gap-3 opacity-40">
-                      <Users className="w-14 h-14 text-[#d4a017]" />
-                      <span className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase">Photo</span>
+                      <Users className="w-14 h-14 text-[#ec4899]" />
+                      <span className="text-[#ec4899] text-xs font-semibold tracking-widest uppercase">Photo</span>
                     </div>
                   </div>
                   <div className="text-center">
                     <p className="text-white font-bold">Présentateur 2</p>
-                    <p className="text-[#d4a017]/60 text-sm">Animateur</p>
+                    <p className="text-[#ec4899]/60 text-sm">Animateur</p>
                   </div>
                 </div>
               </div>
 
               {/* DROITE — Texte décalé à droite */}
               <div className="flex-1 text-center lg:text-right lg:pl-8">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d4a017]/30 bg-[#d4a017]/5 text-[#d4a017] text-xs font-semibold tracking-widest uppercase mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#7c3aed]/40 bg-[#7c3aed]/10 text-[#a855f7] text-xs font-semibold tracking-widest uppercase mb-6"
+                  style={{ boxShadow: '0 0 15px rgba(124,58,237,0.2)' }}
+                >
                   <Star className="w-3 h-3" />
                   Présentation
                 </div>
                 <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 leading-tight">
                   Les Animateurs<br />
                   <span style={{
-                    background: 'linear-gradient(135deg, #f0c040, #d4a017)',
+                    background: 'linear-gradient(135deg, #a855f7, #ec4899)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                   }}>du LIVE</span>
                 </h2>
-                <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#d4a017] to-transparent mx-auto lg:ml-auto lg:mr-0 mb-6 opacity-50" />
+                <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#7c3aed] to-[#ec4899] mx-auto lg:ml-auto lg:mr-0 mb-6 opacity-60" />
                 <p className="text-gray-400 text-base max-w-sm mx-auto lg:ml-auto lg:mr-0 mb-8 leading-relaxed">
                   Découvrez qui animera la cérémonie officielle en direct sur TikTok.
                 </p>
@@ -277,10 +314,10 @@ export default async function HomePage({
                   href="https://www.tiktok.com/@ricokouame"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-black transition-all btn-gold lg:float-right"
-                  style={{ boxShadow: '0 0 20px rgba(212,160,23,0.35)' }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-all btn-gold lg:float-right"
+                  style={{ boxShadow: '0 0 25px rgba(124,58,237,0.4), 0 0 50px rgba(236,72,153,0.2)' }}
                 >
-                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-black">
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white">
                     <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" />
                   </svg>
                   Suivre le Live
@@ -292,13 +329,13 @@ export default async function HomePage({
         </section>
 
         {/* ─── TikTok CTA ───────────────────────────────────────────────── */}
-        <section className="py-20 bg-[#070707]" style={{ borderTop: '1px solid rgba(212,160,23,0.15)' }}>
+        <section className="py-20 bg-[#05050f]" style={{ borderTop: '1px solid rgba(124,58,237,0.2)' }}>
           <div className="container-mobile">
             <div className="rounded-3xl p-8 sm:p-12 text-center"
               style={{
-                background: 'linear-gradient(135deg, #e0d64c 0%, rgba(3, 3, 3, 0.1) 50%, #4e4c2f 100%)',
-                border: '1px solid rgba(0, 0, 0, 0.2)',
-                boxShadow: '0 0 60px rgba(78, 85, 53, 0.36), inset 0 0 60px rgba(163, 142, 90, 0.03)',
+                background: 'linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(5,5,15,0.8) 50%, rgba(236,72,153,0.1) 100%)',
+                border: '1px solid rgba(124,58,237,0.3)',
+                boxShadow: '0 0 60px rgba(124,58,237,0.15), inset 0 0 60px rgba(236,72,153,0.03)',
               }}
             >
               <div className="w-16 h-16 rounded-2xl bg-black border border-[#d4a017]/30 flex items-center justify-center mx-auto mb-6">
@@ -315,7 +352,7 @@ export default async function HomePage({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-100 transition-all hover:scale-105"
-                style={{ boxShadow: '0 0 20px rgba(255,255,255,0.15)' }}
+                style={{ boxShadow: '0 0 20px rgba(181, 212, 40, 0.12)' }}
               >
                 <svg viewBox="0 0 24 24" className="w-5 h-5 fill-black">
                   <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" />

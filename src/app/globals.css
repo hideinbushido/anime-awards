@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #070707;
-  --foreground: #f5f0e8;
-  --primary: #d4a017;
-  --primary-dark: #b8860b;
-  --secondary: #6d28d9;
-  --accent: #f0c040;
-  --card-bg: #0e0e0e;
-  --card-border: #1e1600;
-  --muted: #6b6040;
+  --background: #05050f;
+  --foreground: #f0f0ff;
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --secondary: #2563eb;
+  --accent: #ec4899;
+  --card-bg: #0a0a1a;
+  --card-border: #1a1a3a;
+  --muted: #6b7280;
 }
 
 * {
@@ -27,55 +27,57 @@ body {
   min-height: 100vh;
 }
 
-/* Gold gradient text */
+/* Anime Energy — gradient text violet→bleu→rose */
 .gradient-text {
-  background: linear-gradient(135deg, #f0c040, #d4a017, #c9a227);
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #ec4899);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradient-shift 4s ease infinite;
 }
 
-/* Purple accent text */
+/* Blue electric accent */
 .gradient-text-purple {
-  background: linear-gradient(135deg, #7c3aed, #6d28d9, #4c1d95);
+  background: linear-gradient(135deg, #7c3aed, #2563eb, #ec4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glowing card effect — gold */
+/* Glowing card effect — neon */
 .card-glow {
   transition: all 0.3s ease;
 }
 .card-glow:hover {
-  box-shadow: 0 0 30px rgba(212, 160, 23, 0.25);
-  transform: translateY(-2px);
-  border-color: rgba(212, 160, 23, 0.4) !important;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.35), 0 0 60px rgba(236, 72, 153, 0.15);
+  transform: translateY(-3px);
+  border-color: rgba(124, 58, 237, 0.6) !important;
 }
 
-/* Stage spotlight background */
+/* Anime Energy background */
 .anime-bg {
-  background-color: #070707;
+  background-color: #05050f;
   background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(109, 40, 217, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 60%, rgba(212, 160, 23, 0.08) 0%, transparent 45%),
-    radial-gradient(ellipse at 80% 70%, rgba(109, 40, 217, 0.08) 0%, transparent 45%);
+    radial-gradient(ellipse at 20% 20%, rgba(124, 58, 237, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 60%);
 }
 
-/* Hero gradient — spotlight from top */
+/* Hero gradient — energy burst */
 .hero-gradient {
   background: radial-gradient(
     ellipse 80% 60% at 50% -10%,
-    rgba(109, 40, 217, 0.25) 0%,
+    rgba(124, 58, 237, 0.3) 0%,
     transparent 70%
   );
 }
 
-/* Gold spotlight ring */
+/* Neon ring */
 .spotlight-ring {
   background: radial-gradient(
     ellipse 60% 40% at 50% 100%,
-    rgba(212, 160, 23, 0.12) 0%,
+    rgba(236, 72, 153, 0.15) 0%,
     transparent 70%
   );
 }
@@ -85,27 +87,42 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070707;
+  background: #05050f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4a017;
+  background: #7c3aed;
   border-radius: 3px;
 }
 
-/* Custom animations */
+/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
 
-@keyframes pulse-glow-gold {
-  0%, 100% { box-shadow: 0 0 20px rgba(212, 160, 23, 0.4); }
-  50% { box-shadow: 0 0 50px rgba(212, 160, 23, 0.8), 0 0 80px rgba(212, 160, 23, 0.3); }
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes shimmer-gold {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
+@keyframes pulse-neon {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), 0 0 40px rgba(236, 72, 153, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.9), 0 0 80px rgba(236, 72, 153, 0.4), 0 0 120px rgba(37, 99, 235, 0.2);
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(124, 58, 237, 0.5); }
+  50% { border-color: rgba(236, 72, 153, 0.8); }
+}
+
+@keyframes lightning {
+  0%, 95%, 100% { opacity: 0; }
+  96%, 99% { opacity: 0.6; }
 }
 
 @keyframes rotate-slow {
@@ -118,33 +135,34 @@ body {
 }
 
 .pulse-glow {
-  animation: pulse-glow-gold 2.5s ease-in-out infinite;
+  animation: pulse-neon 2.5s ease-in-out infinite;
 }
 
-/* Gold shimmer button */
+/* Neon primary button — violet→rose avec glow */
 .btn-gold {
-  background: linear-gradient(135deg, #d4a017, #f0c040, #b8860b);
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #ec4899);
   background-size: 200% auto;
+  color: white !important;
   transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 .btn-gold:hover {
   background-position: right center;
-  transform: scale(1.04);
-  box-shadow: 0 0 30px rgba(212, 160, 23, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.6), 0 0 60px rgba(236, 72, 153, 0.3);
 }
 
 /* Nominee card selected state */
 .nominee-card-selected {
-  border-color: #d4a017 !important;
-  background: rgba(212, 160, 23, 0.08) !important;
-  box-shadow: 0 0 20px rgba(212, 160, 23, 0.25);
+  border-color: #7c3aed !important;
+  background: rgba(124, 58, 237, 0.1) !important;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 40px rgba(236, 72, 153, 0.1);
 }
 
-/* Gold divider */
+/* Neon divider */
 .gold-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d4a017, transparent);
-  opacity: 0.3;
+  background: linear-gradient(90deg, transparent, #7c3aed, #ec4899, #7c3aed, transparent);
+  opacity: 0.5;
 }
 
 /* Mobile-first responsive helpers */
