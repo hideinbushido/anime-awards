@@ -182,18 +182,27 @@ body {
    NOMINEE CARD — animations par catégorie
    ════════════════════════════════════════════ */
 
-/* Entrée universelle */
+/* Entrée universelle — désactivée par défaut, jouée à l'apparition dans le viewport */
 @keyframes nominee-entry {
-  0%   { opacity: 0; transform: translateY(28px) scale(0.88); }
+  0%   { opacity: 0; transform: translateY(32px) scale(0.86); }
   60%  { opacity: 1; }
-  100% { opacity: 1; transform: translateY(0)    scale(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* État initial : invisible */
 .nominee-card {
-  animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both;
+  opacity: 0;
+  transform: translateY(32px) scale(0.86);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
+}
+
+/* Déclenché par IntersectionObserver : animation d'entrée */
+.nominee-card.in-view {
+  animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both;
 }
 
 /* Hover universel */
-.nominee-card:hover {
+.nominee-card.in-view:hover {
   transform: scale(1.06) translateY(-4px) !important;
   z-index: 10;
 }
@@ -203,8 +212,8 @@ body {
   0%,100% { box-shadow: 0 0 0 1px rgba(255,100,30,0.3), 0 0 18px rgba(255,80,20,0.25); }
   50%      { box-shadow: 0 0 0 2px rgba(255,140,50,0.6), 0 0 35px rgba(255,100,30,0.5), 0 0 60px rgba(200,60,0,0.2); }
 }
-.anim-combat { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-combat-idle 2s ease-in-out 0.6s infinite; }
-.anim-combat:hover { box-shadow: 0 0 0 2px rgba(255,140,50,0.8), 0 0 50px rgba(255,100,30,0.7), 0 0 90px rgba(200,60,0,0.35) !important; }
+.anim-combat.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-combat-idle 2s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-combat.in-view:hover { box-shadow: 0 0 0 2px rgba(255,140,50,0.8), 0 0 50px rgba(255,100,30,0.7), 0 0 90px rgba(200,60,0,0.35) !important; }
 
 /* ── Antagoniste / Villain — flammes violettes/rouges ── */
 @keyframes anim-villain-idle {
@@ -212,29 +221,29 @@ body {
   33%      { box-shadow: 0 0 22px rgba(180,0,255,0.7), 0 0 45px rgba(220,0,80,0.4), 0 4px 20px rgba(100,0,150,0.3); }
   66%      { box-shadow: 0 0 15px rgba(200,0,100,0.6), 0 0 35px rgba(150,0,200,0.35); }
 }
-.anim-villain { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-villain-idle 2.4s ease-in-out 0.6s infinite; }
-.anim-villain:hover { box-shadow: 0 0 30px rgba(180,0,255,0.85), 0 0 70px rgba(220,0,80,0.55) !important; }
+.anim-villain.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-villain-idle 2.4s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-villain.in-view:hover { box-shadow: 0 0 30px rgba(180,0,255,0.85), 0 0 70px rgba(220,0,80,0.55) !important; }
 
-/* ── Musique — ondes sonores (opening / ending / BO / chanson) ── */
+/* ── Musique — ondes sonores ── */
 @keyframes anim-music-idle {
   0%,100% { box-shadow: 0 0 10px rgba(30,190,255,0.35); }
   25%      { box-shadow: 0 0 20px rgba(50,210,255,0.6), 0 8px 20px rgba(30,130,255,0.3); }
   50%      { box-shadow: 0 0 30px rgba(100,180,255,0.55), 0 0 55px rgba(30,190,255,0.25); }
   75%      { box-shadow: 0 0 18px rgba(50,210,255,0.5), 0 -8px 18px rgba(30,130,255,0.25); }
 }
-.anim-music { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-music-idle 2.2s ease-in-out 0.6s infinite; }
-.anim-music:hover { box-shadow: 0 0 40px rgba(50,210,255,0.8), 0 0 80px rgba(30,190,255,0.4) !important; }
+.anim-music.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-music-idle 2.2s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-music.in-view:hover { box-shadow: 0 0 40px rgba(50,210,255,0.8), 0 0 80px rgba(30,190,255,0.4) !important; }
 
 /* ── Animé de l'année — énergie épique ── */
 @keyframes anim-epic-idle {
   0%,100% { box-shadow: 0 0 20px rgba(201,162,39,0.55), 0 0 50px rgba(201,162,39,0.2); }
   50%      { box-shadow: 0 0 40px rgba(232,197,74,0.85), 0 0 90px rgba(201,162,39,0.4), 0 0 130px rgba(245,224,144,0.15); }
 }
-.anim-epic {
-  animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-epic-idle 2s ease-in-out 0.6s infinite;
+.anim-epic.in-view {
+  animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-epic-idle 2s ease-in-out var(--idle-delay, 0.65s) infinite;
   border-color: rgba(201,162,39,0.5) !important;
 }
-.anim-epic:hover { box-shadow: 0 0 55px rgba(232,197,74,0.95), 0 0 110px rgba(201,162,39,0.5) !important; }
+.anim-epic.in-view:hover { box-shadow: 0 0 55px rgba(232,197,74,0.95), 0 0 110px rgba(201,162,39,0.5) !important; }
 
 /* ── Foudre — protagoniste / personnages ── */
 @keyframes anim-lightning-idle {
@@ -242,24 +251,24 @@ body {
   89%,91%,93%  { box-shadow: 0 0 35px rgba(160,230,255,0.9), 0 0 65px rgba(100,200,255,0.55); }
   90%,92%,94%  { box-shadow: 0 0 5px rgba(100,200,255,0.15); }
 }
-.anim-lightning { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-lightning-idle 3s ease-in-out 0.6s infinite; }
-.anim-lightning:hover { box-shadow: 0 0 35px rgba(160,230,255,0.85), 0 0 70px rgba(100,200,255,0.5) !important; }
+.anim-lightning.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-lightning-idle 3s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-lightning.in-view:hover { box-shadow: 0 0 35px rgba(160,230,255,0.85), 0 0 70px rgba(100,200,255,0.5) !important; }
 
 /* ── Isekai — portal ── */
 @keyframes anim-portal-idle {
   0%,100% { box-shadow: 0 0 15px rgba(80,40,220,0.4), inset 0 0 15px rgba(80,40,220,0.08); }
   50%      { box-shadow: 0 0 30px rgba(120,80,255,0.65), inset 0 0 25px rgba(80,40,220,0.15); }
 }
-.anim-portal { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-portal-idle 2.8s ease-in-out 0.6s infinite; }
-.anim-portal:hover { box-shadow: 0 0 45px rgba(130,90,255,0.8), inset 0 0 30px rgba(80,40,220,0.25) !important; }
+.anim-portal.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-portal-idle 2.8s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-portal.in-view:hover { box-shadow: 0 0 45px rgba(130,90,255,0.8), inset 0 0 30px rgba(80,40,220,0.25) !important; }
 
 /* ── Romance ── */
 @keyframes anim-romance-idle {
   0%,100% { box-shadow: 0 0 12px rgba(255,100,160,0.35); }
   50%      { box-shadow: 0 0 28px rgba(255,140,185,0.65), 0 0 50px rgba(255,80,140,0.25); }
 }
-.anim-romance { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-romance-idle 2.5s ease-in-out 0.6s infinite; }
-.anim-romance:hover { box-shadow: 0 0 40px rgba(255,140,185,0.8), 0 0 70px rgba(255,80,140,0.4) !important; }
+.anim-romance.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-romance-idle 2.5s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-romance.in-view:hover { box-shadow: 0 0 40px rgba(255,140,185,0.8), 0 0 70px rgba(255,80,140,0.4) !important; }
 
 /* ── Attachant / Comédie — étincelles ── */
 @keyframes anim-sparkle-idle {
@@ -267,16 +276,16 @@ body {
   33%      { box-shadow: 0 0 20px rgba(255,230,100,0.55), 4px -4px 15px rgba(255,200,50,0.3); }
   66%      { box-shadow: 0 0 15px rgba(255,220,90,0.4), -4px 4px 15px rgba(255,210,60,0.25); }
 }
-.anim-sparkle { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-sparkle-idle 2.3s ease-in-out 0.6s infinite; }
-.anim-sparkle:hover { box-shadow: 0 0 35px rgba(255,230,100,0.75), 0 0 60px rgba(255,200,50,0.35) !important; }
+.anim-sparkle.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-sparkle-idle 2.3s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-sparkle.in-view:hover { box-shadow: 0 0 35px rgba(255,230,100,0.75), 0 0 60px rgba(255,200,50,0.35) !important; }
 
 /* ── Sagesse / Sensei ── */
 @keyframes anim-wisdom-idle {
   0%,100% { box-shadow: 0 0 12px rgba(180,220,150,0.3); }
   50%      { box-shadow: 0 0 25px rgba(180,240,150,0.55), 0 0 45px rgba(140,200,100,0.2); }
 }
-.anim-wisdom { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-wisdom-idle 3s ease-in-out 0.6s infinite; }
-.anim-wisdom:hover { box-shadow: 0 0 35px rgba(180,240,150,0.7), 0 0 65px rgba(140,200,100,0.35) !important; }
+.anim-wisdom.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-wisdom-idle 3s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-wisdom.in-view:hover { box-shadow: 0 0 35px rgba(180,240,150,0.7), 0 0 65px rgba(140,200,100,0.35) !important; }
 
 /* ── Chara-design — arc-en-ciel ── */
 @keyframes anim-rainbow-idle {
@@ -286,23 +295,15 @@ body {
   75%  { box-shadow: 0 0 15px rgba(180,50,255,0.4); }
   100% { box-shadow: 0 0 15px rgba(255,80,80,0.4); }
 }
-.anim-rainbow { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-rainbow-idle 3s linear 0.6s infinite; }
+.anim-rainbow.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-rainbow-idle 3s linear var(--idle-delay, 0.65s) infinite; }
 
 /* ── Or — défaut ── */
 @keyframes anim-gold-idle {
   0%,100% { box-shadow: 0 0 10px rgba(201,162,39,0.25); }
   50%      { box-shadow: 0 0 22px rgba(201,162,39,0.5), 0 0 40px rgba(201,162,39,0.15); }
 }
-.anim-gold { animation: nominee-entry 0.55s cubic-bezier(0.22,1,0.36,1) both, anim-gold-idle 2.5s ease-in-out 0.6s infinite; }
-.anim-gold:hover { box-shadow: 0 0 30px rgba(201,162,39,0.7), 0 0 55px rgba(201,162,39,0.3) !important; }
-
-/* délais d'entrée en cascade */
-.nominee-card:nth-child(1) { animation-delay: 0s, 0.6s; }
-.nominee-card:nth-child(2) { animation-delay: 0.07s, 0.67s; }
-.nominee-card:nth-child(3) { animation-delay: 0.14s, 0.74s; }
-.nominee-card:nth-child(4) { animation-delay: 0.21s, 0.81s; }
-.nominee-card:nth-child(5) { animation-delay: 0.28s, 0.88s; }
-.nominee-card:nth-child(6) { animation-delay: 0.35s, 0.95s; }
+.anim-gold.in-view { animation: nominee-entry 0.6s cubic-bezier(0.22,1,0.36,1) both, anim-gold-idle 2.5s ease-in-out var(--idle-delay, 0.65s) infinite; }
+.anim-gold.in-view:hover { box-shadow: 0 0 30px rgba(201,162,39,0.7), 0 0 55px rgba(201,162,39,0.3) !important; }
 
 /* ── Container responsive ── */
 .container-mobile {

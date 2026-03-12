@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trophy, Volume2 } from 'lucide-react';
@@ -104,12 +104,13 @@ export default function NomineesClient({
                 <p className="text-sm py-8 text-center" style={{ color: '#665544' }}>{noNomineesLabel}</p>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {nominees.map((nominee) => (
+                  {nominees.map((nominee, idx) => (
                     <NomineeCard
                       key={nominee.id}
                       nominee={nominee}
                       locale={locale}
                       animClass={animClass}
+                      index={idx}
                     />
                   ))}
                 </div>
@@ -142,13 +143,32 @@ function NomineeCard({
   nominee,
   locale,
   animClass,
+  index,
 }: {
   nominee: Nominee;
   locale: string;
   animClass: string;
+  index: number;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [inView, setInView] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
+
+  // Délai d'entrée en cascade selon la position dans la grille
+  const entryDelay = `${index * 0.09}s`;
+  const idleDelay = `${index * 0.09 + 0.65}s`;
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleMouseEnter = useCallback(() => {
     if (!nominee.audioUrl) return;
@@ -179,12 +199,14 @@ function NomineeCard({
 
   return (
     <div
-      className={`nominee-card ${animClass} relative rounded-2xl overflow-hidden cursor-pointer group`}
+      ref={cardRef}
+      className={`nominee-card ${animClass}${inView ? ' in-view' : ''} relative rounded-2xl overflow-hidden cursor-pointer group`}
       style={{
         background: 'rgba(15,13,9,0.95)',
         border: '1px solid rgba(201,162,39,0.18)',
-        transition: 'transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease',
-      }}
+        animationDelay: inView ? entryDelay : undefined,
+        ['--idle-delay' as string]: idleDelay,
+      } as React.CSSProperties}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
