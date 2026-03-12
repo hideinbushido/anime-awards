@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
+import AudioPlayer from '@/components/layout/AudioPlayer';
 
 const locales = ['fr', 'en'];
 
@@ -39,6 +40,7 @@ export default async function LocaleLayout({
       <body className="anime-bg min-h-screen">
         <NextIntlClientProvider messages={messages}>
           {children}
+          <AudioPlayer />
           <Toaster
             position="top-center"
             toastOptions={{
