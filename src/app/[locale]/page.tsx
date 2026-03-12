@@ -52,7 +52,7 @@ export default async function HomePage({
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ opacity: 0.55 }}
           >
-            <source src="/style3_fond1.mp4" type="video/mp4" />
+            <source src="/style3_fond2.mp4" type="video/mp4" />
           </video>
           {/* ─────────────────────────────────────────────────── */}
 
