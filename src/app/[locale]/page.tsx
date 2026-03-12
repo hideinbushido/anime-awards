@@ -156,7 +156,10 @@ export default async function HomePage({
         </section>
 
         {/* ─── How it works ─────────────────────────────────────────────── */}
-        <section className="py-20 bg-[#05050f]" style={{ borderTop: '1px solid rgba(124,58,237,0.2)' }}>
+        <section className="py-20" style={{
+          borderTop: '1px solid rgba(124,58,237,0.2)',
+          background: 'linear-gradient(160deg, #0a0520 0%, #05050f 40%, #12051a 70%, #0a0a1f 100%)',
+        }}>
           <div className="container-mobile">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-black mb-3">
