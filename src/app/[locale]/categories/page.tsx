@@ -7,13 +7,17 @@ import { getActiveEvent, getCategories } from '@/lib/firestore';
 
 // Mapping image de fond par slug de catégorie
 const CATEGORY_IMAGES: Record<string, string> = {
-  'meilleur-personnage-feminin': '/FOND FEMININ.jpg',
-  'personnage-attachant':        '/FOND FEMINI.png',
-  'meilleurs-decors':            '/FOND DECOR.jpg',
-  'meilleur-isekai':             '/FOND ISEKAI.jpg',
-  'meilleur-protagoniste':       '/FOND PROTA.jpg',
-  'meilleur-personnage-masculin':'/FOND PROTA.jpg',
-  'meilleur-sensei':             '/FOND SENSEI.jpg',
+  'meilleur-personnage-feminin':  '/FOND_FEMININ.png',
+  'personnage-attachant':         '/FOND_ATTACHANT.png',
+  'meilleurs-decors':             '/FOND DECOR.jpg',
+  'meilleur-isekai':              '/FOND ISEKAI.jpg',
+  'meilleur-protagoniste':        '/FOND PROTA.jpg',
+  'meilleur-personnage-masculin': '/FOND  MASCULIN.png',
+  'meilleur-sensei':              '/FOND SENSEI.jpg',
+  'meilleur-developpement':       '/FOND  DEVELOPPEMENT.png',
+  'meilleur-film':                '/FOND FILM.png',
+  'meilleur-antagoniste':         '/FOND COMBAT.jpg',
+  'meilleur-action':              '/FOND COMBAT.jpg',
 };
 
 // Gradients de fallback pour les catégories sans image

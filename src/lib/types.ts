@@ -39,6 +39,7 @@ export interface Nominee {
   name: string;
   anime: string;
   imageUrl: string;
+  audioUrl?: string;
   description: string;
   descriptionFr: string;
   descriptionEn: string;

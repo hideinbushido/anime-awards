@@ -19,6 +19,7 @@ const emptyForm = {
   name: '',
   anime: '',
   imageUrl: '',
+  audioUrl: '',
   descriptionFr: '',
   descriptionEn: '',
   categoryId: '',
@@ -73,6 +74,7 @@ export default function NomineesAdmin() {
       name: nominee.name,
       anime: nominee.anime,
       imageUrl: nominee.imageUrl,
+      audioUrl: nominee.audioUrl ?? '',
       descriptionFr: nominee.descriptionFr,
       descriptionEn: nominee.descriptionEn,
       categoryId: nominee.categoryId,
@@ -197,13 +199,22 @@ export default function NomineesAdmin() {
                 placeholder="Sousou no Frieren"
               />
             </div>
-            <div className="sm:col-span-2">
+            <div>
               <label className="block text-xs text-[#665544] mb-1">URL de l'image</label>
               <input
                 value={form.imageUrl}
                 onChange={(e) => setForm((p) => ({ ...p, imageUrl: e.target.value }))}
                 className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="https://example.com/image.jpg"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-[#665544] mb-1">URL audio (extrait hover)</label>
+              <input
+                value={form.audioUrl}
+                onChange={(e) => setForm((p) => ({ ...p, audioUrl: e.target.value }))}
+                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                placeholder="/audio/mon-fichier.mp3"
               />
             </div>
             <div>
