@@ -54,7 +54,7 @@ export default async function HomePage({
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ opacity: 0.85 }}
           >
-            <source src="/Gold_fond.mp4" type="video/mp4" />
+            <source src="/style2_fond2.mp4" type="video/mp4" />
           </video>
 
           {/* Overlay énergie */}
@@ -224,7 +224,7 @@ export default async function HomePage({
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ opacity: 0.9 }}
           >
-            <source src="/section3_fond.mp4" type="video/mp4" />
+            <source src="/style2_fond1.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(5,5,15,0.72)' }} />
           {/* Glow neon overlay */}
