@@ -120,18 +120,10 @@ export default async function HomePage({
               </Link>
               <Link
                 href={`/${locale}/categories`}
-                className="flex items-center gap-2 px-8 py-4 border rounded-xl text-[#a855f7] hover:text-white font-semibold text-lg transition-all"
+                className="flex items-center gap-2 px-8 py-4 border rounded-xl text-[#a855f7] hover:text-white hover:border-[#ec4899] font-semibold text-lg transition-all"
                 style={{
                   borderColor: 'rgba(124,58,237,0.5)',
                   boxShadow: '0 0 15px rgba(124,58,237,0.15)',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(236,72,153,0.7)';
-                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 25px rgba(236,72,153,0.3)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(124,58,237,0.5)';
-                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 15px rgba(124,58,237,0.15)';
                 }}
               >
                 Voir les Catégories
