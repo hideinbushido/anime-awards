@@ -47,9 +47,9 @@ export default async function HomePage({
           {/* ── FOND VIDÉO HERO — change le nom du fichier ici ── */}
           <video autoPlay loop muted playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 0.45 }}
+            style={{ opacity: 1.00 }}
           >
-            <source src="/style3_fond1.mp4" type="video/mp4" />
+            <source src="/Gold_fond.mp4" type="video/mp4" />
           </video>
 
           {/* Overlay assombri */}
@@ -259,9 +259,9 @@ export default async function HomePage({
           {/* ── FOND VIDÉO SECTION 3 — change uniquement le nom du fichier ── */}
           <video autoPlay loop muted playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ opacity: 0.5 }}
+            style={{ opacity: 0.75 }}
           >
-            <source src="/style3_fond2.mp4" type="video/mp4" />
+            <source src="/section3_fond.mp4" type="video/mp4" />
           </video>
 
           {/* Overlays */}
