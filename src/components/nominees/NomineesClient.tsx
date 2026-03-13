@@ -3,7 +3,12 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Trophy, Volume2 } from 'lucide-react';
+import {
+  Trophy, Volume2, Heart, Film, Smile, Zap, Star, TrendingUp, ThumbsDown,
+  GraduationCap, Globe, Palette, Users, Repeat, Coffee, Sparkles, Music,
+  Mic, Headphones, Play, Square, BookOpen, Shield, Skull, Swords, Crown,
+  type LucideIcon,
+} from 'lucide-react';
 import type { Category, Nominee } from '@/lib/types';
 
 interface Props {
@@ -13,6 +18,38 @@ interface Props {
   voteHref: string;
   voteNowLabel: string;
   noNomineesLabel: string;
+}
+
+function getCategoryIcon(titleFr: string, titleEn: string): LucideIcon {
+  const t = (titleFr + ' ' + titleEn).toLowerCase();
+  if (t.includes('romance')) return Heart;
+  if (t.includes('film')) return Film;
+  if (t.includes('comédie') || t.includes('comedy')) return Smile;
+  if (t.includes('action')) return Zap;
+  if (t.includes('nouveauté') || t.includes('new series')) return Sparkles;
+  if (t.includes('développement') || t.includes('development')) return TrendingUp;
+  if (t.includes('déception') || t.includes('disappointment')) return ThumbsDown;
+  if (t.includes('sensei')) return GraduationCap;
+  if (t.includes('isekai')) return Globe;
+  if (t.includes('chara') || t.includes('character design')) return Palette;
+  if (t.includes('attachant') || t.includes('lovable')) return Star;
+  if (t.includes('opening')) return Play;
+  if (t.includes('ending')) return Square;
+  if (t.includes('bande') || t.includes('soundtrack')) return Headphones;
+  if (t.includes('chanson') || t.includes('song')) return Mic;
+  if (t.includes('protagoniste') || t.includes('protagonist')) return Shield;
+  if (t.includes('secondaire') || t.includes('supporting')) return Users;
+  if (t.includes('suite') || t.includes('sequel')) return Repeat;
+  if (t.includes('slice')) return Coffee;
+  if (t.includes('animé de l') || t.includes('anime of the year')) return Trophy;
+  if (t.includes('antagoniste') || t.includes('antagonist')) return Skull;
+  if (t.includes('drama')) return BookOpen;
+  if (t.includes('décors') || t.includes('settings')) return Sparkles;
+  if (t.includes('seinen')) return Swords;
+  if (t.includes('animation')) return Music;
+  if (t.includes('masculin') || t.includes('male')) return Shield;
+  if (t.includes('féminin') || t.includes('female')) return Crown;
+  return Star;
 }
 
 function getCategoryAnimClass(titleFr: string, titleEn: string): string {
@@ -41,6 +78,7 @@ export default function NomineesClient({
   if (!category) return null;
 
   const animClass = getCategoryAnimClass(category.titleFr, category.titleEn);
+  const CategoryIcon = getCategoryIcon(category.titleFr, category.titleEn);
 
   return (
     <div>
@@ -48,7 +86,7 @@ export default function NomineesClient({
       <div className="flex items-center gap-3 mb-8">
         <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
           style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
-          <Trophy className="w-4 h-4 text-black" />
+          <CategoryIcon className="w-4 h-4 text-black" />
         </div>
         <h1 className="text-2xl sm:text-3xl font-black text-white">
           {locale === 'fr' ? category.titleFr : category.titleEn}

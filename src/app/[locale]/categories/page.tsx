@@ -1,6 +1,43 @@
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { Trophy, ChevronRight } from 'lucide-react';
+import {
+  Trophy, Heart, Film, Smile, Zap, Star, TrendingUp, ThumbsDown,
+  GraduationCap, Globe, Palette, Users, Repeat, Coffee, Sparkles, Music,
+  Mic, Headphones, Play, Square, BookOpen, Shield, Skull, Swords, Crown,
+  type LucideIcon,
+} from 'lucide-react';
+
+function getCategoryIcon(titleFr = '', titleEn = ''): LucideIcon {
+  const t = (titleFr + ' ' + titleEn).toLowerCase();
+  if (t.includes('romance')) return Heart;
+  if (t.includes('film')) return Film;
+  if (t.includes('comédie') || t.includes('comedy')) return Smile;
+  if (t.includes('action')) return Zap;
+  if (t.includes('nouveauté') || t.includes('new series')) return Sparkles;
+  if (t.includes('développement') || t.includes('development')) return TrendingUp;
+  if (t.includes('déception') || t.includes('disappointment')) return ThumbsDown;
+  if (t.includes('sensei')) return GraduationCap;
+  if (t.includes('isekai')) return Globe;
+  if (t.includes('chara') || t.includes('character design')) return Palette;
+  if (t.includes('attachant') || t.includes('lovable')) return Star;
+  if (t.includes('opening')) return Play;
+  if (t.includes('ending')) return Square;
+  if (t.includes('bande') || t.includes('soundtrack')) return Headphones;
+  if (t.includes('chanson') || t.includes('song')) return Mic;
+  if (t.includes('protagoniste') || t.includes('protagonist')) return Shield;
+  if (t.includes('secondaire') || t.includes('supporting')) return Users;
+  if (t.includes('suite') || t.includes('sequel')) return Repeat;
+  if (t.includes('slice')) return Coffee;
+  if (t.includes('animé de l') || t.includes('anime of the year')) return Trophy;
+  if (t.includes('antagoniste') || t.includes('antagonist')) return Skull;
+  if (t.includes('drama')) return BookOpen;
+  if (t.includes('décors') || t.includes('settings')) return Sparkles;
+  if (t.includes('seinen')) return Swords;
+  if (t.includes('animation')) return Music;
+  if (t.includes('masculin') || t.includes('male')) return Shield;
+  if (t.includes('féminin') || t.includes('female')) return Crown;
+  return Star;
+}
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { getActiveEvent, getCategories } from '@/lib/firestore';
@@ -104,6 +141,7 @@ export default async function CategoriesPage({
               const bgImage = CATEGORY_IMAGES[slug];
               const fallback = FALLBACK_GRADIENTS[i % FALLBACK_GRADIENTS.length];
 
+              const CatIcon = getCategoryIcon(cat.titleFr, cat.titleEn);
               return (
                 <Link
                   key={cat.id}
@@ -158,7 +196,7 @@ export default async function CategoriesPage({
                       <div className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
                         style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', boxShadow: '0 0 15px rgba(201,162,39,0.35)' }}
                       >
-                        <ChevronRight className="w-4 h-4 text-black" />
+                        <CatIcon className="w-4 h-4 text-black" />
                       </div>
                     </div>
                   </div>
