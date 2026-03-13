@@ -84,67 +84,60 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center sm:p-6"
-      style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)' }}
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-8"
+      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(16px)' }}
       onClick={onClose}
     >
-      {/* Panel — bottom sheet on mobile, centered modal on desktop */}
+      {/* Panel — image fills everything, text overlaid at bottom */}
       <div
-        className="modal-panel relative overflow-hidden flex flex-col w-full sm:w-auto sm:max-w-[400px] rounded-t-3xl sm:rounded-2xl"
+        className="modal-panel relative rounded-2xl sm:rounded-3xl overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, rgba(14,11,4,0.99) 0%, rgba(10,8,2,1) 100%)',
-          border: '1px solid rgba(201,162,39,0.3)',
-          borderBottom: 'none',
-          boxShadow: '0 -8px 40px rgba(201,162,39,0.1), 0 0 80px rgba(0,0,0,0.8)',
-          maxHeight: '92vh',
+          width: '100%',
+          maxWidth: '480px',
+          height: '88vh',
+          maxHeight: '820px',
+          border: '1px solid rgba(201,162,39,0.4)',
+          boxShadow: '0 0 0 1px rgba(201,162,39,0.08), 0 40px 100px rgba(0,0,0,0.9)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Drag handle (mobile only) */}
-        <div className="flex justify-center pt-3 pb-1 sm:hidden">
-          <div className="w-10 h-1 rounded-full" style={{ background: 'rgba(201,162,39,0.35)' }} />
-        </div>
+        {/* Image — covers the entire panel */}
+        <Image
+          src={imgSrc}
+          alt={nominee.name}
+          fill
+          className="object-cover object-top"
+          unoptimized
+        />
 
-        {/* Gold top line (desktop only) */}
-        <div className="hidden sm:block h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,162,39,0.5), transparent)' }} />
+        {/* Dark gradient at bottom for text readability */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, rgba(4,3,1,0.97) 0%, rgba(4,3,1,0.6) 30%, rgba(4,3,1,0.1) 65%, transparent 100%)' }}
+        />
 
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 hover:scale-110"
-          style={{ background: 'rgba(8,6,0,0.9)', border: '1px solid rgba(201,162,39,0.4)' }}
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 hover:scale-110"
+          style={{ background: 'rgba(4,3,1,0.75)', border: '1px solid rgba(201,162,39,0.5)', backdropFilter: 'blur(8px)' }}
         >
-          <X className="w-4 h-4" style={{ color: '#c9a227' }} />
+          <X className="w-5 h-5" style={{ color: '#c9a227' }} />
         </button>
 
-        {/* Image — smaller ratio on mobile to leave room for text */}
-        <div
-          className="relative w-full overflow-hidden"
-          style={{ aspectRatio: '3/4', maxHeight: '52vh', flexShrink: 0 }}
-        >
-          <Image
-            src={imgSrc}
-            alt={nominee.name}
-            fill
-            className="object-cover object-top"
-            unoptimized
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top, rgba(10,8,2,1) 0%, rgba(10,8,2,0.5) 45%, transparent 100%)' }}
-          />
-        </div>
-
-        {/* Info */}
-        <div className="px-5 pb-6 pt-2 sm:pb-5">
-          {/* Gold accent */}
-          <div className="w-8 h-0.5 mb-3 rounded-full" style={{ background: 'linear-gradient(90deg, #c9a227, #9e7c1e)' }} />
-          <h2 className="text-lg sm:text-xl font-black text-white leading-tight">{nominee.name}</h2>
+        {/* Text overlay at bottom */}
+        <div className="absolute bottom-0 inset-x-0 px-6 pb-8">
+          <div className="w-10 h-0.5 mb-4 rounded-full" style={{ background: 'linear-gradient(90deg, #c9a227, #9e7c1e)' }} />
+          <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-lg">
+            {nominee.name}
+          </h2>
           {nominee.anime && (
-            <p className="text-sm font-semibold mt-1" style={{ color: '#c9a227' }}>{nominee.anime}</p>
+            <p className="text-base font-semibold mt-1.5" style={{ color: '#c9a227' }}>
+              {nominee.anime}
+            </p>
           )}
           {(nominee.descriptionFr || nominee.descriptionEn) && (
-            <p className="text-xs sm:text-sm mt-2 leading-relaxed" style={{ color: '#9a8870' }}>
+            <p className="text-sm mt-3 leading-relaxed" style={{ color: 'rgba(200,180,140,0.85)' }}>
               {nominee.descriptionFr || nominee.descriptionEn}
             </p>
           )}
