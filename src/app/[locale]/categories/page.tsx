@@ -147,7 +147,7 @@ export default async function CategoriesPage({
                   key={cat.id}
                   href={`/${locale}/nominees?category=${cat.id}`}
                   className="category-card group relative rounded-2xl overflow-hidden block"
-                  style={{ height: '220px', border: '1px solid rgba(201,162,39,0.18)' }}
+                  style={{ height: '220px', border: '1px solid rgba(201,162,39,0.18)', animationDelay: `${i * 0.07}s` }}
                 >
                   {/* Fond — image ou gradient */}
                   {bgImage ? (

@@ -97,7 +97,7 @@ export default function NomineesClient({
       {nominees.length === 0 ? (
         <p className="text-sm py-8 text-center" style={{ color: '#665544' }}>{noNomineesLabel}</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
           {nominees.map((nominee, idx) => (
             <NomineeCard
               key={nominee.id}
