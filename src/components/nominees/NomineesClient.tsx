@@ -204,7 +204,7 @@ function NomineeCard({
       style={{
         background: 'rgba(15,13,9,0.95)',
         border: '1px solid rgba(201,162,39,0.18)',
-        animationDelay: inView ? entryDelay : undefined,
+        animationDelay: inView ? `${entryDelay}, ${idleDelay}` : undefined,
         ['--idle-delay' as string]: idleDelay,
       } as React.CSSProperties}
       onMouseEnter={handleMouseEnter}
