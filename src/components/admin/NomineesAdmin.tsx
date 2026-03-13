@@ -186,7 +186,7 @@ export default function NomineesAdmin() {
               <input
                 value={form.name}
                 onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Frieren"
               />
             </div>
@@ -195,7 +195,7 @@ export default function NomineesAdmin() {
               <input
                 value={form.anime}
                 onChange={(e) => setForm((p) => ({ ...p, anime: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Sousou no Frieren"
               />
             </div>
@@ -204,7 +204,7 @@ export default function NomineesAdmin() {
               <input
                 value={form.imageUrl}
                 onChange={(e) => setForm((p) => ({ ...p, imageUrl: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
@@ -213,7 +213,7 @@ export default function NomineesAdmin() {
               <input
                 value={form.audioUrl}
                 onChange={(e) => setForm((p) => ({ ...p, audioUrl: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="/audio/mon-fichier.mp3"
               />
             </div>
@@ -222,7 +222,7 @@ export default function NomineesAdmin() {
               <textarea
                 value={form.descriptionFr}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionFr: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
@@ -230,7 +230,7 @@ export default function NomineesAdmin() {
               <textarea
                 value={form.descriptionEn}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionEn: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
@@ -238,7 +238,7 @@ export default function NomineesAdmin() {
               <select
                 value={form.categoryId}
                 onChange={(e) => setForm((p) => ({ ...p, categoryId: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
               >
                 <option value="">Choisir...</option>
                 {categories.map((cat) => (
@@ -311,7 +311,7 @@ export default function NomineesAdmin() {
             key={nominee.id}
             className="bg-[#0f0d09] border border-[#2a1e0a] rounded-xl overflow-hidden group"
           >
-            <div className="relative aspect-[3/4] bg-[#07060a]">
+            <div className="relative aspect-[3/4] bg-[#080600]">
               <Image
                 src={nominee.imageUrl || `https://placehold.co/300x400/111118/8b5cf6?text=${encodeURIComponent(nominee.name)}`}
                 alt={nominee.name}

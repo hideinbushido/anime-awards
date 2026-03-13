@@ -210,7 +210,7 @@ function NomineeCard({
         {/* Overlay gradient */}
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top, rgba(7,6,10,0.98) 0%, rgba(7,6,10,0.55) 45%, rgba(7,6,10,0.15) 100%)' }}
+          style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.98) 0%, rgba(8,6,0,0.55) 45%, rgba(8,6,0,0.15) 100%)' }}
         />
 
         {/* Audio indicator */}

@@ -166,7 +166,7 @@ export default function CategoriesAdmin() {
               <input
                 value={form.titleFr}
                 onChange={(e) => setForm((p) => ({ ...p, titleFr: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Best Anime"
               />
             </div>
@@ -175,7 +175,7 @@ export default function CategoriesAdmin() {
               <input
                 value={form.titleEn}
                 onChange={(e) => setForm((p) => ({ ...p, titleEn: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 placeholder="Best Anime"
               />
             </div>
@@ -184,7 +184,7 @@ export default function CategoriesAdmin() {
               <textarea
                 value={form.descriptionFr}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionFr: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
@@ -192,7 +192,7 @@ export default function CategoriesAdmin() {
               <textarea
                 value={form.descriptionEn}
                 onChange={(e) => setForm((p) => ({ ...p, descriptionEn: e.target.value }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
               />
             </div>
             <div>
@@ -201,7 +201,7 @@ export default function CategoriesAdmin() {
                 type="number"
                 value={form.order}
                 onChange={(e) => setForm((p) => ({ ...p, order: parseInt(e.target.value) || 1 }))}
-                className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
               />
             </div>
             <div className="flex items-center gap-3">

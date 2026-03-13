@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: '#07060a' }}>
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: '#080600' }}>
       {/* Projecteur */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.12) 0%, transparent 65%)' }} />
@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
                 placeholder="admin@example.com"
                 required
                 className="w-full rounded-xl px-4 py-3 text-white placeholder-[#3a2e1e] focus:outline-none transition-colors"
-                style={{ background: '#07060a', border: '1px solid rgba(201,162,39,0.2)' }}
+                style={{ background: '#080600', border: '1px solid rgba(201,162,39,0.2)' }}
                 onFocus={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.6)'}
                 onBlur={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.2)'}
               />
@@ -82,7 +82,7 @@ export default function AdminLoginPage() {
                 placeholder="••••••••"
                 required
                 className="w-full rounded-xl px-4 py-3 text-white placeholder-[#3a2e1e] focus:outline-none transition-colors"
-                style={{ background: '#07060a', border: '1px solid rgba(201,162,39,0.2)' }}
+                style={{ background: '#080600', border: '1px solid rgba(201,162,39,0.2)' }}
                 onFocus={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.6)'}
                 onBlur={(e) => e.target.style.borderColor = 'rgba(201,162,39,0.2)'}
               />

@@ -60,10 +60,10 @@ const CATEGORY_IMAGES: Record<string, string> = {
 // Gradients de fallback pour les catégories sans image
 const FALLBACK_GRADIENTS = [
   'linear-gradient(135deg, #1a1200, #0f0d09)',
-  'linear-gradient(135deg, #0d0b14, #07060a)',
-  'linear-gradient(135deg, #160e02, #07060a)',
+  'linear-gradient(135deg, #0d0b14, #080600)',
+  'linear-gradient(135deg, #160e02, #080600)',
   'linear-gradient(135deg, #0a0800, #120d03)',
-  'linear-gradient(135deg, #0f0c00, #07060a)',
+  'linear-gradient(135deg, #0f0c00, #080600)',
   'linear-gradient(135deg, #120900, #0f0d09)',
 ];
 
@@ -119,7 +119,7 @@ export default async function CategoriesPage({
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-20" style={{ background: '#07060a', minHeight: '100vh' }}>
+      <main className="pt-24 pb-20" style={{ background: '#080600', minHeight: '100vh' }}>
         {/* Projecteur haut */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none z-0"
           style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.1) 0%, transparent 65%)' }} />
@@ -161,12 +161,12 @@ export default async function CategoriesPage({
 
                   {/* Overlay dégradé sombre du bas */}
                   <div className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to top, rgba(7,6,10,0.95) 0%, rgba(7,6,10,0.65) 50%, rgba(7,6,10,0.3) 100%)' }}
+                    style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.95) 0%, rgba(8,6,0,0.65) 50%, rgba(8,6,0,0.3) 100%)' }}
                   />
 
                   {/* Badge nominés en haut à droite */}
                   <div className="absolute top-3 right-3 text-xs px-2.5 py-1 rounded"
-                    style={{ background: 'rgba(7,6,10,0.8)', border: '1px solid rgba(201,162,39,0.3)', color: '#c9a227', backdropFilter: 'blur(8px)' }}
+                    style={{ background: 'rgba(8,6,0,0.8)', border: '1px solid rgba(201,162,39,0.3)', color: '#c9a227', backdropFilter: 'blur(8px)' }}
                   >
                     {cat.nomineeCount ?? '—'} {t('nominees')}
                   </div>

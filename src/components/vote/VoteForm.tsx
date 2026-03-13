@@ -103,7 +103,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
   return (
     <form onSubmit={handleSubmit} noValidate>
       {/* Progress bar */}
-      <div className="sticky top-16 z-40 bg-[#07060a]/95 backdrop-blur-md border-b border-[#2a1e0a] py-3 mb-8">
+      <div className="sticky top-16 z-40 bg-[#080600]/95 backdrop-blur-md border-b border-[#2a1e0a] py-3 mb-8">
         <div className="container-mobile">
           <div className="flex items-center justify-between text-sm mb-2">
             <span className="text-[#9a8870]">
@@ -140,7 +140,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                 }}
                 placeholder={t('namePlaceholder')}
                 className={clsx(
-                  'w-full bg-[#07060a] border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors',
+                  'w-full bg-[#080600] border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors',
                   errors.name ? 'border-red-500' : 'border-[#2a1e0a]'
                 )}
                 data-error={errors.name ? 'name' : undefined}
@@ -162,7 +162,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                   value={voterEmail}
                   onChange={(e) => setVoterEmail(e.target.value)}
                   placeholder={t('emailPlaceholder')}
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors"
                 />
               </div>
               <div>
@@ -174,7 +174,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                   value={voterCountry}
                   onChange={(e) => setVoterCountry(e.target.value)}
                   placeholder={t('countryPlaceholder')}
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a227] transition-colors"
                 />
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function VoteForm({ categories, nomineesByCategory, eventId }: Pr
                           type="button"
                           onClick={() => handleSelectNominee(cat.id, nominee.id)}
                           className={clsx(
-                            'relative bg-[#07060a] border rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]',
+                            'relative bg-[#080600] border rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]',
                             selected === nominee.id
                               ? 'border-[#c9a227] shadow-[0_0_20px_rgba(201,162,39,0.3)]'
                               : 'border-[#2a1e0a] hover:border-[#c9a227]/40'

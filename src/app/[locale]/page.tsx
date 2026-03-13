@@ -42,7 +42,7 @@ export default async function HomePage({
         {/* ════════════════════════════════════════════════════════════
             SECTION 1 — HERO Award Show
         ════════════════════════════════════════════════════════════ */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 overflow-hidden" style={{ background: '#07060a' }}>
+        <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 overflow-hidden" style={{ background: '#080600' }}>
 
           {/* ── FOND VIDÉO HERO — change le nom du fichier ici ── */}
           <video autoPlay loop muted playsInline
@@ -54,7 +54,7 @@ export default async function HomePage({
 
           {/* Overlay assombri */}
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(7,6,10,0.75) 0%, rgba(7,6,10,0.25) 45%, rgba(7,6,10,0.92) 100%)' }}
+            style={{ background: 'linear-gradient(to bottom, rgba(8,6,0,0.75) 0%, rgba(8,6,0,0.25) 45%, rgba(8,6,0,0.92) 100%)' }}
           />
 
           {/* Projecteur or central haut */}
@@ -176,7 +176,7 @@ export default async function HomePage({
 
           {/* Fondu bas */}
           <div className="absolute bottom-0 inset-x-0 h-40 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, transparent, #07060a)' }}
+            style={{ background: 'linear-gradient(to bottom, transparent, #080600)' }}
           />
         </section>
 
@@ -185,7 +185,7 @@ export default async function HomePage({
         ════════════════════════════════════════════════════════════ */}
         <section className="relative py-20 overflow-hidden" style={{
           borderTop: '1px solid rgba(201,162,39,0.12)',
-          background: 'linear-gradient(160deg, #0e0b05 0%, #07060a 40%, #110d04 70%, #07060a 100%)',
+          background: 'linear-gradient(160deg, #0e0b05 0%, #080600 40%, #110d04 70%, #080600 100%)',
         }}>
           {/* Projecteur haut-gauche */}
           <div className="absolute top-0 left-0 w-[600px] h-[400px] pointer-events-none"
@@ -254,7 +254,7 @@ export default async function HomePage({
         {/* ════════════════════════════════════════════════════════════
             SECTION 3 — ANIMATEURS DU LIVE
         ════════════════════════════════════════════════════════════ */}
-        <section className="relative py-24 overflow-hidden" style={{ background: '#07060a', borderTop: '1px solid rgba(201,162,39,0.12)' }}>
+        <section className="relative py-24 overflow-hidden" style={{ background: '#080600', borderTop: '1px solid rgba(201,162,39,0.12)' }}>
 
           {/* ── FOND VIDÉO SECTION 3 — change uniquement le nom du fichier ── */}
           <video autoPlay loop muted playsInline
@@ -266,13 +266,13 @@ export default async function HomePage({
 
           {/* Overlays */}
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(135deg, rgba(7,6,10,0.9) 0%, rgba(14,11,5,0.8) 50%, rgba(7,6,10,0.88) 100%)' }} />
+            style={{ background: 'linear-gradient(135deg, rgba(8,6,0,0.9) 0%, rgba(14,11,5,0.8) 50%, rgba(8,6,0,0.88) 100%)' }} />
           {/* Projecteur doré haut */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] pointer-events-none"
             style={{ background: 'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(201,162,39,0.15) 0%, transparent 65%)' }} />
           {/* Chaleur bas */}
           <div className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, transparent, #07060a)' }} />
+            style={{ background: 'linear-gradient(to bottom, transparent, #080600)' }} />
 
           <div className="container-mobile relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -352,7 +352,7 @@ export default async function HomePage({
         ════════════════════════════════════════════════════════════ */}
         <section className="relative py-20 overflow-hidden" style={{
           borderTop: '1px solid rgba(201,162,39,0.12)',
-          background: 'linear-gradient(160deg, #0e0b05 0%, #07060a 40%, #120e04 70%, #07060a 100%)',
+          background: 'linear-gradient(160deg, #0e0b05 0%, #080600 40%, #120e04 70%, #080600 100%)',
         }}>
           {/* Projecteurs */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[350px] pointer-events-none"

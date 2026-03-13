@@ -130,7 +130,7 @@ export default function SettingsAdmin() {
                 <input
                   value={form.name}
                   onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
@@ -139,7 +139,7 @@ export default function SettingsAdmin() {
                   type="number"
                   value={form.year}
                   onChange={(e) => setForm((p) => ({ ...p, year: parseInt(e.target.value) || 2026 }))}
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
@@ -147,7 +147,7 @@ export default function SettingsAdmin() {
                 <select
                   value={form.status}
                   onChange={(e) => setForm((p) => ({ ...p, status: e.target.value as EventStatus }))}
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 >
                   {STATUS_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -161,7 +161,7 @@ export default function SettingsAdmin() {
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227] h-20 resize-none"
                 />
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function SettingsAdmin() {
                   onChange={(e) =>
                     setForm((p) => ({ ...p, voteOpenDate: new Date(e.target.value).toISOString() }))
                   }
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
@@ -190,7 +190,7 @@ export default function SettingsAdmin() {
                   onChange={(e) =>
                     setForm((p) => ({ ...p, voteCloseDate: new Date(e.target.value).toISOString() }))
                   }
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
               <div>
@@ -201,7 +201,7 @@ export default function SettingsAdmin() {
                   onChange={(e) =>
                     setForm((p) => ({ ...p, liveDate: new Date(e.target.value).toISOString() }))
                   }
-                  className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                  className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                 />
               </div>
             </div>
@@ -222,7 +222,7 @@ export default function SettingsAdmin() {
                     value={(form as any)[field.key]}
                     onChange={(e) => setForm((p) => ({ ...p, [field.key]: e.target.value }))}
                     placeholder={field.placeholder}
-                    className="w-full bg-[#07060a] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
+                    className="w-full bg-[#080600] border border-[#2a1e0a] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#c9a227]"
                   />
                 </div>
               ))}

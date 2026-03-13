@@ -21,7 +21,7 @@ export default async function AboutPage({
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-20" style={{ background: '#07060a', minHeight: '100vh' }}>
+      <main className="pt-24 pb-20" style={{ background: '#080600', minHeight: '100vh' }}>
         {/* Projecteur */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none z-0"
           style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.1) 0%, transparent 65%)' }} />

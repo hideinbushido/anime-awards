@@ -164,7 +164,7 @@ export default function VotesAdmin() {
                     return (
                       <div
                         key={answer.categoryId}
-                        className="flex items-center justify-between bg-[#07060a] rounded-lg px-3 py-2"
+                        className="flex items-center justify-between bg-[#080600] rounded-lg px-3 py-2"
                       >
                         <span className="text-xs text-[#665544]">
                           {getCategoryTitle(answer.categoryId)}

@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b"
-      style={{ background: 'rgba(7,6,10,0.92)', backdropFilter: 'blur(16px)', borderColor: 'rgba(201,162,39,0.15)' }}
+      style={{ background: 'rgba(8,6,0,0.92)', backdropFilter: 'blur(16px)', borderColor: 'rgba(201,162,39,0.15)' }}
     >
       <div className="container-mobile">
         <div className="flex items-center justify-between h-16">
@@ -62,7 +62,7 @@ export default function Navbar() {
                     ? 'text-[#e8c54a]'
                     : 'text-[#9a8870] hover:text-white hover:bg-white/5'
                 )}
-                style={link.highlight ? { background: 'linear-gradient(135deg, #c9a227, #e8c54a)', color: '#07060a' } : {}}
+                style={link.highlight ? { background: 'linear-gradient(135deg, #c9a227, #e8c54a)', color: '#080600' } : {}}
               >
                 {link.label}
               </Link>
@@ -113,7 +113,7 @@ export default function Navbar() {
                 )}
                 style={
                   link.highlight
-                    ? { background: 'linear-gradient(135deg, #c9a227, #e8c54a)', color: '#07060a' }
+                    ? { background: 'linear-gradient(135deg, #c9a227, #e8c54a)', color: '#080600' }
                     : isActive(link.href)
                     ? { color: '#e8c54a', background: 'rgba(201,162,39,0.08)' }
                     : { color: '#9a8870' }

@@ -318,44 +318,88 @@ export default async function NomineesPage({
 
       {/* Sub-navbar — fixed below main navbar */}
       <div
-        className="fixed left-0 right-0 z-40 border-b"
-        style={{ top: '64px', background: 'rgba(7,6,10,0.95)', backdropFilter: 'blur(16px)', borderColor: 'rgba(201,162,39,0.12)' }}
+        className="fixed left-0 right-0 z-40"
+        style={{
+          top: '64px',
+          background: 'linear-gradient(180deg, rgba(8,6,0,0.98) 0%, rgba(12,9,0,0.96) 100%)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(201,162,39,0.2)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+        }}
       >
-        <div className="container-mobile flex items-center justify-between" style={{ height: '44px' }}>
+        {/* Gold top accent line */}
+        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(201,162,39,0.5) 30%, rgba(201,162,39,0.5) 70%, transparent)' }} />
+
+        <div className="container-mobile flex items-stretch" style={{ height: '56px' }}>
+          {/* Prev */}
           {prevCat ? (
             <Link
               href={`/${locale}/nominees?category=${prevCat.id}`}
-              className="flex items-center gap-1 text-xs font-medium transition-colors"
-              style={{ color: '#9a8870', maxWidth: '33%' }}
+              className="flex items-center gap-2 flex-1 group"
+              style={{ minWidth: 0 }}
             >
-              <ChevronLeft className="w-4 h-4 flex-shrink-0" />
-              <span className="truncate">{locale === 'fr' ? prevCat.titleFr : prevCat.titleEn}</span>
+              <div
+                className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all group-hover:scale-110"
+                style={{ background: 'rgba(201,162,39,0.12)', border: '1px solid rgba(201,162,39,0.25)' }}
+              >
+                <ChevronLeft className="w-4 h-4" style={{ color: '#c9a227' }} />
+              </div>
+              <div className="flex flex-col min-w-0">
+                <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'rgba(201,162,39,0.55)' }}>
+                  {locale === 'fr' ? 'Précédent' : 'Previous'}
+                </span>
+                <span className="text-xs font-semibold truncate leading-tight" style={{ color: '#c4a882' }}>
+                  {locale === 'fr' ? prevCat.titleFr : prevCat.titleEn}
+                </span>
+              </div>
             </Link>
-          ) : <div style={{ width: '33%' }} />}
+          ) : <div className="flex-1" />}
 
-          <Link
-            href={`/${locale}/categories`}
-            className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full flex-shrink-0"
-            style={{ color: '#c9a227', border: '1px solid rgba(201,162,39,0.3)' }}
-          >
-            <LayoutGrid className="w-3 h-3" />
-            {locale === 'fr' ? 'Toutes les catégories' : 'All categories'}
-          </Link>
+          {/* Center — All categories */}
+          <div className="flex items-center flex-shrink-0 px-3">
+            <Link
+              href={`/${locale}/categories`}
+              className="flex flex-col items-center gap-0.5 group"
+            >
+              <div
+                className="w-8 h-8 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
+                style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', boxShadow: '0 2px 12px rgba(201,162,39,0.3)' }}
+              >
+                <LayoutGrid className="w-4 h-4 text-black" />
+              </div>
+              <span className="text-[8px] font-bold uppercase tracking-wider" style={{ color: 'rgba(201,162,39,0.7)' }}>
+                {locale === 'fr' ? 'Catégories' : 'Categories'}
+              </span>
+            </Link>
+          </div>
 
+          {/* Next */}
           {nextCat ? (
             <Link
               href={`/${locale}/nominees?category=${nextCat.id}`}
-              className="flex items-center gap-1 text-xs font-medium transition-colors justify-end"
-              style={{ color: '#9a8870', maxWidth: '33%' }}
+              className="flex items-center gap-2 flex-1 justify-end group"
+              style={{ minWidth: 0 }}
             >
-              <span className="truncate">{locale === 'fr' ? nextCat.titleFr : nextCat.titleEn}</span>
-              <ChevronRight className="w-4 h-4 flex-shrink-0" />
+              <div className="flex flex-col items-end min-w-0">
+                <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'rgba(201,162,39,0.55)' }}>
+                  {locale === 'fr' ? 'Suivant' : 'Next'}
+                </span>
+                <span className="text-xs font-semibold truncate leading-tight" style={{ color: '#c4a882' }}>
+                  {locale === 'fr' ? nextCat.titleFr : nextCat.titleEn}
+                </span>
+              </div>
+              <div
+                className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all group-hover:scale-110"
+                style={{ background: 'rgba(201,162,39,0.12)', border: '1px solid rgba(201,162,39,0.25)' }}
+              >
+                <ChevronRight className="w-4 h-4" style={{ color: '#c9a227' }} />
+              </div>
             </Link>
-          ) : <div style={{ width: '33%' }} />}
+          ) : <div className="flex-1" />}
         </div>
       </div>
 
-      <main style={{ background: '#07060a', minHeight: '100vh', paddingTop: '108px', paddingBottom: '5rem' }}>
+      <main style={{ background: '#080600', minHeight: '100vh', paddingTop: '121px', paddingBottom: '5rem' }}>
         {/* Projecteur haut */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none z-0"
           style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.1) 0%, transparent 65%)' }} />

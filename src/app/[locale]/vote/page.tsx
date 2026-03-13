@@ -97,7 +97,7 @@ export default async function VotePage({
                   Firebase n'est pas encore configuré. Ajoutez vos variables d'environnement dans{' '}
                   <code className="text-[#c9a227] text-sm">.env.local</code> pour activer le vote.
                 </p>
-                <div className="bg-[#07060a] rounded-xl p-4 text-left text-sm text-[#9a8870] font-mono">
+                <div className="bg-[#080600] rounded-xl p-4 text-left text-sm text-[#9a8870] font-mono">
                   <p>NEXT_PUBLIC_FIREBASE_API_KEY=...</p>
                   <p>NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...</p>
                   <p>NEXT_PUBLIC_FIREBASE_PROJECT_ID=...</p>

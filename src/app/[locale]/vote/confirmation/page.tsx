@@ -20,7 +20,7 @@ export default async function ConfirmationPage({
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-20 min-h-screen flex items-center" style={{ background: '#07060a' }}>
+      <main className="pt-24 pb-20 min-h-screen flex items-center" style={{ background: '#080600' }}>
         {/* Projecteur */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none z-0"
           style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.12) 0%, transparent 65%)' }} />
@@ -44,7 +44,7 @@ export default async function ConfirmationPage({
 
               {event?.liveDate && (
                 <div className="rounded-xl p-4 mb-8 inline-block"
-                  style={{ background: 'rgba(7,6,10,0.9)', border: '1px solid rgba(201,162,39,0.2)' }}
+                  style={{ background: 'rgba(8,6,0,0.9)', border: '1px solid rgba(201,162,39,0.2)' }}
                 >
                   <p className="text-sm mb-1" style={{ color: '#665544' }}>{t('liveDate')}</p>
                   <p className="text-white font-bold">
