@@ -84,16 +84,22 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto"
-      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(16px)', paddingTop: '124px', paddingBottom: '24px', paddingLeft: '16px', paddingRight: '16px' }}
+      className="fixed inset-0 z-[200]"
+      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(16px)' }}
       onClick={onClose}
     >
+      {/* Zone de centrage sous les navbars */}
+      <div
+        className="absolute flex items-center justify-center p-4"
+        style={{ top: '120px', left: 0, right: 0, bottom: 0 }}
+      >
       {/* Panel */}
       <div
         className="modal-panel relative rounded-2xl sm:rounded-3xl overflow-hidden flex-shrink-0"
         style={{
           width: '100%',
-          maxWidth: '480px',
+          maxWidth: '420px',
+          maxHeight: 'calc(100vh - 144px)',
           border: '1px solid rgba(201,162,39,0.4)',
           boxShadow: '0 0 0 1px rgba(201,162,39,0.08), 0 40px 100px rgba(0,0,0,0.9)',
           background: '#080600',
@@ -142,6 +148,7 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
