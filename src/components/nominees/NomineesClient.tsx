@@ -4,20 +4,17 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trophy, Volume2 } from 'lucide-react';
-import { clsx } from 'clsx';
 import type { Category, Nominee } from '@/lib/types';
 
 interface Props {
-  categories: Category[];
-  nomineesByCategory: Record<string, Nominee[]>;
+  category: Category | null;
+  nominees: Nominee[];
   locale: string;
   voteHref: string;
-  filterAllLabel: string;
   voteNowLabel: string;
   noNomineesLabel: string;
 }
 
-/** Retourne la classe d'animation CSS selon le titre de la catégorie */
 function getCategoryAnimClass(titleFr: string, titleEn: string): string {
   const t = (titleFr + ' ' + titleEn).toLowerCase();
   if (t.includes('antagoniste') || t.includes('antagonist')) return 'anim-villain';
@@ -34,94 +31,45 @@ function getCategoryAnimClass(titleFr: string, titleEn: string): string {
 }
 
 export default function NomineesClient({
-  categories,
-  nomineesByCategory,
+  category,
+  nominees,
   locale,
   voteHref,
   voteNowLabel,
   noNomineesLabel,
-  filterAllLabel,
 }: Props) {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  if (!category) return null;
 
-  const filteredCategories = activeCategory
-    ? categories.filter((c) => c.id === activeCategory)
-    : categories;
+  const animClass = getCategoryAnimClass(category.titleFr, category.titleEn);
 
   return (
     <div>
-      {/* Filter tabs */}
-      <div className="flex flex-wrap gap-2 mb-10">
-        <button
-          onClick={() => setActiveCategory(null)}
-          className={clsx(
-            'px-4 py-2 rounded-full text-sm font-medium transition-all',
-            !activeCategory
-              ? 'text-black font-bold btn-gold'
-              : 'text-[#9a8870] hover:text-white transition-colors'
-          )}
-          style={!activeCategory ? {} : { background: 'rgba(15,13,9,0.9)', border: '1px solid rgba(201,162,39,0.2)' }}
-        >
-          {filterAllLabel}
-        </button>
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setActiveCategory(cat.id)}
-            className={clsx(
-              'px-4 py-2 rounded-full text-sm font-medium transition-all',
-              activeCategory === cat.id
-                ? 'text-black font-bold btn-gold'
-                : 'text-[#9a8870] hover:text-white transition-colors'
-            )}
-            style={activeCategory === cat.id ? {} : { background: 'rgba(15,13,9,0.9)', border: '1px solid rgba(201,162,39,0.2)' }}
-          >
-            {locale === 'fr' ? cat.titleFr : cat.titleEn}
-          </button>
-        ))}
+      {/* Category header */}
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
+          <Trophy className="w-4 h-4 text-black" />
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-black text-white">
+          {locale === 'fr' ? category.titleFr : category.titleEn}
+        </h1>
+        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(201,162,39,0.4), transparent)' }} />
       </div>
 
-      {/* Categories with nominees */}
-      <div className="space-y-14">
-        {filteredCategories.map((cat) => {
-          const nominees = nomineesByCategory[cat.id] || [];
-          const animClass = getCategoryAnimClass(cat.titleFr, cat.titleEn);
-          return (
-            <section key={cat.id}>
-              {/* Category header */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
-                  <Trophy className="w-4 h-4 text-black" />
-                </div>
-                <h2 className="text-xl sm:text-2xl font-black text-white">
-                  {locale === 'fr' ? cat.titleFr : cat.titleEn}
-                </h2>
-                <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(201,162,39,0.4), transparent)' }} />
-              </div>
-
-              {nominees.length === 0 ? (
-                <p className="text-sm py-8 text-center" style={{ color: '#665544' }}>{noNomineesLabel}</p>
-              ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {nominees.map((nominee, idx) => (
-                    <NomineeCard
-                      key={nominee.id}
-                      nominee={nominee}
-                      locale={locale}
-                      animClass={animClass}
-                      index={idx}
-                    />
-                  ))}
-                </div>
-              )}
-            </section>
-          );
-        })}
-      </div>
-
-      {filteredCategories.length === 0 && (
-        <div className="text-center py-20" style={{ color: '#665544' }}>{noNomineesLabel}</div>
+      {nominees.length === 0 ? (
+        <p className="text-sm py-8 text-center" style={{ color: '#665544' }}>{noNomineesLabel}</p>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {nominees.map((nominee, idx) => (
+            <NomineeCard
+              key={nominee.id}
+              nominee={nominee}
+              locale={locale}
+              animClass={animClass}
+              index={idx}
+            />
+          ))}
+        </div>
       )}
 
       {/* Vote CTA */}
@@ -129,7 +77,6 @@ export default function NomineesClient({
         <Link
           href={voteHref}
           className="inline-flex items-center gap-2 px-8 py-4 rounded font-bold text-lg transition-all btn-gold"
-          style={{ boxShadow: '0 0 30px rgba(201,162,39,0.35)' }}
         >
           <Trophy className="w-5 h-5" />
           {voteNowLabel}
@@ -155,7 +102,6 @@ function NomineeCard({
   const [inView, setInView] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
 
-  // Délai d'entrée en cascade selon la position dans la grille
   const entryDelay = `${index * 0.09}s`;
   const idleDelay = `${index * 0.09 + 0.65}s`;
 
@@ -233,7 +179,7 @@ function NomineeCard({
         {audioPlaying && (
           <div
             className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center"
-            style={{ background: 'rgba(201,162,39,0.9)', boxShadow: '0 0 10px rgba(201,162,39,0.6)' }}
+            style={{ background: 'rgba(201,162,39,0.9)' }}
           >
             <Volume2 className="w-3 h-3 text-black" />
           </div>

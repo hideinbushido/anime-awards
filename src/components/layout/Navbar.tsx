@@ -20,7 +20,6 @@ export default function Navbar() {
     { href: `/${locale}`, label: t('home') },
     { href: `/${locale}/about`, label: t('about') },
     { href: `/${locale}/categories`, label: t('categories') },
-    { href: `/${locale}/nominees`, label: t('nominees') },
     { href: `/${locale}/vote`, label: t('vote'), highlight: true },
     { href: `/${locale}/faq`, label: t('faq') },
   ];

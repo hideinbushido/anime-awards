@@ -1,4 +1,6 @@
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import NomineesClient from '@/components/nominees/NomineesClient';
@@ -36,7 +38,6 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-antagoniste', eventId: 'demo', title: 'Meilleur Antagoniste',            titleFr: 'Meilleur Antagoniste',            titleEn: 'Best Antagonist',               description: '', descriptionFr: 'Le méchant qu\'on a adoré détester',           descriptionEn: 'The villain we loved to hate',                order: 27, active: true },
 ];
 
-// Helper pour créer un nominé placeholder
 function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227'): Nominee {
   return {
     id, categoryId: catId, name, anime,
@@ -45,7 +46,6 @@ function n(id: string, catId: string, name: string, anime: string, descFr: strin
   };
 }
 
-// ─── 5 nominés fictifs par catégorie ─────────────────────────────────────────
 const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
   'p-drama': [
     n('d1','p-drama','Vinland Saga S2','Vinland Saga','Un voyage vers la paix intérieure','1a0a0a','e8a87c'),
@@ -133,7 +133,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
   ],
   'p-sensei': [
     n('se1','p-sensei','Kakashi Hatake','Naruto','Le maître qui enseigne par l\'exemple','0a0a14','a0c0ff'),
-    n('se2','p-sensei','Satoru Gojo','Jujutsu Kaisen','Le prof le plus puissant et le plus excentriquer','0a0a20','6060ff'),
+    n('se2','p-sensei','Satoru Gojo','Jujutsu Kaisen','Le prof le plus puissant et le plus excentrique','0a0a20','6060ff'),
     n('se3','p-sensei','Master Roshi','Dragon Ball','La sagesse du vieux maître aux méthodes douteuses','1a0800','ff7030'),
     n('se4','p-sensei','Aizawa','My Hero Academia','Un professeur qui pousse toujours plus loin','0a1414','60d0c0'),
     n('se5','p-sensei','Bisco','Sabikui Bisco','Un guide de survie dans un monde hostile','0a1008','80d880'),
@@ -240,10 +240,13 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
 
 export default async function NomineesPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string }>;
 }) {
   const { locale } = await params;
+  const { category: categoryId } = await searchParams;
   const t = await getTranslations('nominees');
 
   let categories: Category[] = [];
@@ -261,36 +264,72 @@ export default async function NomineesPage({
     // Firebase not configured
   }
 
-  // Fallback placeholders si pas de données Firestore
   if (categories.length === 0) {
     categories = PLACEHOLDER_CATEGORIES;
     nomineesByCategory = PLACEHOLDER_NOMINEES;
   }
 
+  // Determine active category (from param or first)
+  const activeCat = (categoryId ? categories.find((c) => c.id === categoryId) : null) ?? categories[0] ?? null;
+  const activeIdx = activeCat ? categories.findIndex((c) => c.id === activeCat.id) : -1;
+  const prevCat = activeIdx > 0 ? categories[activeIdx - 1] : null;
+  const nextCat = activeIdx < categories.length - 1 ? categories[activeIdx + 1] : null;
+  const nominees = activeCat ? (nomineesByCategory[activeCat.id] ?? []) : [];
+
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-20" style={{ background: '#07060a', minHeight: '100vh' }}>
+
+      {/* Sub-navbar — fixed below main navbar */}
+      <div
+        className="fixed left-0 right-0 z-40 border-b"
+        style={{ top: '64px', background: 'rgba(7,6,10,0.95)', backdropFilter: 'blur(16px)', borderColor: 'rgba(201,162,39,0.12)' }}
+      >
+        <div className="container-mobile flex items-center justify-between" style={{ height: '44px' }}>
+          {prevCat ? (
+            <Link
+              href={`/${locale}/nominees?category=${prevCat.id}`}
+              className="flex items-center gap-1 text-xs font-medium transition-colors"
+              style={{ color: '#9a8870', maxWidth: '33%' }}
+            >
+              <ChevronLeft className="w-4 h-4 flex-shrink-0" />
+              <span className="truncate">{locale === 'fr' ? prevCat.titleFr : prevCat.titleEn}</span>
+            </Link>
+          ) : <div style={{ width: '33%' }} />}
+
+          <Link
+            href={`/${locale}/categories`}
+            className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full flex-shrink-0"
+            style={{ color: '#c9a227', border: '1px solid rgba(201,162,39,0.3)' }}
+          >
+            <LayoutGrid className="w-3 h-3" />
+            {locale === 'fr' ? 'Toutes les catégories' : 'All categories'}
+          </Link>
+
+          {nextCat ? (
+            <Link
+              href={`/${locale}/nominees?category=${nextCat.id}`}
+              className="flex items-center gap-1 text-xs font-medium transition-colors justify-end"
+              style={{ color: '#9a8870', maxWidth: '33%' }}
+            >
+              <span className="truncate">{locale === 'fr' ? nextCat.titleFr : nextCat.titleEn}</span>
+              <ChevronRight className="w-4 h-4 flex-shrink-0" />
+            </Link>
+          ) : <div style={{ width: '33%' }} />}
+        </div>
+      </div>
+
+      <main style={{ background: '#07060a', minHeight: '100vh', paddingTop: '108px', paddingBottom: '5rem' }}>
         {/* Projecteur haut */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none z-0"
           style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.1) 0%, transparent 65%)' }} />
 
-        <div className="container-mobile relative z-10">
-          {/* Header */}
-          <div className="text-center mb-14">
-            <h1 className="text-4xl sm:text-5xl font-black mb-4">
-              <span className="gradient-text">{t('title')}</span>
-            </h1>
-            <div className="gold-divider w-40 mx-auto mb-4" />
-            <p className="text-lg" style={{ color: '#9a8870' }}>{t('subtitle')}</p>
-          </div>
-
+        <div className="container-mobile relative z-10 pt-8">
           <NomineesClient
-            categories={categories}
-            nomineesByCategory={nomineesByCategory}
+            category={activeCat}
+            nominees={nominees}
             locale={locale}
             voteHref={`/${locale}/vote`}
-            filterAllLabel={t('filterAll')}
             voteNowLabel={t('voteNow')}
             noNomineesLabel={t('noNominees')}
           />
