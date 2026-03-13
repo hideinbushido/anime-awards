@@ -106,14 +106,13 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Image — full size, no crop */}
-        <div className="relative w-full" style={{ aspectRatio: '3/4' }}>
-          <Image
+        {/* Image — natural ratio, no black bars */}
+        <div className="relative w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={imgSrc}
             alt={nominee.name}
-            fill
-            className="object-contain"
-            unoptimized
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           />
           {/* Bottom gradient for text */}
           <div
