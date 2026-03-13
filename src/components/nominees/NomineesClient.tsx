@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {
   Trophy, Volume2, Heart, Film, Smile, Zap, Star, TrendingUp, ThumbsDown,
   GraduationCap, Globe, Palette, Users, Repeat, Coffee, Sparkles, Music,
-  Mic, Headphones, Play, Square, BookOpen, Shield, Skull, Swords, Crown,
+  Mic, Headphones, Play, Square, BookOpen, Shield, Skull, Swords, Crown, X,
   type LucideIcon,
 } from 'lucide-react';
 import type { Category, Nominee } from '@/lib/types';
@@ -67,6 +67,83 @@ function getCategoryAnimClass(titleFr: string, titleEn: string): string {
   return 'anim-gold';
 }
 
+// ── Modal ────────────────────────────────────────────────────────────────────
+function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => void }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handleKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKey);
+    };
+  }, [onClose]);
+
+  const imgSrc = nominee.imageUrl ||
+    `https://placehold.co/600x800/0f0d09/c9a227?text=${encodeURIComponent(nominee.name)}`;
+
+  return (
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(10px)' }}
+      onClick={onClose}
+    >
+      {/* Panel */}
+      <div
+        className="relative rounded-2xl overflow-hidden flex flex-col"
+        style={{
+          background: 'rgba(12,10,4,0.98)',
+          border: '1px solid rgba(201,162,39,0.35)',
+          boxShadow: '0 0 60px rgba(201,162,39,0.15), 0 30px 80px rgba(0,0,0,0.7)',
+          maxWidth: '420px',
+          width: '100%',
+          maxHeight: '90vh',
+          animation: 'modal-in 0.3s cubic-bezier(0.22,1,0.36,1)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
+          style={{ background: 'rgba(8,6,0,0.85)', border: '1px solid rgba(201,162,39,0.4)' }}
+        >
+          <X className="w-4 h-4" style={{ color: '#c9a227' }} />
+        </button>
+
+        {/* Image */}
+        <div className="relative w-full" style={{ aspectRatio: '3/4', maxHeight: '65vh' }}>
+          <Image
+            src={imgSrc}
+            alt={nominee.name}
+            fill
+            className="object-cover"
+            unoptimized
+          />
+          {/* Bottom gradient */}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, rgba(12,10,4,1) 0%, rgba(12,10,4,0.4) 50%, transparent 100%)' }}
+          />
+        </div>
+
+        {/* Info */}
+        <div className="px-5 py-4">
+          <h2 className="text-xl font-black text-white leading-tight">{nominee.name}</h2>
+          {nominee.anime && (
+            <p className="text-sm font-semibold mt-1" style={{ color: '#c9a227' }}>{nominee.anime}</p>
+          )}
+          {(nominee.descriptionFr || nominee.descriptionEn) && (
+            <p className="text-sm mt-3 leading-relaxed" style={{ color: '#9a8870' }}>
+              {nominee.descriptionFr || nominee.descriptionEn}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function NomineesClient({
   category,
   nominees,
@@ -75,6 +152,8 @@ export default function NomineesClient({
   voteNowLabel,
   noNomineesLabel,
 }: Props) {
+  const [modalNominee, setModalNominee] = useState<Nominee | null>(null);
+
   if (!category) return null;
 
   const animClass = getCategoryAnimClass(category.titleFr, category.titleEn);
@@ -105,6 +184,7 @@ export default function NomineesClient({
               locale={locale}
               animClass={animClass}
               index={idx}
+              onOpen={() => setModalNominee(nominee)}
             />
           ))}
         </div>
@@ -120,6 +200,11 @@ export default function NomineesClient({
           {voteNowLabel}
         </Link>
       </div>
+
+      {/* Modal */}
+      {modalNominee && (
+        <NomineeModal nominee={modalNominee} onClose={() => setModalNominee(null)} />
+      )}
     </div>
   );
 }
@@ -129,11 +214,13 @@ function NomineeCard({
   locale,
   animClass,
   index,
+  onOpen,
 }: {
   nominee: Nominee;
   locale: string;
   animClass: string;
   index: number;
+  onOpen: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -193,6 +280,7 @@ function NomineeCard({
       } as React.CSSProperties}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onOpen}
     >
       {/* Photo */}
       <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
