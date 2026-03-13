@@ -38,10 +38,10 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-antagoniste', eventId: 'demo', title: 'Meilleur Antagoniste',            titleFr: 'Meilleur Antagoniste',            titleEn: 'Best Antagonist',               description: '', descriptionFr: 'Le méchant qu\'on a adoré détester',           descriptionEn: 'The villain we loved to hate',                order: 27, active: true },
 ];
 
-function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227'): Nominee {
+function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string): Nominee {
   return {
     id, categoryId: catId, name, anime,
-    imageUrl: `https://placehold.co/300x400/${color}/${textColor}?text=${encodeURIComponent(name)}`,
+    imageUrl: imgUrl ?? `https://placehold.co/300x400/${color}/${textColor}?text=${encodeURIComponent(name)}`,
     description: descFr, descriptionFr: descFr, descriptionEn: descFr, active: true,
   };
 }
@@ -169,7 +169,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('se1','p-sensei','— À venir —','','','0d0d0d','555555'),
   ],
   'p-isekai': [
-    n('isk1','p-isekai','Zenshu','','','0a0a1a','a0c0ff'),
+    n('isk1','p-isekai','Zenshu','','','0a0a1a','a0c0ff','/image/Zenshu.jpg'),
     n('isk2','p-isekai','Lord of the Mysteries','','','100814','8040c0'),
     n('isk3','p-isekai','The Water Magician','','','0a0a20','6080ff'),
     n('isk4','p-isekai','Who Made Me a Princess','','','1a0a14','ff80b4'),
