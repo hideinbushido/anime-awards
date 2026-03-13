@@ -90,7 +90,7 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
     >
       {/* Zone de centrage sous les navbars */}
       <div
-        className="absolute flex items-center justify-center p-4"
+        className="absolute flex items-start sm:items-center justify-center p-4 overflow-y-auto sm:overflow-hidden"
         style={{ top: '120px', left: 0, right: 0, bottom: 0 }}
       >
       {/* Panel */}
