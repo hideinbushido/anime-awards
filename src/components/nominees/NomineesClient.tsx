@@ -84,63 +84,63 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-8"
-      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(16px)' }}
+      className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto"
+      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(16px)', paddingTop: '124px', paddingBottom: '24px', paddingLeft: '16px', paddingRight: '16px' }}
       onClick={onClose}
     >
-      {/* Panel — image fills everything, text overlaid at bottom */}
+      {/* Panel */}
       <div
-        className="modal-panel relative rounded-2xl sm:rounded-3xl overflow-hidden"
+        className="modal-panel relative rounded-2xl sm:rounded-3xl overflow-hidden flex-shrink-0"
         style={{
           width: '100%',
           maxWidth: '480px',
-          height: '88vh',
-          maxHeight: '820px',
           border: '1px solid rgba(201,162,39,0.4)',
           boxShadow: '0 0 0 1px rgba(201,162,39,0.08), 0 40px 100px rgba(0,0,0,0.9)',
+          background: '#080600',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Image — covers the entire panel */}
-        <Image
-          src={imgSrc}
-          alt={nominee.name}
-          fill
-          className="object-cover object-top"
-          unoptimized
-        />
+        {/* Image — full size, no crop */}
+        <div className="relative w-full" style={{ aspectRatio: '3/4' }}>
+          <Image
+            src={imgSrc}
+            alt={nominee.name}
+            fill
+            className="object-contain"
+            unoptimized
+          />
+          {/* Bottom gradient for text */}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, rgba(4,3,1,0.97) 0%, rgba(4,3,1,0.5) 25%, transparent 60%)' }}
+          />
 
-        {/* Dark gradient at bottom for text readability */}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top, rgba(4,3,1,0.97) 0%, rgba(4,3,1,0.6) 30%, rgba(4,3,1,0.1) 65%, transparent 100%)' }}
-        />
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 hover:scale-110"
+            style={{ background: 'rgba(4,3,1,0.8)', border: '1px solid rgba(201,162,39,0.5)', backdropFilter: 'blur(8px)' }}
+          >
+            <X className="w-5 h-5" style={{ color: '#c9a227' }} />
+          </button>
 
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 hover:scale-110"
-          style={{ background: 'rgba(4,3,1,0.75)', border: '1px solid rgba(201,162,39,0.5)', backdropFilter: 'blur(8px)' }}
-        >
-          <X className="w-5 h-5" style={{ color: '#c9a227' }} />
-        </button>
-
-        {/* Text overlay at bottom */}
-        <div className="absolute bottom-0 inset-x-0 px-6 pb-8">
-          <div className="w-10 h-0.5 mb-4 rounded-full" style={{ background: 'linear-gradient(90deg, #c9a227, #9e7c1e)' }} />
-          <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-lg">
-            {nominee.name}
-          </h2>
-          {nominee.anime && (
-            <p className="text-base font-semibold mt-1.5" style={{ color: '#c9a227' }}>
-              {nominee.anime}
-            </p>
-          )}
-          {(nominee.descriptionFr || nominee.descriptionEn) && (
-            <p className="text-sm mt-3 leading-relaxed" style={{ color: 'rgba(200,180,140,0.85)' }}>
-              {nominee.descriptionFr || nominee.descriptionEn}
-            </p>
-          )}
+          {/* Text overlay at bottom of image */}
+          <div className="absolute bottom-0 inset-x-0 px-5 pb-6">
+            <div className="w-8 h-0.5 mb-3 rounded-full" style={{ background: 'linear-gradient(90deg, #c9a227, #9e7c1e)' }} />
+            <h2 className="text-2xl font-black text-white leading-tight drop-shadow-lg">
+              {nominee.name}
+            </h2>
+            {nominee.anime && (
+              <p className="text-sm font-semibold mt-1" style={{ color: '#c9a227' }}>
+                {nominee.anime}
+              </p>
+            )}
+            {(nominee.descriptionFr || nominee.descriptionEn) && (
+              <p className="text-xs mt-2 leading-relaxed" style={{ color: 'rgba(200,180,140,0.85)' }}>
+                {nominee.descriptionFr || nominee.descriptionEn}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
