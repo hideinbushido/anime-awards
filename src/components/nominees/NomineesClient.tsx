@@ -310,10 +310,20 @@ function NomineeCard({
           style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.98) 0%, rgba(8,6,0,0.55) 45%, rgba(8,6,0,0.15) 100%)' }}
         />
 
+        {/* Logo événement */}
+        <div className="absolute top-2 right-2 z-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logonoir.png"
+            alt="Anime Awards"
+            style={{ width: '32px', height: '32px', objectFit: 'contain', opacity: 0.75 }}
+          />
+        </div>
+
         {/* Audio indicator */}
         {audioPlaying && (
           <div
-            className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center"
+            className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
             style={{ background: 'rgba(201,162,39,0.9)' }}
           >
             <Volume2 className="w-3 h-3 text-black" />
