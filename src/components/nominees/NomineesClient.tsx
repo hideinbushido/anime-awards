@@ -314,9 +314,9 @@ function NomineeCard({
         <div className="absolute top-2 right-2 z-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logonoir.png"
+            src="/logodore.png"
             alt="Anime Awards"
-            style={{ width: '32px', height: '32px', objectFit: 'contain', opacity: 0.75 }}
+            style={{ width: '32px', height: '32px', objectFit: 'contain', opacity: 0.9, mixBlendMode: 'screen' }}
           />
         </div>
 
