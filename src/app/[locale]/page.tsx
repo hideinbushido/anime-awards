@@ -99,20 +99,20 @@ export default async function HomePage({
               </div>
             </AnimateOnScroll>
 
-            {/* Titre — Logo Zenkai */}
+            {/* Titre */}
             <AnimateOnScroll animation="cosmic" delay={350} duration={900}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/ZENKAILOGO OFF.png"
-                alt="Zenkai Awards"
-                className="mx-auto mb-4"
-                style={{
-                  height: 'clamp(140px, 22vw, 320px)',
-                  width: 'auto',
-                  objectFit: 'contain',
-                  filter: 'drop-shadow(0 0 40px rgba(201,162,39,0.5)) drop-shadow(0 0 80px rgba(201,162,39,0.2))',
-                }}
-              />
+              <h1 className="text-5xl sm:text-7xl md:text-9xl font-black mb-4 leading-none tracking-tight">
+                <span style={{
+                  background: 'linear-gradient(135deg, #e8c54a, #c9a227, #f5e090, #c9a227)',
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  animation: 'gradient-shift 6s ease infinite',
+                }}>Anime</span>
+                <br />
+                <span className="text-white" style={{ textShadow: '0 0 60px rgba(201,162,39,0.4), 0 0 120px rgba(201,162,39,0.15)' }}>Awards</span>
+              </h1>
             </AnimateOnScroll>
 
             {/* Ligne décorative prestige */}
