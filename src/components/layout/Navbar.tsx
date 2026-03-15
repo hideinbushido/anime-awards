@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { Menu, X, Trophy, Globe, LogIn } from 'lucide-react';
+import { Menu, X, Globe, LogIn } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export default function Navbar() {
@@ -36,16 +36,14 @@ export default function Navbar() {
       <div className="container-mobile">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform"
-              style={{ background: 'linear-gradient(135deg, #c9a227, #e8c54a)' }}
-            >
-              <Trophy className="w-4 h-4 text-black" />
-            </div>
-            <span className="font-bold text-white hidden sm:block">
-              <span className="gradient-text">Anime</span> Awards
-            </span>
-            <span className="text-xs hidden sm:block" style={{ color: '#c9a227' }}>2026</span>
+          <Link href={`/${locale}`} className="flex items-center group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/ZENKAILOGO OFF.png"
+              alt="Zenkai Awards"
+              className="group-hover:scale-105 transition-transform"
+              style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
+            />
           </Link>
 
           {/* Desktop nav */}
