@@ -177,11 +177,19 @@ export default function NomineesClient({
   noNomineesLabel,
 }: Props) {
   const [modalNominee, setModalNominee] = useState<Nominee | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(hover: none)').matches);
+  }, []);
 
   if (!category) return null;
 
   const animClass = getCategoryAnimClass(category.titleFr, category.titleEn);
   const CategoryIcon = getCategoryIcon(category.titleFr, category.titleEn);
+
+  const catTitle = (category.titleFr + ' ' + category.titleEn).toLowerCase();
+  const isAudioCategory = catTitle.includes('opening') || catTitle.includes('ending') || catTitle.includes('chanson') || catTitle.includes('song');
 
   return (
     <div>
@@ -196,6 +204,29 @@ export default function NomineesClient({
         </h1>
         <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(201,162,39,0.4), transparent)' }} />
       </div>
+
+      {/* Hint audio — Opening / Ending / Chanson uniquement */}
+      {isAudioCategory && (
+        <div
+          className="flex items-center gap-3 mb-6 px-4 py-3 rounded-2xl"
+          style={{
+            background: 'rgba(124,58,237,0.08)',
+            border: '1px solid rgba(124,58,237,0.25)',
+          }}
+        >
+          <Headphones className="w-4 h-4 flex-shrink-0" style={{ color: '#a855f7' }} />
+          <p className="text-sm font-medium" style={{ color: 'rgba(200,180,255,0.85)' }}>
+            {isTouch
+              ? (locale === 'fr'
+                  ? 'Touchez l\'image d\'un anime pour l\'écouter 🎵'
+                  : 'Tap an anime image to listen 🎵')
+              : (locale === 'fr'
+                  ? 'Glissez votre souris sur la case d\'un anime pour l\'écouter 🎵'
+                  : 'Hover over an anime card to listen 🎵')
+            }
+          </p>
+        </div>
+      )}
 
       {nominees.length === 0 ? (
         <p className="text-sm py-8 text-center" style={{ color: '#665544' }}>{noNomineesLabel}</p>
