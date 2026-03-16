@@ -77,11 +77,10 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
     // Lecture audio à l'ouverture du modal (mobile)
     let audio: HTMLAudioElement | null = null;
     if (nominee.audioUrl) {
+      window.dispatchEvent(new Event('card-audio-start')); // coupe la musique du site immédiatement
       audio = new Audio(nominee.audioUrl);
       audio.volume = 0.45;
-      audio.play().then(() => {
-        window.dispatchEvent(new Event('card-audio-start'));
-      }).catch(() => {});
+      audio.play().catch(() => {});
     }
 
     return () => {
@@ -90,8 +89,8 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
       if (audio) {
         audio.pause();
         audio.currentTime = 0;
-        window.dispatchEvent(new Event('card-audio-stop'));
       }
+      window.dispatchEvent(new Event('card-audio-stop')); // toujours restaurer à la fermeture
     };
   }, [onClose, nominee.audioUrl]);
 
@@ -251,6 +250,8 @@ function NomineeCard({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [inView, setInView] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
+  // Détecte touch : désactive hover audio sur mobile
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
 
   const entryDelay = `${index * 0.09}s`;
   const idleDelay = `${index * 0.09 + 0.65}s`;
@@ -267,7 +268,8 @@ function NomineeCard({
   }, []);
 
   const handleMouseEnter = useCallback(() => {
-    if (!nominee.audioUrl) return;
+    // Ne pas jouer au hover sur appareils tactiles (géré par le modal)
+    if (isTouchDevice || !nominee.audioUrl) return;
     try {
       if (!audioRef.current) {
         audioRef.current = new Audio(nominee.audioUrl);
@@ -288,7 +290,7 @@ function NomineeCard({
         window.dispatchEvent(new Event('card-audio-start'));
       }).catch(() => {});
     } catch {}
-  }, [nominee.audioUrl]);
+  }, [isTouchDevice, nominee.audioUrl]);
 
   const handleMouseLeave = useCallback(() => {
     if (audioRef.current) {
