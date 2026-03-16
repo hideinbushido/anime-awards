@@ -79,13 +79,19 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
     if (nominee.audioUrl) {
       audio = new Audio(nominee.audioUrl);
       audio.volume = 0.45;
-      audio.play().catch(() => {});
+      audio.play().then(() => {
+        window.dispatchEvent(new Event('card-audio-start'));
+      }).catch(() => {});
     }
 
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKey);
-      if (audio) { audio.pause(); audio.currentTime = 0; }
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        window.dispatchEvent(new Event('card-audio-stop'));
+      }
     };
   }, [onClose, nominee.audioUrl]);
 
@@ -266,14 +272,21 @@ function NomineeCard({
       if (!audioRef.current) {
         audioRef.current = new Audio(nominee.audioUrl);
         audioRef.current.volume = 0.45;
-        audioRef.current.addEventListener('ended', () => setAudioPlaying(false));
+        audioRef.current.addEventListener('ended', () => {
+          setAudioPlaying(false);
+          window.dispatchEvent(new Event('card-audio-stop'));
+        });
         audioRef.current.addEventListener('error', () => {
           audioRef.current = null;
           setAudioPlaying(false);
+          window.dispatchEvent(new Event('card-audio-stop'));
         });
       }
       audioRef.current.currentTime = 0;
-      audioRef.current.play().then(() => setAudioPlaying(true)).catch(() => {});
+      audioRef.current.play().then(() => {
+        setAudioPlaying(true);
+        window.dispatchEvent(new Event('card-audio-start'));
+      }).catch(() => {});
     } catch {}
   }, [nominee.audioUrl]);
 
@@ -282,6 +295,7 @@ function NomineeCard({
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       setAudioPlaying(false);
+      window.dispatchEvent(new Event('card-audio-stop'));
     }
   }, []);
 

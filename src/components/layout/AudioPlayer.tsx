@@ -20,17 +20,33 @@ export default function AudioPlayer() {
     if (playPromise !== undefined) {
       playPromise
         .then(() => {
-          // Autoplay réussi avec son
           setMuted(false);
         })
         .catch(() => {
-          // Navigateur a bloqué — affiche la bannière après 1s
           audio.muted = true;
           audio.play().catch(() => {});
           setMuted(true);
           setTimeout(() => setShowBanner(true), 1000);
         });
     }
+
+    // Pause temporaire quand une carte joue sa musique
+    const onCardStart = () => {
+      if (!audio.muted) {
+        audio.volume = 0;
+      }
+    };
+    const onCardStop = () => {
+      if (!audio.muted) {
+        audio.volume = 0.4;
+      }
+    };
+    window.addEventListener('card-audio-start', onCardStart);
+    window.addEventListener('card-audio-stop', onCardStop);
+    return () => {
+      window.removeEventListener('card-audio-start', onCardStart);
+      window.removeEventListener('card-audio-stop', onCardStop);
+    };
   }, []);
 
   const enableSound = () => {
