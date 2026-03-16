@@ -31,14 +31,15 @@ export default function AudioPlayer() {
     }
 
     // Pause temporaire quand une carte joue sa musique
+    // On utilise pause/play plutôt que volume (iOS ignore les changements de volume via JS)
     const onCardStart = () => {
-      if (!audio.muted) {
-        audio.volume = 0;
+      if (!audio.muted && !audio.paused) {
+        audio.pause();
       }
     };
     const onCardStop = () => {
-      if (!audio.muted) {
-        audio.volume = 0.4;
+      if (!audio.muted && audio.paused) {
+        audio.play().catch(() => {});
       }
     };
     window.addEventListener('card-audio-start', onCardStart);
