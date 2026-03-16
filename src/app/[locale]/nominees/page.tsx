@@ -37,10 +37,11 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-antagoniste', eventId: 'demo', title: 'Meilleur Antagoniste',            titleFr: 'Meilleur Antagoniste',            titleEn: 'Best Antagonist',               description: '', descriptionFr: 'Le méchant qu\'on a adoré détester',           descriptionEn: 'The villain we loved to hate',                order: 27, active: true },
 ];
 
-function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string): Nominee {
+function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string, audioUrl?: string): Nominee {
   return {
     id, categoryId: catId, name, anime,
     imageUrl: imgUrl ?? `https://placehold.co/300x400/${color}/${textColor}?text=${encodeURIComponent(name)}`,
+    audioUrl,
     description: descFr, descriptionFr: descFr, descriptionEn: descFr, active: true,
   };
 }
@@ -232,27 +233,27 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('fil7','p-film','100 Meters','','','0a0a14','6080ff','/image/FILM/metteer.png'),
   ],
   'p-opening': [
-    n('op1','p-opening','"Hugs" — Gachiakuta OP1','Paledusk','','1a0800','ff8030'),
-    n('op2','p-opening','"Inertia" — To Be Hero X OP','Sawano Hiroyuki[nZk]: RE','','0a0a20','60a0ff'),
-    n('op3','p-opening','"Kaiju" — Orb: On the Movement of the Earth OP','Sakanaction','','100a00','c9a227'),
-    n('op4','p-opening','"Watch Me" — Witch Watch OP1','YOASOBI','','1a0a14','ff80b4'),
-    n('op5','p-opening','"Kakumei Douchuu" — Dandadan OP2','Aina the End','','0a0a20','a060ff'),
-    n('op6','p-opening','"Kusushiki" — The Apothecary Diaries S2 OP2','Mrs. GREEN APPLE','','0a0a14','c9a227'),
-    n('op7','p-opening','"Mirage" — Call of the Night S2 OP','Creepy Nuts','','0a0a20','8060ff'),
-    n('op8','p-opening','"Without Any Words" — Bleach TYBW OP3','Six Lounge','','0a0a14','6080ff'),
-    n('op9','p-opening','"Carmine" — One Piece OP28','Ellegarden','','1a0800','ff7030'),
-    n('op10','p-opening','"Tsuyobi" — Fire Force S3 OP1','QUEEN BEE','','200800','ff6020'),
-    n('op11','p-opening','"ReawakenR" — Solo Leveling S2 OP1','LiSA feat. Felix','','1a0800','ffd250'),
-    n('op12','p-opening','"Frontiers" — Shangri-La Frontier S2 OP2','AWICH','','100814','8040c0'),
+    n('op1','p-opening','"Hugs" — Gachiakuta OP1','Paledusk','','1a0800','ff8030',undefined,'/music/Opening/Hugs.MP3'),
+    n('op2','p-opening','"Inertia" — To Be Hero X OP','Sawano Hiroyuki[nZk]: RE','','0a0a20','60a0ff',undefined,'/music/Opening/Inertia.MP3'),
+    n('op3','p-opening','"Kaiju" — Orb: On the Movement of the Earth OP','Sakanaction','','100a00','c9a227',undefined,'/music/Opening/Kaiju.MP3'),
+    n('op4','p-opening','"Watch Me" — Witch Watch OP1','YOASOBI','','1a0a14','ff80b4',undefined,'/music/Opening/Witch.MP3'),
+    n('op5','p-opening','"Kakumei Douchuu" — Dandadan OP2','Aina the End','','0a0a20','a060ff',undefined,'/music/Opening/Aina.MP3'),
+    n('op6','p-opening','"Kusushiki" — The Apothecary Diaries S2 OP2','Mrs. GREEN APPLE','','0a0a14','c9a227',undefined,'/music/Opening/MsGreen.MP3'),
+    n('op7','p-opening','"Mirage" — Call of the Night S2 OP','Creepy Nuts','','0a0a20','8060ff',undefined,'/music/Opening/Mirage.MP3'),
+    n('op8','p-opening','"Without Any Words" — Bleach TYBW OP3','Six Lounge','','0a0a14','6080ff',undefined,'/music/Opening/Without.MP3'),
+    n('op9','p-opening','"Carmine" — One Piece OP28','Ellegarden','','1a0800','ff7030',undefined,'/music/Opening/Carmine.MP3'),
+    n('op10','p-opening','"Tsuyobi" — Fire Force S3 OP1','QUEEN BEE','','200800','ff6020',undefined,'/music/Opening/Tsuyobi.MP3'),
+    n('op11','p-opening','"ReawakenR" — Solo Leveling S2 OP1','LiSA feat. Felix','','1a0800','ffd250',undefined,'/music/Opening/Reweaker.MP3'),
+    n('op12','p-opening','"Frontiers" — Shangri-La Frontier S2 OP2','AWICH','','100814','8040c0',undefined,'/music/Opening/Frontier.MP3'),
   ],
   'p-ending': [
-    n('en1','p-ending','"The 1" — One Piece Ending 24','Muque','','1a0800','ff7030'),
+    n('en1','p-ending','"The 1" — One Piece Ending 24','Muque','','1a0800','ff7030',undefined,'/music/ending/Muque.MP3'),
     n('en2','p-ending','"Kawaii Kawaii" — My Dress-Up Darling S2 ED','Piki','','1a0a14','ff80b4'),
     n('en3','p-ending','"Houkou" — Kingdom S6 ED','Tomonari Sora','','100a00','c9a227'),
     n('en4','p-ending','"Dark Dream" — Lord of the Mysteries ED','Curley Gao','','100814','8040c0'),
     n('en5','p-ending','"Doukashiteru" — Dandadan ED2','Wurts','','0a0a20','a060ff'),
     n('en6','p-ending','"I" — My Hero Academia Final Season ED','BUMP OF CHICKEN','','1a0500','ff4020'),
-    n('en7','p-ending','"Urusairen" — Fire Force S3 ED','Umeda Cypher','','200800','ff6020'),
+    n('en7','p-ending','"Urusairen" — Fire Force S3 ED','Umeda Cypher','','200800','ff6020',undefined,'/music/ending/UruSiren.MP3'),
     n('en8','p-ending','"Nemure" — Call of the Night S2 ED','Creepy Nuts','','0a0a20','8060ff'),
     n('en9','p-ending','"UN-APEX" — Solo Leveling S2 ED','TK from Ling tosite sigure','','1a0800','ffd250'),
   ],

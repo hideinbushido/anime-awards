@@ -73,11 +73,21 @@ function NomineeModal({ nominee, onClose }: { nominee: Nominee; onClose: () => v
     document.body.style.overflow = 'hidden';
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', handleKey);
+
+    // Lecture audio à l'ouverture du modal (mobile)
+    let audio: HTMLAudioElement | null = null;
+    if (nominee.audioUrl) {
+      audio = new Audio(nominee.audioUrl);
+      audio.volume = 0.45;
+      audio.play().catch(() => {});
+    }
+
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKey);
+      if (audio) { audio.pause(); audio.currentTime = 0; }
     };
-  }, [onClose]);
+  }, [onClose, nominee.audioUrl]);
 
   const imgSrc = nominee.imageUrl ||
     `https://placehold.co/600x800/0f0d09/c9a227?text=${encodeURIComponent(nominee.name)}`;
