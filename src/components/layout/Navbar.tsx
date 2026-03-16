@@ -22,6 +22,7 @@ export default function Navbar() {
     { href: `/${locale}/categories`, label: t('categories') },
     { href: `/${locale}/vote`, label: t('vote'), highlight: true },
     { href: `/${locale}/faq`, label: t('faq') },
+    { href: `/${locale}/createurs`, label: t('team') },
   ];
 
   const isActive = (href: string) => {
