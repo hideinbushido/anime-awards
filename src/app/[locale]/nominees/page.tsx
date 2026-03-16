@@ -233,7 +233,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('fil7','p-film','100 Meters','','','0a0a14','6080ff','/image/FILM/metteer.png'),
   ],
   'p-opening': [
-    n('op1','p-opening','"Hugs" — Gachiakuta OP1','Paledusk','','1a0800','ff8030',undefined,'/music/Opening/Hugs.MP3'),
+    n('op1','p-opening','"Hugs" — Gachiakuta OP1','Paledusk','','1a0800','ff8030','/image/OPENING/Hugs.png','/music/Opening/Hugs.MP3'),
     n('op2','p-opening','"Inertia" — To Be Hero X OP','Sawano Hiroyuki[nZk]: RE','','0a0a20','60a0ff',undefined,'/music/Opening/Inertia.MP3'),
     n('op3','p-opening','"Kaiju" — Orb: On the Movement of the Earth OP','Sakanaction','','100a00','c9a227',undefined,'/music/Opening/Kaiju.MP3'),
     n('op4','p-opening','"Watch Me" — Witch Watch OP1','YOASOBI','','1a0a14','ff80b4',undefined,'/music/Opening/Witch.MP3'),
