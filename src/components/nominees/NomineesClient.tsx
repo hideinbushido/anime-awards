@@ -200,7 +200,7 @@ export default function NomineesClient({
         className="relative flex items-center gap-3 mb-8 rounded-2xl overflow-hidden"
         style={fondUrl ? {
           padding: '20px 20px',
-          backgroundImage: `url(${fondUrl})`,
+          backgroundImage: `url('${fondUrl}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         } : {}}

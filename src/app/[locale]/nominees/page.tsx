@@ -38,13 +38,20 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
 ];
 
 const CATEGORY_FONDS: Record<string, string> = {
-  'p-romance':    '/FOND_ROMANCE.png',
-  'p-decors':     '/FOND_DECOR.png',
-  'p-chara':      '/FOND_CHARADESIGN.png',
-  'p-combat':     '/FOND_COMBAT.png',
-  'p-antagoniste':'/FOND_ANTAGONISTE.png',
-  'p-sol':        '/FOND_SLICE.png',
-  'p-nouveaute':  '/FOND_NOUVEAUTE.png',
+  'p-romance':     '/FOND_ROMANCE.png',
+  'p-decors':      '/FOND_DECOR.png',
+  'p-chara':       '/FOND_CHARADESIGN.png',
+  'p-combat':      '/FOND_COMBAT.png',
+  'p-antagoniste': '/FOND_ANTAGONISTE.png',
+  'p-sol':         '/FOND_SLICE.png',
+  'p-nouveaute':   '/FOND_NOUVEAUTE.png',
+  'p-attachant':   '/FOND_ATTACHANT.png',
+  'p-feminin':     '/FOND_FEMININ.png',
+  'p-masculin':    '/FOND _MASCULIN.png',
+  'p-film':        '/FOND FILM.png',
+  'p-isekai':      '/FOND ISEKAI.jpg',
+  'p-protagoniste':'/FOND PROTA.jpg',
+  'p-sensei':      '/FOND SENSEI.jpg',
 };
 
 function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string, audioUrl?: string): Nominee {
