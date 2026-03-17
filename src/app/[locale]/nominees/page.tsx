@@ -89,7 +89,6 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('s1','p-seinen','Ameku Takao no Suiri Karte','','','0a0a14','c9a227','/image/SEINEN/Ameku.png'),
     n('s2','p-seinen','Les Carnets de l\'Apothicaire S2','','','0a0a14','c9a227','/image/SEINEN/Carnet.png'),
     n('s3','p-seinen','To Your Eternity S3','','','0a0a1a','a0c0ff','/image/SEINEN/Eternity.png'),
-    n('s4','p-seinen','Summer Pockets','','','0a0a1a','80c0ff','/image/SEINEN/Pockets.png'),
     n('s5','p-seinen','The Summer Hikaru Died','','','0a0a1a','80c0ff','/image/SEINEN/Summer.png'),
     n('s6','p-seinen','Kowloon Generic Romance','','','0a0a20','8080ff','/image/SEINEN/Kowloon.png'),
   ],
