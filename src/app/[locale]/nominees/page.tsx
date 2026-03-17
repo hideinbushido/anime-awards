@@ -103,16 +103,13 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
   ],
   'p-animation': [
     n('an1','p-animation','Demon Slayer: The Movie — Infinity Castle','','','1a0800','ff8060','/image/ANIMATION/Demon.png'),
-    n('an2','p-animation','Chainsaw Man: The Movie — Reze Arc','','','100010','c000ff','/image/ANIMATION/Reze.png'),
     n('an3','p-animation','Dandadan S2','','','0a0a20','a060ff','/image/ANIMATION/DANDADAN.png'),
     n('an4','p-animation','Delicious in Dungeon','','','1a0800','ff8030','/image/ANIMATION/Dungeon.png'),
     n('an5','p-animation','Solo Leveling S2','','','1a0800','ffd250','/image/ANIMATION/SOLO.png'),
     n('an6','p-animation','To Be Hero X','','','0a0a20','60a0ff','/image/ANIMATION/Hero.png'),
     n('an7','p-animation','Gachiakuta','','','1a0800','ff8030','/image/ANIMATION/Gachiakuta.png'),
-    n('an8','p-animation','Wind Breaker S2','','','0a0a14','6080ff','/image/ANIMATION/WIND.png'),
     n('an9','p-animation','Lord of the Mysteries','','','100814','8040c0','/image/ANIMATION/Lord.png'),
     n('an10','p-animation','My Hero Academia — Final Season','','','1a0500','ff4020','/image/ANIMATION/MHA.png'),
-    n('an11','p-animation','K-Pop Demon Hunters','','','1a0a14','ff80b4','/image/ANIMATION/Kpop.png'),
   ],
   'p-masculin': [
     n('mas1','p-masculin','Bakugo','My Hero Academia','','1a0500','ff4020','/image/MASCULIN/Bakugo.png'),
