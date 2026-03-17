@@ -131,7 +131,14 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('fem16','p-feminin','Semiu','Gachiakuta','','0a0a20','6080ff','/image/FEMININ/Semiu.png'),
   ],
   'p-combat': [
-    n('cb1','p-combat','— À venir —','','','0d0d0d','555555'),
+    n('cb1','p-combat','Luffy vs Kizaru','One Piece','','1a0800','ff7030'),
+    n('cb2','p-combat','Jinwoo vs Beru','Solo Leveling','','1a0800','ffd250'),
+    n('cb3','p-combat','Bakugo vs All For One','My Hero Academia Final Season','','1a0500','ff4020'),
+    n('cb4','p-combat','Wang vs Mushan','Super Cube','','0a0a20','60a0ff'),
+    n('cb5','p-combat','Zenitsu vs Kaigaku','Demon Slayer: Infinity Castle','','1a0800','ff8060'),
+    n('cb6','p-combat','Queen vs Bowa','To Be Hero X','','0a0a20','60a0ff'),
+    n('cb7','p-combat','Reze vs Denji','Chainsaw Man','','100010','c000ff'),
+    n('cb8','p-combat','Shi Huang Di vs Hades','Valkyrie Apocalypse','','100814','8040c0'),
   ],
   'p-deception': [
     n('dec1','p-deception','The Beginning After the End','','','0d0d0d','666666','/image/DECEPTION/TBATE.png'),
