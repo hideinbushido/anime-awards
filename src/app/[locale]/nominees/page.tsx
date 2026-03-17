@@ -262,7 +262,16 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('pr16','p-protagoniste','Natsuko Zenju','Zenshu','','0a0a1a','a0c0ff','/image/PROTA/Zenju.png'),
   ],
   'p-secondaire': [
-    n('sc1','p-secondaire','— À venir —','','','0d0d0d','555555'),
+    n('sc1','p-secondaire','Reinhard','Re:Zero','','0a0814','8040c0','/image/SECONDAIRE/Reinhard.png'),
+    n('sc2','p-secondaire','Shi Huang Di','Valkyrie Apocalypse','','100814','8040c0','/image/SECONDAIRE/ShiHuang.png'),
+    n('sc3','p-secondaire','Bakugo','My Hero Academia Final Season','','1a0500','ff4020','/image/SECONDAIRE/Bakugo.png'),
+    n('sc4','p-secondaire','Shoto Todoroki','My Hero Academia Final Season','','0a0a1a','a0c0ff','/image/SECONDAIRE/Shoto.png'),
+    n('sc5','p-secondaire','Mémé Turbo','Dandadan S2','','0a0a20','a060ff','/image/SECONDAIRE/Meme.png'),
+    n('sc6','p-secondaire','Jinshi','Les Carnets de l\'Apothicaire','','0a0a14','c9a227','/image/SECONDAIRE/Jinshi.png'),
+    n('sc7','p-secondaire','Jiji','Dandadan','','0a0a20','a060ff','/image/SECONDAIRE/Jiji.png'),
+    n('sc8','p-secondaire','Enjin','Gachiakuta','','1a0800','ff8030','/image/SECONDAIRE/Enjin.png'),
+    n('sc9','p-secondaire','Zanka','Gachiakuta','','0a0a14','6080ff','/image/SECONDAIRE/Zanka.png'),
+    n('sc10','p-secondaire','Riyo','Gachiakuta','','0a0a20','6080ff','/image/SECONDAIRE/Riyo.png'),
   ],
   'p-suite': [
     n('su1','p-suite','My Hero Academia — Saison Finale','','','1a0500','ff4020','/image/SUITE/MHA.png'),
