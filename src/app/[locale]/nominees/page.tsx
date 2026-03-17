@@ -78,13 +78,9 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('rom2','p-romance','My Dress-Up Darling S2','','','1a0a14','ff80b4','/image/ROMANCE/Dress.png'),
     n('rom3','p-romance','Bloom','','','0a1008','80e880','/image/ROMANCE/Bloom.png'),
     n('rom4','p-romance','Kowloon Generic Romance','','','0a0a20','8080ff','/image/ROMANCE/Kowloon.png'),
-    n('rom5','p-romance','Rascal does not dream of Santa Claus ','','','0a0a1a','d0b0ff','/image/ROMANCE/Rascal.png'),
-    n('rom6','p-romance','A Condition Called Love','','','1a0a14','ff80b4','/image/ROMANCE/Condition.png'),
     n('rom7','p-romance','My Happy Marriage S2','','','0a0a14','ffd0e0','/image/ROMANCE/Happy.png'),
-    n('rom8','p-romance','The 100 Girlfriends Who Really Love You S2','','','1a0a14','ff80b4','/image/ROMANCE/100.png'),
     n('rom9','p-romance','Insomniacs After School','','','0a0a20','6080ff','/image/ROMANCE/Insomniac.png'),
     n('rom11','p-romance','Mikadono Sanshimai wa Angai, Choroi','','','0a1010','80d0d0','/image/ROMANCE/Mikadono.png'),
-    n('rom12','p-romance','There\'s No Freaking Way I\'ll Be Your Lover! Unless…','','','1a0a14','ff80b4','/image/ROMANCE/Unless.png'),
   ],
   'p-decors': [
     n('dc1','p-decors','— À venir —','','','0d0d0d','555555'),
