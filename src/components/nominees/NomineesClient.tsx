@@ -18,6 +18,7 @@ interface Props {
   voteHref: string;
   voteNowLabel: string;
   noNomineesLabel: string;
+  fondUrl?: string;
 }
 
 function getCategoryIcon(titleFr: string, titleEn: string): LucideIcon {
@@ -175,6 +176,7 @@ export default function NomineesClient({
   voteHref,
   voteNowLabel,
   noNomineesLabel,
+  fondUrl,
 }: Props) {
   const [modalNominee, setModalNominee] = useState<Nominee | null>(null);
   const [isTouch, setIsTouch] = useState(false);
@@ -194,15 +196,26 @@ export default function NomineesClient({
   return (
     <div>
       {/* Category header */}
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+      <div
+        className="relative flex items-center gap-3 mb-8 rounded-2xl overflow-hidden"
+        style={fondUrl ? {
+          padding: '20px 20px',
+          backgroundImage: `url(${fondUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        } : {}}
+      >
+        {fondUrl && (
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(8,6,0,0.85) 0%, rgba(8,6,0,0.6) 60%, rgba(8,6,0,0.3) 100%)' }} />
+        )}
+        <div className="relative w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
           style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
           <CategoryIcon className="w-4 h-4 text-black" />
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-white">
+        <h1 className="relative text-2xl sm:text-3xl font-black text-white">
           {locale === 'fr' ? category.titleFr : category.titleEn}
         </h1>
-        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(201,162,39,0.4), transparent)' }} />
+        <div className="relative flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(201,162,39,0.4), transparent)' }} />
       </div>
 
       {/* Hint audio — Opening / Ending / Chanson uniquement */}

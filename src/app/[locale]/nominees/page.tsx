@@ -18,7 +18,6 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-masculin',    eventId: 'demo', title: 'Meilleur Personnage Masculin',    titleFr: 'Meilleur Personnage Masculin',    titleEn: 'Best Male Character',           description: '', descriptionFr: 'Le personnage masculin le plus marquant',      descriptionEn: 'The most iconic male character',              order: 7,  active: true },
   { id: 'p-feminin',     eventId: 'demo', title: 'Meilleur Personnage Féminin',     titleFr: 'Meilleur Personnage Féminin',     titleEn: 'Best Female Character',         description: '', descriptionFr: 'Le personnage féminin le plus marquant',       descriptionEn: 'The most iconic female character',            order: 8,  active: true },
   { id: 'p-deception',   eventId: 'demo', title: 'Déception de l\'Année',           titleFr: 'Déception de l\'Année',           titleEn: 'Disappointment of the Year',    description: '', descriptionFr: 'L\'animé qui a le plus déçu',                  descriptionEn: 'The most disappointing anime',                order: 9,  active: true },
-  { id: 'p-developpement',eventId:'demo', title: 'Meilleur Développement',          titleFr: 'Meilleur Développement',          titleEn: 'Best Character Development',    description: '', descriptionFr: 'La progression de personnage la plus réussie', descriptionEn: 'The best character growth',                   order: 10, active: true },
   { id: 'p-comedie',     eventId: 'demo', title: 'Meilleure Comédie',               titleFr: 'Meilleure Comédie',               titleEn: 'Best Comedy',                   description: '', descriptionFr: 'L\'animé qui a le plus fait rire',             descriptionEn: 'The anime that made us laugh the most',       order: 11, active: true },
   { id: 'p-nouveaute',   eventId: 'demo', title: 'Meilleure Nouveauté',             titleFr: 'Meilleure Nouveauté',             titleEn: 'Best New Series',               description: '', descriptionFr: 'La nouvelle série la plus prometteuse',        descriptionEn: 'The most promising new series',               order: 12, active: true },
   { id: 'p-sensei',      eventId: 'demo', title: 'Meilleur Sensei',                 titleFr: 'Meilleur Sensei',                 titleEn: 'Best Sensei',                   description: '', descriptionFr: 'Le maître ou professeur le plus inspirant',    descriptionEn: 'The most inspiring teacher',                  order: 13, active: true },
@@ -36,6 +35,15 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-annee',       eventId: 'demo', title: 'Animé de l\'Année',              titleFr: 'Animé de l\'Année',              titleEn: 'Anime of the Year',             description: '', descriptionFr: 'Le grand prix — meilleur animé 2025',          descriptionEn: 'The grand prize — best anime 2025',           order: 26, active: true },
   { id: 'p-antagoniste', eventId: 'demo', title: 'Meilleur Antagoniste',            titleFr: 'Meilleur Antagoniste',            titleEn: 'Best Antagonist',               description: '', descriptionFr: 'Le méchant qu\'on a adoré détester',           descriptionEn: 'The villain we loved to hate',                order: 27, active: true },
 ];
+
+const CATEGORY_FONDS: Record<string, string> = {
+  'p-romance':    '/image/FOND/FOND_ROMANCE.png',
+  'p-decors':     '/image/FOND/FOND_DECOR.png',
+  'p-masculin':   '/image/FOND/FOND_MASCULIN.png',
+  'p-chara':      '/image/FOND/FOND_CHARADESIGN.png',
+  'p-antagoniste':'/image/FOND/FOND_ANTAGONISTE.png',
+  'p-sol':        '/image/FOND/FOND_SLICE.png',
+};
 
 function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string, audioUrl?: string): Nominee {
   return {
@@ -155,9 +163,6 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('dec4','p-deception','Fairy Tail: 100 Years Quest','','','0d0d0d','555555','/image/DECEPTION/Fairy.png'),
     n('dec5','p-deception','Blue Lock S2','','','0d0d0d','6080ff','/image/DECEPTION/Blue Lock S2.png'),
     n('dec6','p-deception','The Rising of the Shield Hero S4','','','0d0d0d','c9a227','/image/DECEPTION/Shield.png'),
-  ],
-  'p-developpement': [
-    n('dv1','p-developpement','— À venir —','','','0d0d0d','555555'),
   ],
   'p-comedie': [
     n('com1','p-comedie','The 100 Girlfriends Who Really Love You S2','','','1a0a14','ff80b4','/image/COMEDIE/100.png'),
@@ -472,6 +477,7 @@ export default async function NomineesPage({
             voteHref={`/${locale}/vote`}
             voteNowLabel={t('voteNow')}
             noNomineesLabel={t('noNominees')}
+            fondUrl={activeCat ? CATEGORY_FONDS[activeCat.id] : undefined}
           />
         </div>
       </main>
