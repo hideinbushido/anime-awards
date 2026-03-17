@@ -68,13 +68,10 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('dra1','p-drama','The Apothecary Diaries S2','','','0a0a14','c9a227','/image/DRAME/Carnet.png'),
     n('dra2','p-drama','Bloom','','','0a1414','80e0c0','/image/DRAME/Bloom.png'),
     n('dra3','p-drama','To Your Eternity S3','','','0a0a1a','a0c0ff','/image/DRAME/Eternity.png'),
-    n('dra4','p-drama','Orb: On the Movements of the Earth','','','100a00','c9a227','/image/DRAME/Orb.png'),
     n('dra5','p-drama','Link Click S3','','','0a0a20','6080ff','/image/DRAME/Link.png'),
     n('dra6','p-drama','Takopi\'s Original Sin','','','0a0a0a','ff80b4','/image/DRAME/Takopi.png'),
     n('dra7','p-drama','Rascal does not dream of Santa Claus','','','0a0a1a','d0b0ff','/image/DRAME/Rascal.png'),
     n('dra8','p-drama','My Happy Marriage S2','','','1a0a14','ff80b4','/image/DRAME/Happy.png'),
-    n('dra9','p-drama','The Rising of the Shield Hero S4','','','100a00','c9a227','/image/DRAME/Shield.png'),
-    n('dra10','p-drama','Scarlet','','','1a0a0a','e8a87c','/image/DRAME/Scarlet.png'),
   ],
   'p-romance': [
     n('rom1','p-romance','Blue Box','','','0a0a1a','a0c0ff','/image/ROMANCE/Box.png'),
