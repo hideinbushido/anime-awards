@@ -38,13 +38,13 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
 ];
 
 const CATEGORY_FONDS: Record<string, string> = {
-  'p-romance':    '/image/FOND/FOND_ROMANCE.png',
-  'p-decors':     '/image/FOND/FOND_DECOR.png',
-  'p-chara':      '/image/FOND/FOND_CHARADESIGN.png',
-  'p-combat':     '/image/FOND/FOND_COMBAT.png',
-  'p-antagoniste':'/image/FOND/FOND_ANTAGONISTE.png',
-  'p-sol':        '/image/FOND/FOND_SLICE.png',
-  'p-nouveaute':  '/image/FOND/FOND_NOUVEAUTE.png',
+  'p-romance':    '/FOND_ROMANCE.png',
+  'p-decors':     '/FOND_DECOR.png',
+  'p-chara':      '/FOND_CHARADESIGN.png',
+  'p-combat':     '/FOND_COMBAT.png',
+  'p-antagoniste':'/FOND_ANTAGONISTE.png',
+  'p-sol':        '/FOND_SLICE.png',
+  'p-nouveaute':  '/FOND_NOUVEAUTE.png',
 };
 
 function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string, audioUrl?: string): Nominee {
