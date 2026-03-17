@@ -18,6 +18,7 @@ const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-masculin',    eventId: 'demo', title: 'Meilleur Personnage Masculin',    titleFr: 'Meilleur Personnage Masculin',    titleEn: 'Best Male Character',           description: '', descriptionFr: 'Le personnage masculin le plus marquant',      descriptionEn: 'The most iconic male character',              order: 7,  active: true },
   { id: 'p-feminin',     eventId: 'demo', title: 'Meilleur Personnage Féminin',     titleFr: 'Meilleur Personnage Féminin',     titleEn: 'Best Female Character',         description: '', descriptionFr: 'Le personnage féminin le plus marquant',       descriptionEn: 'The most iconic female character',            order: 8,  active: true },
   { id: 'p-deception',   eventId: 'demo', title: 'Déception de l\'Année',           titleFr: 'Déception de l\'Année',           titleEn: 'Disappointment of the Year',    description: '', descriptionFr: 'L\'animé qui a le plus déçu',                  descriptionEn: 'The most disappointing anime',                order: 9,  active: true },
+  { id: 'p-combat',      eventId: 'demo', title: 'Meilleur Combat',                 titleFr: 'Meilleur Combat',                 titleEn: 'Best Fight',                    description: '', descriptionFr: 'Le combat le plus épique de l\'année',         descriptionEn: 'The most epic fight of the year',             order: 10, active: true },
   { id: 'p-comedie',     eventId: 'demo', title: 'Meilleure Comédie',               titleFr: 'Meilleure Comédie',               titleEn: 'Best Comedy',                   description: '', descriptionFr: 'L\'animé qui a le plus fait rire',             descriptionEn: 'The anime that made us laugh the most',       order: 11, active: true },
   { id: 'p-nouveaute',   eventId: 'demo', title: 'Meilleure Nouveauté',             titleFr: 'Meilleure Nouveauté',             titleEn: 'Best New Series',               description: '', descriptionFr: 'La nouvelle série la plus prometteuse',        descriptionEn: 'The most promising new series',               order: 12, active: true },
   { id: 'p-sensei',      eventId: 'demo', title: 'Meilleur Sensei',                 titleFr: 'Meilleur Sensei',                 titleEn: 'Best Sensei',                   description: '', descriptionFr: 'Le maître ou professeur le plus inspirant',    descriptionEn: 'The most inspiring teacher',                  order: 13, active: true },
@@ -41,6 +42,7 @@ const CATEGORY_FONDS: Record<string, string> = {
   'p-decors':     '/image/FOND/FOND_DECOR.png',
   'p-masculin':   '/image/FOND/FOND_MASCULIN.png',
   'p-chara':      '/image/FOND/FOND_CHARADESIGN.png',
+  'p-combat':     '/image/FOND/FOND_COMBAT.png',
   'p-antagoniste':'/image/FOND/FOND_ANTAGONISTE.png',
   'p-sol':        '/image/FOND/FOND_SLICE.png',
 };
@@ -155,6 +157,9 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('fem14','p-feminin','Toga Himiko','My Hero Academia','','1a0a14','ff80b4','/image/FEMININ/Toga.png'),
     n('fem15','p-feminin','Uraraka','My Hero Academia','','1a0a14','ff80b4','/image/FEMININ/Uraraka.png'),
     n('fem16','p-feminin','Semiu','Gachiakuta','','0a0a20','6080ff','/image/FEMININ/Semiu.png'),
+  ],
+  'p-combat': [
+    n('cb1','p-combat','— À venir —','','','0d0d0d','555555'),
   ],
   'p-deception': [
     n('dec1','p-deception','The Beginning After the End','','','0d0d0d','666666','/image/DECEPTION/TBATE.png'),
