@@ -1,6 +1,7 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Mail, ExternalLink } from 'lucide-react';
+import { TeamAvatar } from '@/components/team/TeamAvatar';
 
 // ─── Données de l'équipe ──────────────────────────────────────────────────────
 const CREATOR = {
@@ -87,22 +88,6 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
-// ─── Avatar placeholder (si pas de photo) ─────────────────────────────────────
-function Avatar({ src, alt, size = 120 }: { src: string; alt: string; size?: number }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt}
-      width={size}
-      height={size}
-      onError={(e) => {
-        (e.target as HTMLImageElement).src = `https://placehold.co/${size}x${size}/1a0a14/c9a227?text=${encodeURIComponent(alt[0])}`;
-      }}
-      style={{ width: size, height: size, objectFit: 'cover', borderRadius: '50%' }}
-    />
-  );
-}
 
 export default async function CreateursPage({
   params,
@@ -173,7 +158,7 @@ export default async function CreateursPage({
                   background: 'linear-gradient(135deg, #c9a227, #e8c54a, #9e7c1e)',
                 }}
               >
-                <Avatar src={CREATOR.photo} alt={CREATOR.nickname} size={110} />
+                <TeamAvatar src={CREATOR.photo} alt={CREATOR.nickname} size={110} />
               </div>
 
               <h2 className="text-2xl font-black text-white mb-1">{CREATOR.nickname}</h2>
@@ -239,7 +224,7 @@ export default async function CreateursPage({
                       background: 'linear-gradient(135deg, rgba(201,162,39,0.6), rgba(158,124,30,0.3))',
                     }}
                   >
-                    <Avatar src={member.photo} alt={member.nickname} size={80} />
+                    <TeamAvatar src={member.photo} alt={member.nickname} size={80} />
                   </div>
 
                   <h3 className="text-base font-black text-white mb-1">{member.nickname}</h3>
