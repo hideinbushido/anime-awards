@@ -150,13 +150,14 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
   ],
   'p-comedie': [
     n('com1','p-comedie','The 100 Girlfriends Who Really Love You S2','','','1a0a14','ff80b4','/image/COMEDIE/100.png'),
-    n('com2','p-comedie','Konosuba S3','','','0a0a20','a060ff','/image/COMEDIE/Konosuba.png'),
     n('com3','p-comedie','Kamen Rider','','','0a0a14','60a0ff','/image/COMEDIE/Kamen.png'),
     n('com4','p-comedie','Spy × Family S3','','','0a1414','60d0c0','/image/COMEDIE/Spy.png'),
     n('com5','p-comedie','May I Ask for One Final Thing?','','','0a0a1a','d0b0ff','/image/COMEDIE/May.png'),
     n('com6','p-comedie','Kono Subarashii Sekai ni Shukufuku wo! 3: BONUS STAGE','','','0a0a20','ffd250','/image/COMEDIE/Bonus.png'),
     n('com7','p-comedie','New Panty & Stocking with GARTERBELT S2','','','1a0a14','ff80b4','/image/COMEDIE/Pant.png'),
     n('com8','p-comedie','From Bureaucrat to Villainess','','','0a0a14','c9a227','/image/COMEDIE/Bureau.png'),
+    n('com9','p-comedie','Witch Watch','','','1a0a14','ff80b4'),
+    n('com10','p-comedie','Ranma 1/2 Remake','','','1a0500','ff4060'),
   ],
   'p-nouveaute': [
     n('nv1','p-nouveaute','To Be Hero X','','','0a0a20','60a0ff','/image/NOUVEAUTE/Hero.png'),
