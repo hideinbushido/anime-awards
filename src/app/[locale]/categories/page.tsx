@@ -42,19 +42,23 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { getActiveEvent, getCategories } from '@/lib/firestore';
 
-// Mapping image de fond par slug de catégorie
+// Mapping image de fond par ID de catégorie
 const CATEGORY_IMAGES: Record<string, string> = {
-  'meilleur-personnage-feminin':  '/FOND_FEMININ.png',
-  'personnage-attachant':         '/FOND_ATTACHANT.png',
-  'meilleurs-decors':             '/FOND DECOR.jpg',
-  'meilleur-isekai':              '/FOND ISEKAI.jpg',
-  'meilleur-protagoniste':        '/FOND PROTA.jpg',
-  'meilleur-personnage-masculin': '/FOND MASCULIN.png',
-  'meilleur-sensei':              '/FOND SENSEI.jpg',
-  'meilleur-developpement':       '/FOND DEVELOPPEMENT.png',
-  'meilleur-film':                '/FOND FILM.png',
-  'meilleur-antagoniste':         '/FOND COMBAT.jpg',
-  'meilleur-action':              '/FOND COMBAT.jpg',
+  'p-romance':     '/FOND_ROMANCE.png',
+  'p-decors':      '/FOND_DECOR.png',
+  'p-masculin':    '/FOND _MASCULIN.png',
+  'p-feminin':     '/FOND_FEMININ.png',
+  'p-attachant':   '/FOND_ATTACHANT.png',
+  'p-film':        '/FOND FILM.png',
+  'p-isekai':      '/FOND ISEKAI.jpg',
+  'p-protagoniste':'/FOND PROTA.jpg',
+  'p-sensei':      '/FOND SENSEI.jpg',
+  'p-antagoniste': '/FOND_ANTAGONISTE.png',
+  'p-action':      '/FOND_COMBAT.png',
+  'p-combat':      '/FOND_COMBAT.png',
+  'p-chara':       '/FOND_CHARADESIGN.png',
+  'p-nouveaute':   '/FOND_NOUVEAUTE.png',
+  'p-sol':         '/FOND_SLICE.png',
 };
 
 // Gradients de fallback pour les catégories sans image
@@ -77,7 +81,7 @@ const PLACEHOLDERS = [
   { id: 'p-masculin',     slug: 'meilleur-personnage-masculin', titleFr: 'Meilleur Personnage Masculin',        titleEn: 'Best Male Character',             descriptionFr: 'Le personnage masculin le plus marquant', descriptionEn: 'The most iconic male character',        nomineeCount: 5 },
   { id: 'p-feminin',      slug: 'meilleur-personnage-feminin',  titleFr: 'Meilleur Personnage Féminin',         titleEn: 'Best Female Character',           descriptionFr: 'Le personnage féminin le plus marquant',  descriptionEn: 'The most iconic female character',      nomineeCount: 5 },
   { id: 'p-deception',    slug: 'deception-annee',              titleFr: 'Déception de l\'Année',              titleEn: 'Disappointment of the Year',      descriptionFr: 'L\'animé qui a le plus déçu',           descriptionEn: 'The most disappointing anime',           nomineeCount: 5 },
-  { id: 'p-developpement',slug: 'meilleur-developpement',       titleFr: 'Meilleur Développement',             titleEn: 'Best Character Development',      descriptionFr: 'La progression de personnage la plus réussie', descriptionEn: 'The best character growth',        nomineeCount: 5 },
+  { id: 'p-combat',       slug: 'meilleur-combat',              titleFr: 'Meilleur Combat',                    titleEn: 'Best Fight',                      descriptionFr: 'Le combat le plus épique de l\'année',   descriptionEn: 'The most epic fight of the year',        nomineeCount: 5 },
   { id: 'p-comedie',      slug: 'meilleure-comedie',            titleFr: 'Meilleure Comédie',                  titleEn: 'Best Comedy',                     descriptionFr: 'L\'animé qui a le plus fait rire',      descriptionEn: 'The anime that made us laugh the most',  nomineeCount: 5 },
   { id: 'p-nouveaute',    slug: 'meilleure-nouveaute',          titleFr: 'Meilleure Nouveauté',                titleEn: 'Best New Series',                 descriptionFr: 'La nouvelle série la plus prometteuse',  descriptionEn: 'The most promising new series',          nomineeCount: 5 },
   { id: 'p-sensei',       slug: 'meilleur-sensei',              titleFr: 'Meilleur Sensei',                    titleEn: 'Best Sensei',                     descriptionFr: 'Le maître ou professeur le plus inspirant', descriptionEn: 'The most inspiring teacher',          nomineeCount: 5 },
@@ -137,8 +141,7 @@ export default async function CategoriesPage({
           {/* Grid catégories */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {displayCategories.map((cat: any, i: number) => {
-              const slug = cat.slug ?? '';
-              const bgImage = CATEGORY_IMAGES[slug];
+              const bgImage = CATEGORY_IMAGES[cat.id];
               const fallback = FALLBACK_GRADIENTS[i % FALLBACK_GRADIENTS.length];
 
               const CatIcon = getCategoryIcon(cat.titleFr, cat.titleEn);
