@@ -391,7 +391,9 @@ export default async function NomineesPage({
   const activeIdx = activeCat ? categories.findIndex((c) => c.id === activeCat.id) : -1;
   const prevCat = activeIdx > 0 ? categories[activeIdx - 1] : null;
   const nextCat = activeIdx < categories.length - 1 ? categories[activeIdx + 1] : null;
-  const nominees = activeCat ? (nomineesByCategory[activeCat.id] ?? []) : [];
+  const nominees = (activeCat ? (nomineesByCategory[activeCat.id] ?? []) : [])
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
 
   return (
     <>
