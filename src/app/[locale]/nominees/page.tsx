@@ -230,7 +230,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('fil5','p-film','K-Pop Demon Hunters','','','1a0a14','ff80b4','/image/FILM/Kpop.png'),
     n('fil6','p-film','The Rose of Versailles','','','1a0a14','ff80b4','/image/FILM/Versailles.png'),
     n('fil7','p-film','100 Meters','','','0a0a14','6080ff','/image/FILM/metteer.png'),
-    n('fil8','p-film','Scarlet et l\'Éternité','','','1a0a0a','e8a87c'),
+    n('fil8','p-film','Scarlet et l\'Éternité','','','1a0a0a','e8a87c','/image/DRAME/Scarlet.png'),
     n('fil9','p-film','Mononoke, le film : Chapitre II - Les cendres de la rage','','','1a0800','ff8030'),
   ],
   'p-opening': [
