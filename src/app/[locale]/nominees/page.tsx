@@ -139,7 +139,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('fem14','p-feminin','Toga Himiko','My Hero Academia','','1a0a14','ff80b4','/image/FEMININ/Toga.png'),
     n('fem16','p-feminin','Semiu Grier','Gachiakuta','','0a0a20','6080ff','/image/FEMININ/Semiu.png'),
     n('fem17','p-feminin','Atanasia','Who Made Me a Princess','','1a0a14','ff80b4','/image/FEMININ/Anastasia.png'),
-    n('fem18','p-feminin','Alicia Glenfall','','','0a0a1a','a0c0ff','/image/FEMININ/Alicia.png'),
+    n('fem18','p-feminin','Alicia Glenfall','Clevatess','','0a0a1a','a0c0ff','/image/FEMININ/Alicia.png'),
     n('fem19','p-feminin','Momo Ayase','Dandadan S2','','0a0a20','a060ff','/image/FEMININ/Momo.png'),
     n('fem20','p-feminin','Ochaco Uraraka','My Hero Academia','','1a0500','ff80b4','/image/FEMININ/Uraraka.png'),
   ],
