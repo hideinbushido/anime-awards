@@ -124,6 +124,9 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('mas11','p-masculin','Xeno','Dr. Stone','','0a1008','ffd250','/image/MASCULIN/Xeno.png'),
     n('mas12','p-masculin','Lin Ling','To Be Hero X','','0a0a1a','a0c0ff','/image/MASCULIN/Lin.png'),
     n('mas15','p-masculin','Shigaraki','My Hero Academia','','100010','a000ff','/image/MASCULIN/Shigaraki.png'),
+    n('mas16','p-masculin','Sung Jinwoo','Solo Leveling','','1a0800','ffd250','/image/MASCULIN/Jinwoo.png'),
+    n('mas17','p-masculin','Sakura','','','0a0a20','a060ff','/image/MASCULIN/Sakura.png'),
+    n('mas18','p-masculin','Badeni','Gachiakuta','','1a0800','ff8030','/image/MASCULIN/Badeni.png'),
   ],
   'p-feminin': [
     n('fem2','p-feminin','Suika','Dr. Stone','','0a1008','80e880','/image/FEMININ/Suika.png'),
