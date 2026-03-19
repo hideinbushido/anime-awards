@@ -142,9 +142,61 @@ export default async function CategoriesPage({
             <p className="text-lg" style={{ color: '#9a8870' }}>{t('subtitle')}</p>
           </div>
 
-          {/* Grid catégories */}
+          {/* Carte Grand Prix — Animé de l'Année */}
+          {(() => {
+            const annee = displayCategories.find((c: any) => c.id === 'p-annee');
+            if (!annee) return null;
+            const bgImage = CATEGORY_IMAGES['p-annee'];
+            const CatIcon = getCategoryIcon(annee.titleFr, annee.titleEn);
+            return (
+              <div className="mb-6">
+                <Link
+                  href={`/${locale}/nominees?category=p-annee`}
+                  className="category-card group relative rounded-2xl overflow-hidden block mx-auto"
+                  style={{ height: '320px', maxWidth: '700px', border: '2px solid rgba(201,162,39,0.55)', boxShadow: '0 0 40px rgba(201,162,39,0.18)' }}
+                >
+                  {bgImage ? (
+                    <div className="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ backgroundImage: `url("${bgImage}")` }} />
+                  ) : (
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1a1200, #0f0d09)' }} />
+                  )}
+                  <div className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.95) 0%, rgba(8,6,0,0.55) 50%, rgba(8,6,0,0.2) 100%)' }} />
+
+                  {/* Couronne Grand Prix */}
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-black tracking-widest uppercase"
+                    style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', color: '#080600', boxShadow: '0 0 20px rgba(201,162,39,0.5)' }}
+                  >
+                    ★ Grand Prix
+                  </div>
+
+                  <div className="absolute bottom-0 inset-x-0 p-6 text-center">
+                    <h3 className="text-white font-black text-3xl leading-tight mb-2"
+                      style={{ textShadow: '0 2px 12px rgba(0,0,0,0.9)' }}
+                    >
+                      {locale === 'fr' ? annee.titleFr : annee.titleEn}
+                    </h3>
+                    <p className="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-3"
+                      style={{ color: '#c9a227' }}
+                    >
+                      {locale === 'fr' ? annee.descriptionFr : annee.descriptionEn}
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs"
+                      style={{ background: 'rgba(8,6,0,0.8)', border: '1px solid rgba(201,162,39,0.3)', color: '#c9a227' }}
+                    >
+                      <CatIcon className="w-3.5 h-3.5" />
+                      {annee.nomineeCount ?? '—'} {t('nominees')}
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            );
+          })()}
+
+          {/* Grid autres catégories */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {displayCategories.map((cat: any, i: number) => {
+            {displayCategories.filter((c: any) => c.id !== 'p-annee').map((cat: any, i: number) => {
               const bgImage = CATEGORY_IMAGES[cat.id];
               const fallback = FALLBACK_GRADIENTS[i % FALLBACK_GRADIENTS.length];
 
