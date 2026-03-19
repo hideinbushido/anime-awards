@@ -246,8 +246,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('op10','p-opening','"Tsuyobi" — Fire Force S3 OP1','QUEEN BEE','','200800','ff6020','/image/OPENING/Fire.png','/music/Opening/Tsuyobi.MP3'),
     n('op11','p-opening','"ReawakenR" — Solo Leveling S2 OP1','LiSA feat. Felix','','1a0800','ffd250','/image/OPENING/Solo.png','/music/Opening/Reweaker.MP3'),
     n('op12','p-opening','"Frontiers" — Shangri-La Frontier S2 OP2','AWICH','','100814','8040c0','/image/OPENING/Frontier.png','/music/Opening/Frontier.MP3'),
-    n('op13','p-opening','"Shounen" — OP','GRe4N BOYZ','','0a0a14','c9a227'),
-    n('op14','p-opening','Danmachi S5 OP','','','100814','8040c0'),
+    n('op13','p-opening','"Shounen" — Danmachi S5 OP','GRe4N BOYZ','','100814','8040c0'),
     n('op15','p-opening','"Same Blue" — Blue Box OP','Official HIGE DANdism','','0a0a1a','80c0ff'),
   ],
   'p-ending': [
