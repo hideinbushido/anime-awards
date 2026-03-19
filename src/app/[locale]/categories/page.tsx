@@ -63,6 +63,13 @@ const CATEGORY_IMAGES: Record<string, string> = {
   'p-animation':   '/FOND_ANIMATION.png',
   'p-seinen':      '/FOND_SEINEN.png',
   'p-secondaire':  '/FOND_SECONDAIRE.png',
+  'p-annee':       '/FOND_ANIME.png',
+  'p-chanson':     '/FOND_CHANSON.png',
+  'p-comedie':     '/FOND_COMEDIE.png',
+  'p-deception':   '/FOND_DECEPTION.png',
+  'p-ending':      '/FOND_ENDING.png',
+  'p-opening':     '/FOND_OPENING.png',
+  'p-suite':       '/FOND_SUITE.png',
 };
 
 // Gradients de fallback pour les catégories sans image

@@ -57,6 +57,13 @@ const CATEGORY_FONDS: Record<string, string> = {
   'p-drama':       '/FOND_DRAME.png',
   'p-seinen':      '/FOND_SEINEN.png',
   'p-secondaire':  '/FOND_SECONDAIRE.png',
+  'p-annee':       '/FOND_ANIME.png',
+  'p-chanson':     '/FOND_CHANSON.png',
+  'p-comedie':     '/FOND_COMEDIE.png',
+  'p-deception':   '/FOND_DECEPTION.png',
+  'p-ending':      '/FOND_ENDING.png',
+  'p-opening':     '/FOND_OPENING.png',
+  'p-suite':       '/FOND_SUITE.png',
 };
 
 function n(id: string, catId: string, name: string, anime: string, descFr: string, color = '0f0d09', textColor = 'c9a227', imgUrl?: string, audioUrl?: string): Nominee {
