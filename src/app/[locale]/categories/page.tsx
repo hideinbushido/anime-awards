@@ -186,7 +186,7 @@ export default async function CategoriesPage({
                       style={{ background: 'rgba(8,6,0,0.8)', border: '1px solid rgba(201,162,39,0.3)', color: '#c9a227' }}
                     >
                       <CatIcon className="w-3.5 h-3.5" />
-                      {annee.nomineeCount ?? '—'} {t('nominees')}
+                      {locale === 'fr' ? 'Voir les nominés' : 'See nominees'}
                     </div>
                   </div>
                 </Link>
@@ -222,13 +222,6 @@ export default async function CategoriesPage({
                   <div className="absolute inset-0"
                     style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.95) 0%, rgba(8,6,0,0.65) 50%, rgba(8,6,0,0.3) 100%)' }}
                   />
-
-                  {/* Badge nominés en haut à droite */}
-                  <div className="absolute top-3 right-3 text-xs px-2.5 py-1 rounded"
-                    style={{ background: 'rgba(8,6,0,0.8)', border: '1px solid rgba(201,162,39,0.3)', color: '#c9a227', backdropFilter: 'blur(8px)' }}
-                  >
-                    {cat.nomineeCount ?? '—'} {t('nominees')}
-                  </div>
 
                   {/* Numéro discret en haut à gauche */}
                   <div className="absolute top-3 left-4 text-xs font-bold tracking-wider"
