@@ -173,6 +173,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('com8','p-comedie','From Bureaucrat to Villainess','','','0a0a14','c9a227','/image/COMEDIE/Bureau.png'),
     n('com9','p-comedie','Witch Watch','','','1a0a14','ff80b4'),
     n('com10','p-comedie','Ranma 1/2 Remake','','','1a0500','ff4060'),
+    n('com11','p-comedie','Grand Blue Dreaming S2','','','0a0a20','6080ff','/image/SUITE/GRAND.png'),
   ],
   'p-nouveaute': [
     n('nv1','p-nouveaute','To Be Hero X','','','0a0a20','60a0ff','/image/NOUVEAUTE/Hero.png'),
