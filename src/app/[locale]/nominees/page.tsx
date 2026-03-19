@@ -183,6 +183,8 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('nv10','p-nouveaute','Orb: On the Movements of the Earth','','','100a00','c9a227','/image/NOUVEAUTE/Orb.png'),
     n('nv11','p-nouveaute','Gachiakuta','','','1a0800','ff8030','/image/NOUVEAUTE/Gachiakuta.png'),
     n('nv12','p-nouveaute','The Summer Hikaru Died','','','0a0a1a','80c0ff','/image/NOUVEAUTE/Summer.png'),
+    n('nv13','p-nouveaute','Lazarus','','','100010','c000ff','/image/NOUVEAUTE/Lazarus.png'),
+    n('nv14','p-nouveaute','Rock Is a Lady\'s Modesty','','','1a0a14','ff80b4','/image/NOUVEAUTE/Rock.png'),
   ],
   'p-sensei': [
     n('se1','p-sensei','Enjin','Gachiakuta','','0a0a20','60a0ff','/image/SENSEI/Enjin.png'),
