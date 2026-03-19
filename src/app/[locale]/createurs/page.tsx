@@ -9,7 +9,7 @@ const CREATOR = {
   fullName: 'Kouamé Corentin Paul',
   role: 'Créateur & Organisateur',
   email: 'ricokouame92@gmail.com',
-  tiktok: 'https://www.tiktok.com/@ricokouame92',
+  tiktok: 'https://www.tiktok.com/@ricokouame',
   photo: '/image/team/Rico.png',
 };
 
