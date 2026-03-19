@@ -152,6 +152,8 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('cb6','p-combat','Queen vs Bowa','To Be Hero X','','0a0a20','60a0ff'),
     n('cb7','p-combat','Reze vs Denji','Chainsaw Man','','100010','c000ff'),
     n('cb8','p-combat','Shi Huang Di vs Hades','Valkyrie Apocalypse','','100814','8040c0'),
+    n('cb9','p-combat','Akaza vs Giyu & Tanjiro','Demon Slayer: The Movie — Infinity Castle','','1a0800','ff8060'),
+    n('cb10','p-combat','Kocho Shinobu vs Doma','Demon Slayer: The Movie — Infinity Castle','','0a0a1a','a0c0ff'),
   ],
   'p-deception': [
     n('dec1','p-deception','The Beginning After the End','','','0d0d0d','666666','/image/DECEPTION/TBATE.png'),
