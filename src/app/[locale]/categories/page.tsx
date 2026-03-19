@@ -54,11 +54,15 @@ const CATEGORY_IMAGES: Record<string, string> = {
   'p-protagoniste':'/FOND PROTA.jpg',
   'p-sensei':      '/FOND SENSEI.jpg',
   'p-antagoniste': '/FOND_ANTAGONISTE.png',
-  'p-action':      '/FOND_COMBAT.png',
+  'p-action':      '/FOND_ACTION.png',
   'p-combat':      '/FOND_COMBAT.png',
   'p-chara':       '/FOND_CHARADESIGN.png',
   'p-nouveaute':   '/FOND_NOUVEAUTE.png',
   'p-sol':         '/FOND_SLICE.png',
+  'p-drama':       '/FOND_DRAME.png',
+  'p-animation':   '/FOND_ANIMATION.png',
+  'p-seinen':      '/FOND_SEINEN.png',
+  'p-secondaire':  '/FOND_SECONDAIRE.png',
 };
 
 // Gradients de fallback pour les catégories sans image
