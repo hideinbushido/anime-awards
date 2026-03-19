@@ -26,7 +26,7 @@ const TEAM: {
     fullName: '',
     role: '',
     email: '',
-    tiktok: 'https://www.tiktok.com/@mllelord',
+    tiktok: 'https://www.tiktok.com/@lord_kymura',
     photo: '/image/team/MlleLord.png',
   },
   {
