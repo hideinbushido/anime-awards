@@ -282,7 +282,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('pr16','p-protagoniste','Natsuko Zenju','Zenshu','','0a0a1a','a0c0ff','/image/PROTA/Zenju.png'),
   ],
   'p-secondaire': [
-    n('sc1','p-secondaire','Reinhard','Re:Zero S3','','0a0814','8040c0','/image/SECONDAIRE/Reinhard.png'),
+    n('sc1','p-secondaire','Reinhardt','Re:Zero S3','','0a0814','8040c0','/image/SECONDAIRE/Reinhard.png'),
     n('sc2','p-secondaire','Shi Huang Di','Valkyrie Apocalypse','','100814','8040c0','/image/SECONDAIRE/ShiHuang.png'),
     n('sc3','p-secondaire','Bakugo','My Hero Academia Final Season','','1a0500','ff4020','/image/SECONDAIRE/Bakugo.png'),
     n('sc4','p-secondaire','Shoto Todoroki','My Hero Academia Final Season','','0a0a1a','a0c0ff','/image/SECONDAIRE/Shoto.png'),
@@ -292,6 +292,15 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('sc8','p-secondaire','Enjin','Gachiakuta','','1a0800','ff8030','/image/SECONDAIRE/Enjin.png'),
     n('sc9','p-secondaire','Zanka','Gachiakuta','','0a0a14','6080ff','/image/SECONDAIRE/Zanka.png'),
     n('sc10','p-secondaire','Riyo','Gachiakuta','','0a0a20','6080ff','/image/SECONDAIRE/Riyo.png'),
+    n('sc11','p-secondaire','Seiko Ayase','Dandadan S2','','0a0a20','a060ff','/image/SENSEI/Seiko.png'),
+    n('sc12','p-secondaire','Dr.Vegapunk','One Piece (Egghead Arc)','','1a0800','ff7030'),
+    n('sc13','p-secondaire','Bartholomew Kuma','One Piece (Egghead Arc)','','1a0800','ff7030'),
+    n('sc14','p-secondaire','Jewelry Bonney','One Piece (Egghead Arc)','','1a0814','ff80b4','/image/ATTACHANT/Bonney.png'),
+    n('sc15','p-secondaire','Novak','Clevatess','','0a0a1a','80c0ff'),
+    n('sc16','p-secondaire','Benimaru Shinmon','Fire Force S3','','200800','ff6020'),
+    n('sc17','p-secondaire','Arthur Boyle','Fire Force S3','','200800','ff6020'),
+    n('sc18','p-secondaire','Jolenta','Clevatess','','0a0a1a','80c0ff'),
+    n('sc19','p-secondaire','Badeni','Gachiakuta','','1a0800','ff8030','/image/MASCULIN/Badeni.png'),
   ],
   'p-suite': [
     n('su1','p-suite','My Hero Academia — Saison Finale','','','1a0500','ff4020','/image/SUITE/MHA.png'),
@@ -333,10 +342,11 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('ag8','p-antagoniste','Xeno',' Dr.STONE SCIENCE FUTURE','','0a1008','80e880','/image/ANTAGONISTE/Xeno.png'),
     n('ag9','p-antagoniste','Stanley',' Dr.STONE SCIENCE FUTURE','','0a0a14','6080ff','/image/ANTAGONISTE/Stanley.png'),
     n('ag10','p-antagoniste','Jabber','Gachiakuta','','1a0800','ff8030','/image/ANTAGONISTE/Jabber.png'),
-    n('ag11','p-antagoniste','Zodyl','Clevatess','','0a0a1a','80c0ff','/image/ANTAGONISTE/Zodyl.png'),
+    n('ag11','p-antagoniste','Zodyl','Gachiakuta','','0a0a1a','80c0ff','/image/ANTAGONISTE/Zodyl.png'),
     n('ag12','p-antagoniste','White Rabbit','Devil May Cry','','0a0a20','a060ff','/image/ANTAGONISTE/White.png'),
     n('ag13','p-antagoniste','Sherlock Holmes','Moriarty the Patriot','','0a0a14','c9a227','/image/ANTAGONISTE/Sherlock.png'),
     n('ag14','p-antagoniste','Beru','Solo Leveling S2','','1a0800','ffd250','/image/ANTAGONISTE/Beru.png'),
+    n('ag15','p-antagoniste','Novak','Clevatess','','0a0a1a','80c0ff'),
   ],
 };
 
