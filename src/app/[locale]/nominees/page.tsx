@@ -127,8 +127,8 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('mas16','p-masculin','Sung Jinwoo','Solo Leveling','','1a0800','ffd250','/image/MASCULIN/Jinwoo.png'),
     n('mas17','p-masculin','Sakura','','','0a0a20','a060ff','/image/MASCULIN/Sakura.png'),
     n('mas18','p-masculin','Badeni','Gachiakuta','','1a0800','ff8030','/image/MASCULIN/Badeni.png'),
-    n('mas19','p-masculin','Giyu','Demon Slayer','','0a0a1a','6080ff','/image/MASCULIN/Giyu.png'),
-    n('mas20','p-masculin','Tanjiro','Demon Slayer','','0a0a14','40a0ff','/image/MASCULIN/Tanjiro.png'),
+    n('mas19','p-masculin','Giyu','Demon Slayer: The Movie — Infinity Castle','','0a0a1a','6080ff','/image/MASCULIN/Giyu.png'),
+    n('mas20','p-masculin','Tanjiro','Demon Slayer: The Movie — Infinity Castle','','0a0a14','40a0ff','/image/MASCULIN/Tanjiro.png'),
   ],
   'p-feminin': [
     n('fem2','p-feminin','Suika','Dr. Stone','','0a1008','80e880','/image/FEMININ/Suika.png'),
