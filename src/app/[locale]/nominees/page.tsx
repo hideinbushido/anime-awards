@@ -308,10 +308,10 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('sc12','p-secondaire','Dr.Vegapunk','One Piece (Egghead Arc)','','1a0800','ff7030','/image/SECONDAIRE/Vega.png'),
     n('sc13','p-secondaire','Bartholomew Kuma','One Piece (Egghead Arc)','','1a0800','ff7030','/image/SECONDAIRE/Kuma.png'),
     n('sc14','p-secondaire','Jewelry Bonney','One Piece (Egghead Arc)','','1a0814','ff80b4','/image/SECONDAIRE/Bonney.png'),
-    n('sc15','p-secondaire','Novak','Clevatess','','0a0a1a','80c0ff','/image/SECONDAIRE/Novak.png'),
+    n('sc15','p-secondaire','Novak','Orb: Du Mouvement de la Terre','','0a0a1a','80c0ff','/image/SECONDAIRE/Novak.png'),
     n('sc16','p-secondaire','Benimaru Shinmon','Fire Force S3','','200800','ff6020','/image/SECONDAIRE/Benimaru.png'),
     n('sc17','p-secondaire','Arthur Boyle','Fire Force S3','','200800','ff6020','/image/SECONDAIRE/Arthur.png'),
-    n('sc18','p-secondaire','Jolenta','Clevatess','','0a0a1a','80c0ff','/image/SECONDAIRE/Jolenta.png'),
+    n('sc18','p-secondaire','Jolenta','Orb: Du Mouvement de la Terre','','0a0a1a','80c0ff','/image/SECONDAIRE/Jolenta.png'),
     n('sc19','p-secondaire','Badeni','Gachiakuta','','1a0800','ff8030','/image/SECONDAIRE/Badeni.png'),
   ],
   'p-suite': [
@@ -346,10 +346,10 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
   'p-antagoniste': [
     n('ag1','p-antagoniste','Reze','Chainsaw Man: The Movie — Reze Arc','','100010','c000ff','/image/ANTAGONISTE/Reze.png'),
     n('ag2','p-antagoniste','Dabi','My Hero Academia — Final Season','','1a0a00','6080ff','/image/ANTAGONISTE/Dabi.png'),
-    n('ag3','p-antagoniste','Doma','Demon Slayer','','0a0a1a','a0c0ff','/image/ANTAGONISTE/Doma.png'),
+    n('ag3','p-antagoniste','Doma','Demon Slayer: The Movie — Infinity Castle','','0a0a1a','a0c0ff','/image/ANTAGONISTE/Doma.png'),
     n('ag4','p-antagoniste','All For One','My Hero Academia — Final Season','','0d0d0d','888888','/image/ANTAGONISTE/All.png'),
     n('ag5','p-antagoniste','Shigaraki','My Hero Academia — Final Season','','100010','a000ff','/image/ANTAGONISTE/Shigaraki.png'),
-    n('ag6','p-antagoniste','Akaza','Demon Slayer: The Movie Infinity Castle','','200010','ff4060','/image/ANTAGONISTE/Akaza.png'),
+    n('ag6','p-antagoniste','Akaza','Demon Slayer: The Movie — Infinity Castle','','200010','ff4060','/image/ANTAGONISTE/Akaza.png'),
     n('ag7','p-antagoniste','Yhwach','Bleach TYBW','','0a0a14','6080ff','/image/ANTAGONISTE/Yhwach.png'),
     n('ag8','p-antagoniste','Xeno',' Dr.STONE SCIENCE FUTURE','','0a1008','80e880','/image/ANTAGONISTE/Xeno.png'),
     n('ag9','p-antagoniste','Stanley',' Dr.STONE SCIENCE FUTURE','','0a0a14','6080ff','/image/ANTAGONISTE/Stanley.png'),
@@ -358,7 +358,7 @@ const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('ag12','p-antagoniste','White Rabbit','Devil May Cry','','0a0a20','a060ff','/image/ANTAGONISTE/White.png'),
     n('ag13','p-antagoniste','Sherlock Holmes','Moriarty the Patriot','','0a0a14','c9a227','/image/ANTAGONISTE/Sherlock.png'),
     n('ag14','p-antagoniste','Beru','Solo Leveling S2','','1a0800','ffd250','/image/ANTAGONISTE/Beru.png'),
-    n('ag15','p-antagoniste','Novak','Clevatess','','0a0a1a','80c0ff','/image/ANTAGONISTE/Nov.png'),
+    n('ag15','p-antagoniste','Novak','Orb: Du Mouvement de la Terre','','0a0a1a','80c0ff','/image/ANTAGONISTE/Nov.png'),
   ],
 };
 
