@@ -1,38 +1,13 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import VoteFlow from '@/components/vote/VoteFlow';
-import { getActiveEvent, getCategories, getNominees } from '@/lib/firestore';
-import { PLACEHOLDER_CATEGORIES, PLACEHOLDER_NOMINEES } from '@/app/[locale]/nominees/page';
-import type { Category, Nominee } from '@/lib/types';
+import RequestAccessForm from '@/components/vote/RequestAccessForm';
 
 export default async function VotePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-
-  let categories: Category[] = [];
-  let nomineesByCategory: Record<string, Nominee[]> = {};
-  let eventId = 'demo';
-
-  try {
-    const event = await getActiveEvent();
-    if (event) {
-      eventId = event.id;
-      categories = await getCategories(event.id);
-      for (const cat of categories) {
-        nomineesByCategory[cat.id] = await getNominees(cat.id);
-      }
-    }
-  } catch {
-    // Firebase not configured
-  }
-
-  if (categories.length === 0) {
-    categories = PLACEHOLDER_CATEGORIES;
-    nomineesByCategory = PLACEHOLDER_NOMINEES;
-  }
+  await params;
 
   return (
     <>
@@ -51,12 +26,7 @@ export default async function VotePage({
             </p>
           </div>
 
-          <VoteFlow
-            categories={categories}
-            nomineesByCategory={nomineesByCategory}
-            eventId={eventId}
-            locale={locale}
-          />
+          <RequestAccessForm />
         </div>
       </main>
       <Footer />

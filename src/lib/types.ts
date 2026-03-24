@@ -62,6 +62,14 @@ export interface Vote {
   ipHash?: string;
 }
 
+export interface VoteAccess {
+  docId: string;
+  token: string;
+  voterName: string;
+  voterEmail: string;
+  expiresAt: string;
+}
+
 export interface PendingVote {
   id: string;
   token: string;

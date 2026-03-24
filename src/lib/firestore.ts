@@ -195,6 +195,36 @@ export async function deletePendingVote(docId: string): Promise<void> {
   await deleteDoc(doc(firestore, 'pendingVotes', docId));
 }
 
+// ─── Vote Access (email verification before voting) ───────────────────────────
+
+export async function createVoteAccess(data: {
+  token: string;
+  voterName: string;
+  voterEmail: string;
+  expiresAt: string;
+}): Promise<string> {
+  const firestore = getDb();
+  const ref = await addDoc(collection(firestore, 'voteAccess'), {
+    ...data,
+    createdAt: serverTimestamp(),
+  });
+  return ref.id;
+}
+
+export async function getVoteAccessByToken(token: string) {
+  const firestore = getDb();
+  const q = query(collection(firestore, 'voteAccess'), where('token', '==', token));
+  const snap = await getDocs(q);
+  if (snap.empty) return null;
+  const d = snap.docs[0];
+  return { docId: d.id, ...d.data() } as any;
+}
+
+export async function deleteVoteAccess(docId: string): Promise<void> {
+  const firestore = getDb();
+  await deleteDoc(doc(firestore, 'voteAccess', docId));
+}
+
 export async function getVotes(eventId: string): Promise<Vote[]> {
   const firestore = getDb();
   const q = query(collection(firestore, 'votes'), where('eventId', '==', eventId));
