@@ -163,11 +163,27 @@ export default async function HomePage({
                 </div>
               </AnimateOnScroll>
             )}
+            {/* Countdown live — Firebase event ou fallback 2 mai 2026 */}
+            {(!event || (!isVotingOpen && !isVotingClosed)) && (
+              <AnimateOnScroll animation="scale-in" delay={1000}>
+                <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
+                  style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
+                    Résultats en direct le 2 mai
+                  </p>
+                  <CountdownTimer targetDate="2026-05-02T20:00:00" label={t('countdown.live')} />
+                </div>
+              </AnimateOnScroll>
+            )}
             {event && !isVotingOpen && event.liveDate && (
               <AnimateOnScroll animation="scale-in" delay={1000}>
                 <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
                   style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
                 >
+                  <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
+                    Résultats en direct le 2 mai
+                  </p>
                   <CountdownTimer targetDate={event.liveDate} label={t('countdown.live')} />
                 </div>
               </AnimateOnScroll>

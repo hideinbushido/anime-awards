@@ -637,7 +637,8 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
         </p>
         <p className="text-sm mb-8" style={{ color: '#665544' }}>
           Consultez votre boîte mail et cliquez sur le lien pour valider vos votes.<br />
-          Le lien est valide pendant <strong style={{ color: '#9a8870' }}>24 heures</strong>.
+          Le lien est valide pendant <strong style={{ color: '#9a8870' }}>24 heures</strong>.<br />
+          Les résultats seront annoncés le <strong style={{ color: '#c9a227' }}>2 mai</strong> en direct sur TikTok.
         </p>
         <a href={`/${locale}`}
           className="inline-block px-8 py-3 rounded-xl font-black text-black transition-all hover:brightness-110"

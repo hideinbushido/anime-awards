@@ -84,7 +84,7 @@ export default function VoteConfirmPage() {
               Merci <span className="text-white font-bold">{result.voterName}</span> 🎉
             </p>
             <p className="text-sm mb-8" style={{ color: '#665544' }}>
-              Tes votes ont été enregistrés. Les résultats seront annoncés en direct sur TikTok.
+              Tes votes ont été enregistrés. Les résultats seront annoncés le <strong className="text-white">2 mai</strong> en direct sur TikTok.
             </p>
 
             {/* Vote recap */}
