@@ -75,7 +75,7 @@ const TEAM: {
     role: '',
     email: '',
     tiktok: 'https://www.tiktok.com/@lev.edit.4k',
-    photo: '/image/team/Lev.png',
+    photo: '/image/team/Lev.jpg',
   },
   {
     nickname: 'Jeremiah',
