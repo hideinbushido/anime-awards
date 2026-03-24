@@ -66,7 +66,7 @@ const TEAM: {
     fullName: 'Pape',
     role: '',
     email: '',
-    tiktok: 'https://www.tiktok.com/@tampico',
+    tiktok: 'https://www.tiktok.com/@papemorjf',
     photo: '/image/team/Pape.jpeg',
   },
   {
