@@ -143,6 +143,7 @@ export async function submitVote(data: {
   eventId: string;
   voterName: string;
   voterTiktok?: string;
+  voterEmail?: string;
   answers: VoteAnswer[];
   ipHash?: string;
 }): Promise<string> {
@@ -152,6 +153,46 @@ export async function submitVote(data: {
     votedAt: serverTimestamp(),
   });
   return ref.id;
+}
+
+export async function hasVotedByEmail(voterEmail: string): Promise<boolean> {
+  const firestore = getDb();
+  const q = query(collection(firestore, 'votes'), where('voterEmail', '==', voterEmail.toLowerCase()));
+  const snap = await getDocs(q);
+  return !snap.empty;
+}
+
+export async function savePendingVote(data: {
+  token: string;
+  eventId: string;
+  voterName: string;
+  voterTiktok?: string;
+  voterEmail: string;
+  locale: string;
+  answers: VoteAnswer[];
+  ipHash?: string;
+  expiresAt: string;
+}): Promise<string> {
+  const firestore = getDb();
+  const ref = await addDoc(collection(firestore, 'pendingVotes'), {
+    ...data,
+    createdAt: serverTimestamp(),
+  });
+  return ref.id;
+}
+
+export async function getPendingVoteByToken(token: string) {
+  const firestore = getDb();
+  const q = query(collection(firestore, 'pendingVotes'), where('token', '==', token));
+  const snap = await getDocs(q);
+  if (snap.empty) return null;
+  const d = snap.docs[0];
+  return { docId: d.id, ...d.data() } as any;
+}
+
+export async function deletePendingVote(docId: string): Promise<void> {
+  const firestore = getDb();
+  await deleteDoc(doc(firestore, 'pendingVotes', docId));
 }
 
 export async function getVotes(eventId: string): Promise<Vote[]> {

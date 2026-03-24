@@ -56,9 +56,23 @@ export interface Vote {
   eventId: string;
   voterName: string;
   voterTiktok?: string;
+  voterEmail?: string;
   votedAt: string;
   answers: VoteAnswer[];
   ipHash?: string;
+}
+
+export interface PendingVote {
+  id: string;
+  token: string;
+  eventId: string;
+  voterName: string;
+  voterTiktok?: string;
+  voterEmail: string;
+  locale: string;
+  answers: VoteAnswer[];
+  ipHash?: string;
+  expiresAt: string;
 }
 
 export interface Admin {
