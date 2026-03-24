@@ -306,6 +306,7 @@ export default async function HomePage({
                     <Image src="/image/team/Braizanime.jpeg" alt="Braizanime" width={256} height={320} className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="text-center">
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-0.5" style={{ color: 'rgba(201,162,39,0.6)' }}>Marlene</p>
                     <p className="text-white font-bold">Braizanime</p>
                     <p className="text-sm" style={{ color: 'rgba(201,162,39,0.5)' }}>Animatrice</p>
                   </div>
@@ -319,6 +320,7 @@ export default async function HomePage({
                     <Image src="/image/team/Pape.jpeg" alt="Tampico" width={256} height={320} className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="text-center">
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-0.5" style={{ color: 'rgba(232,197,74,0.6)' }}>Pape</p>
                     <p className="text-white font-bold">Tampico</p>
                     <p className="text-sm" style={{ color: 'rgba(232,197,74,0.5)' }}>Animateur</p>
                   </div>
