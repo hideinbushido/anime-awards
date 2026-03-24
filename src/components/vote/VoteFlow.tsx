@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { CheckCircle, ChevronLeft, Trophy, User, AtSign, Star, X } from 'lucide-react';
+import { CheckCircle, ChevronLeft, Trophy, User, AtSign, Star, X, Volume2 } from 'lucide-react';
 import type { Category, Nominee } from '@/lib/types';
 
 type Step = 'confirm' | 'identity' | 'categories' | 'nominees' | 'success';
@@ -20,10 +20,35 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
   const [voterTiktok, setVoterTiktok] = useState('');
   const [votes, setVotes] = useState<Record<string, string>>({});
   const [activeCat, setActiveCat] = useState<Category | null>(null);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [selectedNominee, setSelectedNominee] = useState<Nominee | null>(null);
   const [confirmNominee, setConfirmNominee] = useState<Nominee | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [isTouch, setIsTouch] = useState(false);
+  const [playingId, setPlayingId] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(hover: none)').matches);
+  }, []);
+
+  const stopAudio = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setPlayingId(null);
+  }, []);
+
+  const playAudio = useCallback((nominee: Nominee) => {
+    if (!(nominee as any).audioUrl) return;
+    stopAudio();
+    const audio = new Audio((nominee as any).audioUrl);
+    audio.volume = 0.5;
+    audioRef.current = audio;
+    audio.play().catch(() => {});
+    setPlayingId(nominee.id);
+  }, [stopAudio]);
 
   // p-annee toujours en dernier
   const orderedCats = [...categories].sort((a, b) => {
@@ -36,10 +61,11 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
   const votedCount = Object.keys(votes).length;
 
   const handleVoteConfirmed = async (nominee: Nominee) => {
+    stopAudio();
     const newVotes = { ...votes, [nominee.categoryId]: nominee.id };
     setVotes(newVotes);
     setConfirmNominee(null);
-    setExpandedId(null);
+    setSelectedNominee(null);
 
     if (Object.keys(newVotes).length === total) {
       setSubmitting(true);
@@ -162,28 +188,21 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
   if (step === 'categories') {
     return (
       <div>
-        {/* Progress */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-semibold" style={{ color: '#9a8870' }}>Progression</span>
-            <span className="text-sm font-black" style={{ color: '#c9a227' }}>
-              {votedCount} / {total} catégories
-            </span>
+            <span className="text-sm font-black" style={{ color: '#c9a227' }}>{votedCount} / {total}</span>
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(201,162,39,0.1)' }}>
             <div className="h-full rounded-full transition-all duration-500"
               style={{ width: `${(votedCount / total) * 100}%`, background: 'linear-gradient(90deg, #c9a227, #9e7c1e)' }} />
           </div>
         </div>
-
         <h2 className="text-xl font-black text-white mb-6">
-          {votedCount === 0
-            ? 'Choisissez une catégorie pour commencer'
-            : votedCount < total
-            ? 'Continuez — choisissez la prochaine catégorie'
-            : 'Finalisation en cours...'}
+          {votedCount === 0 ? 'Choisissez une catégorie pour commencer'
+            : votedCount < total ? 'Continuez — choisissez la prochaine catégorie'
+            : 'Finalisation...'}
         </h2>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {orderedCats.map((cat) => {
             const nomineeId = votes[cat.id];
@@ -191,15 +210,10 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
             const voted = !!nomineeId;
             return (
               <button key={cat.id}
-                onClick={() => { if (!voted) { setActiveCat(cat); setExpandedId(null); setStep('nominees'); } }}
+                onClick={() => { if (!voted) { stopAudio(); setActiveCat(cat); setSelectedNominee(null); setStep('nominees'); } }}
                 disabled={voted}
                 className="relative rounded-2xl overflow-hidden text-left group transition-all duration-200"
-                style={{
-                  height: '100px',
-                  border: voted ? '1px solid rgba(201,162,39,0.4)' : '1px solid rgba(255,255,255,0.07)',
-                  background: voted ? 'rgba(201,162,39,0.04)' : '#111108',
-                  cursor: voted ? 'default' : 'pointer',
-                }}>
+                style={{ height: '100px', border: voted ? '1px solid rgba(201,162,39,0.4)' : '1px solid rgba(255,255,255,0.07)', background: voted ? 'rgba(201,162,39,0.04)' : '#111108', cursor: voted ? 'default' : 'pointer' }}>
                 {!voted && (
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none rounded-2xl"
                     style={{ border: '1px solid rgba(201,162,39,0.3)', background: 'rgba(201,162,39,0.02)' }} />
@@ -210,18 +224,12 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
                     : <div className="w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center"
                         style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.15)' }}>
                         <Star className="w-3.5 h-3.5" style={{ color: '#c9a227' }} />
-                      </div>
-                  }
+                      </div>}
                   <div className="min-w-0">
-                    <p className="font-black truncate text-sm" style={{ color: voted ? '#c9a227' : 'white' }}>
-                      {cat.titleFr}
-                    </p>
+                    <p className="font-black truncate text-sm" style={{ color: voted ? '#c9a227' : 'white' }}>{cat.titleFr}</p>
                     {voted && nominee
                       ? <p className="text-white text-xs truncate mt-0.5 font-semibold">{nominee.name}</p>
-                      : <p className="text-xs mt-0.5 group-hover:text-[#c9a227] transition-colors" style={{ color: '#4a3a2a' }}>
-                          Voter →
-                        </p>
-                    }
+                      : <p className="text-xs mt-0.5 group-hover:text-[#c9a227] transition-colors" style={{ color: '#4a3a2a' }}>Voter →</p>}
                   </div>
                 </div>
               </button>
@@ -238,135 +246,228 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
 
+    const catTitle = (activeCat.titleFr + ' ' + (activeCat.titleEn ?? '')).toLowerCase();
+    const isAudioCat = catTitle.includes('opening') || catTitle.includes('ending') || catTitle.includes('chanson');
+
     return (
       <div>
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <button onClick={() => { setStep('categories'); setExpandedId(null); setConfirmNominee(null); }}
+        <div className="flex items-center gap-3 mb-6">
+          <button onClick={() => { stopAudio(); setStep('categories'); setSelectedNominee(null); setConfirmNominee(null); }}
             className="flex items-center gap-1.5 text-sm px-3 py-2 rounded-xl transition-all hover:text-white"
             style={{ color: '#9a8870', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
             <ChevronLeft className="w-4 h-4" /> Retour
           </button>
           <div>
             <h2 className="text-xl font-black text-white leading-tight">{activeCat.titleFr}</h2>
-            <p className="text-xs" style={{ color: '#665544' }}>Cliquez sur un nominé pour l&apos;agrandir, puis votez</p>
+            <p className="text-xs" style={{ color: '#665544' }}>
+              {isAudioCat
+                ? isTouch ? 'Touchez une carte pour écouter, puis votez' : 'Survolez pour écouter — cliquez pour voter'
+                : 'Cliquez sur un nominé pour voter'}
+            </p>
           </div>
         </div>
 
-        {/* Grid nominés */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* Vitrine horizontale */}
+        <div
+          className="flex gap-4 pb-4"
+          style={{
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+          }}>
           {catNominees.map((nominee) => {
-            const isExpanded = expandedId === nominee.id;
-            return (
-              <div key={nominee.id}
-                className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${isExpanded ? 'col-span-2 sm:col-span-3 lg:col-span-4' : 'cursor-pointer'}`}
-                style={{
-                  border: isExpanded ? '2px solid rgba(201,162,39,0.5)' : '1px solid rgba(255,255,255,0.07)',
-                  background: '#111108',
-                }}
-                onClick={() => { if (!isExpanded) setExpandedId(nominee.id); }}>
+            const isPlaying = playingId === nominee.id;
+            const hasAudio = !!(nominee as any).audioUrl;
 
-                {isExpanded ? (
-                  // Carte agrandie
-                  <div className="flex flex-col sm:flex-row">
-                    {nominee.imageUrl && (
-                      <div className="relative w-full sm:w-56 flex-shrink-0" style={{ minHeight: '220px' }}>
-                        <Image src={nominee.imageUrl} alt={nominee.name} fill className="object-cover" />
-                        <div className="absolute inset-0 sm:hidden"
-                          style={{ background: 'linear-gradient(to top, rgba(8,6,0,1) 0%, transparent 60%)' }} />
-                      </div>
-                    )}
-                    <div className="flex-1 p-6 flex flex-col justify-between">
-                      <div>
-                        {nominee.anime && (
-                          <p className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: '#c9a227' }}>
-                            {nominee.anime}
-                          </p>
-                        )}
-                        <h3 className="text-2xl font-black text-white mb-2">{nominee.name}</h3>
-                        {nominee.descriptionFr && (
-                          <p className="text-sm" style={{ color: '#9a8870' }}>{nominee.descriptionFr}</p>
-                        )}
-                      </div>
-                      <div className="flex gap-3 mt-6">
-                        <button onClick={(e) => { e.stopPropagation(); setExpandedId(null); }}
-                          className="px-5 py-3 rounded-xl text-sm font-semibold transition-all"
-                          style={{ background: 'rgba(255,255,255,0.04)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
-                          Annuler
-                        </button>
-                        <button onClick={(e) => { e.stopPropagation(); setConfirmNominee(nominee); }}
-                          className="flex-1 py-3 rounded-xl font-black text-base text-black transition-all hover:brightness-110"
-                          style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
-                          VOTER ★
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+            return (
+              <div
+                key={nominee.id}
+                className="relative flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer group"
+                style={{
+                  width: '160px',
+                  height: '240px',
+                  scrollSnapAlign: 'start',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  background: '#111108',
+                  transition: 'transform 0.2s, border-color 0.2s',
+                }}
+                onClick={() => {
+                  if (isAudioCat && isTouch) {
+                    if (isPlaying) {
+                      stopAudio();
+                    } else {
+                      playAudio(nominee);
+                    }
+                  } else {
+                    stopAudio();
+                    setSelectedNominee(nominee);
+                  }
+                }}
+                onMouseEnter={() => {
+                  if (isAudioCat && !isTouch && hasAudio) playAudio(nominee);
+                }}
+                onMouseLeave={() => {
+                  if (isAudioCat && !isTouch) stopAudio();
+                }}
+              >
+                {/* Image */}
+                {nominee.imageUrl ? (
+                  <Image src={nominee.imageUrl} alt={nominee.name} fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105" />
                 ) : (
-                  // Carte normale
-                  <div className="group">
-                    <div className="relative w-full overflow-hidden" style={{ height: '150px' }}>
-                      {nominee.imageUrl ? (
-                        <>
-                          <Image src={nominee.imageUrl} alt={nominee.name} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
-                          <div className="absolute inset-0"
-                            style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.9) 0%, rgba(8,6,0,0.2) 60%, transparent 100%)' }} />
-                        </>
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center"
-                          style={{ background: `#${ (nominee as any).color || '111108'}` }}>
-                          <Trophy className="w-10 h-10 opacity-20" style={{ color: `#${ (nominee as any).textColor || 'c9a227'}` }} />
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-3">
-                      <p className="text-white font-black text-sm truncate">{nominee.name}</p>
-                      {nominee.anime && <p className="text-xs truncate mt-0.5" style={{ color: '#665544' }}>{nominee.anime}</p>}
+                  <div className="absolute inset-0 flex items-center justify-center"
+                    style={{ background: `#${(nominee as any).color || '111108'}` }}>
+                    <Trophy className="w-10 h-10 opacity-20" style={{ color: `#${(nominee as any).textColor || 'c9a227'}` }} />
+                  </div>
+                )}
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(8,6,0,0.97) 0%, rgba(8,6,0,0.4) 50%, rgba(8,6,0,0.1) 100%)' }} />
+
+                {/* Audio indicator */}
+                {isAudioCat && hasAudio && (
+                  <div className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center"
+                    style={{
+                      background: isPlaying ? '#c9a227' : 'rgba(201,162,39,0.25)',
+                      border: '1px solid rgba(201,162,39,0.4)',
+                      transition: 'background 0.2s',
+                    }}>
+                    <Volume2 className="w-3.5 h-3.5" style={{ color: isPlaying ? '#000' : '#c9a227' }} />
+                  </div>
+                )}
+
+                {/* Hover vote button (non-audio / PC) */}
+                {(!isAudioCat || !isTouch) && !isAudioCat && (
+                  <div className="absolute inset-x-0 bottom-14 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className="px-3 py-1 rounded-full text-xs font-black"
+                      style={{ background: 'rgba(201,162,39,0.9)', color: '#000' }}>
+                      VOTER ★
                     </div>
                   </div>
                 )}
+
+                {/* Name */}
+                <div className="absolute bottom-0 inset-x-0 p-3">
+                  <p className="text-white font-black text-sm leading-tight truncate">{nominee.name}</p>
+                  {nominee.anime && (
+                    <p className="text-xs truncate mt-0.5" style={{ color: '#9a8870' }}>{nominee.anime}</p>
+                  )}
+                </div>
               </div>
             );
           })}
         </div>
 
-        {/* Modal confirmation vote */}
-        {confirmNominee && (
+        {/* Pour les catégories audio sur mobile: bouton "Voter" séparé quand un son joue */}
+        {isAudioCat && isTouch && playingId && (
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={() => {
+                const nom = catNominees.find(n => n.id === playingId);
+                if (nom) { stopAudio(); setSelectedNominee(nom); }
+              }}
+              className="px-6 py-3 rounded-xl font-black text-sm text-black"
+              style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
+              Voter pour ce nominé ★
+            </button>
+          </div>
+        )}
+
+        {/* Modal : détail du nominé sélectionné */}
+        {selectedNominee && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ background: 'rgba(8,6,0,0.92)', backdropFilter: 'blur(10px)' }}>
-            <div className="relative max-w-sm w-full rounded-2xl p-7 text-center"
-              style={{ background: '#111108', border: '1px solid rgba(201,162,39,0.3)' }}>
-              <button onClick={() => setConfirmNominee(null)}
-                className="absolute top-4 right-4 p-1.5 rounded-lg transition-all hover:text-white"
-                style={{ color: '#665544', background: 'rgba(255,255,255,0.04)' }}>
+            style={{ background: 'rgba(8,6,0,0.88)', backdropFilter: 'blur(12px)' }}>
+            <div className="relative w-full rounded-2xl overflow-hidden"
+              style={{ maxWidth: '420px', background: '#111108', border: '1px solid rgba(201,162,39,0.3)' }}>
+              <button onClick={() => setSelectedNominee(null)}
+                className="absolute top-3 right-3 z-10 w-8 h-8 rounded-xl flex items-center justify-center transition-all hover:text-white"
+                style={{ color: '#665544', background: 'rgba(8,6,0,0.7)' }}>
                 <X className="w-4 h-4" />
               </button>
-              {confirmNominee.imageUrl && (
-                <div className="relative w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-4">
-                  <Image src={confirmNominee.imageUrl} alt={confirmNominee.name} fill className="object-cover" />
+
+              {/* Image */}
+              {selectedNominee.imageUrl && (
+                <div className="relative w-full" style={{ height: '220px' }}>
+                  <Image src={selectedNominee.imageUrl} alt={selectedNominee.name} fill className="object-cover" />
+                  <div className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, rgba(17,17,8,1) 0%, transparent 60%)' }} />
                 </div>
               )}
-              <p className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: '#c9a227' }}>
-                {activeCat?.titleFr}
-              </p>
-              <h3 className="text-xl font-black text-white mb-1">{confirmNominee.name}</h3>
-              {confirmNominee.anime && (
-                <p className="text-sm mb-4" style={{ color: '#9a8870' }}>{confirmNominee.anime}</p>
-              )}
-              <p className="text-sm mb-6" style={{ color: '#665544' }}>
-                Êtes-vous sûr de votre choix ?<br />Ce vote sera définitif.
-              </p>
-              <div className="flex gap-3">
-                <button onClick={() => setConfirmNominee(null)}
-                  className="flex-1 py-3 rounded-xl font-semibold text-sm transition-all"
-                  style={{ background: 'rgba(255,255,255,0.04)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  Changer
-                </button>
-                <button onClick={() => handleVoteConfirmed(confirmNominee)} disabled={submitting}
-                  className="flex-1 py-3 rounded-xl font-black text-sm text-black transition-all hover:brightness-110"
-                  style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', opacity: submitting ? 0.6 : 1 }}>
-                  {submitting ? '...' : 'Confirmer ✓'}
-                </button>
+
+              {/* Info */}
+              <div className="px-6 pb-6" style={{ marginTop: selectedNominee.imageUrl ? '-32px' : '0', position: 'relative' }}>
+                {selectedNominee.anime && (
+                  <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#c9a227' }}>
+                    {selectedNominee.anime}
+                  </p>
+                )}
+                <h3 className="text-xl font-black text-white mb-4">{selectedNominee.name}</h3>
+                <div className="flex gap-3">
+                  <button onClick={() => setSelectedNominee(null)}
+                    className="px-4 py-3 rounded-xl text-sm font-semibold transition-all"
+                    style={{ background: 'rgba(255,255,255,0.04)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
+                    Annuler
+                  </button>
+                  <button onClick={() => { setSelectedNominee(null); setConfirmNominee(selectedNominee); }}
+                    className="flex-1 py-3 rounded-xl font-black text-base text-black transition-all hover:brightness-110"
+                    style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
+                    VOTER ★
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal : confirmation du vote */}
+        {confirmNominee && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: 'rgba(8,6,0,0.92)', backdropFilter: 'blur(12px)' }}>
+            <div className="relative w-full rounded-2xl overflow-hidden"
+              style={{ maxWidth: '480px', background: '#111108', border: '2px solid rgba(201,162,39,0.4)' }}>
+              <button onClick={() => setConfirmNominee(null)}
+                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-xl flex items-center justify-center transition-all hover:text-white"
+                style={{ color: '#665544', background: 'rgba(8,6,0,0.7)' }}>
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="flex">
+                {confirmNominee.imageUrl && (
+                  <div className="relative flex-shrink-0" style={{ width: '160px', minHeight: '200px' }}>
+                    <Image src={confirmNominee.imageUrl} alt={confirmNominee.name} fill className="object-cover" />
+                    <div className="absolute inset-0"
+                      style={{ background: 'linear-gradient(to right, transparent 70%, rgba(17,17,8,1) 100%)' }} />
+                  </div>
+                )}
+                <div className="flex-1 p-6 flex flex-col justify-between" style={{ minHeight: '200px' }}>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#c9a227' }}>
+                      {activeCat?.titleFr}
+                    </p>
+                    <h3 className="text-xl font-black text-white mb-1">{confirmNominee.name}</h3>
+                    {confirmNominee.anime && (
+                      <p className="text-sm mb-3" style={{ color: '#9a8870' }}>{confirmNominee.anime}</p>
+                    )}
+                    <p className="text-xs" style={{ color: '#665544' }}>
+                      Ce vote est définitif et ne pourra pas être modifié.
+                    </p>
+                  </div>
+                  <div className="flex gap-3 mt-5">
+                    <button onClick={() => setConfirmNominee(null)}
+                      className="px-4 py-3 rounded-xl text-sm font-semibold transition-all"
+                      style={{ background: 'rgba(255,255,255,0.04)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      Changer
+                    </button>
+                    <button onClick={() => handleVoteConfirmed(confirmNominee)} disabled={submitting}
+                      className="flex-1 py-3 rounded-xl font-black text-sm text-black transition-all hover:brightness-110"
+                      style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', opacity: submitting ? 0.6 : 1 }}>
+                      {submitting ? '...' : 'Confirmer ✓'}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -398,8 +499,6 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
             </p>
           </>
         )}
-
-        {/* Récapitulatif */}
         <div className="mb-8 text-left rounded-2xl p-5" style={{ background: '#111108', border: '1px solid rgba(201,162,39,0.15)' }}>
           <p className="text-xs font-bold mb-3 uppercase tracking-wider" style={{ color: '#c9a227' }}>
             Récapitulatif de vos votes
@@ -417,7 +516,6 @@ export default function VoteFlow({ categories, nomineesByCategory, eventId, loca
             })}
           </div>
         </div>
-
         <a href={`/${locale}`}
           className="inline-block px-8 py-3 rounded-xl font-black text-black transition-all hover:brightness-110"
           style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
