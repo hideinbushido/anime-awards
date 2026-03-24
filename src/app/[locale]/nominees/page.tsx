@@ -283,8 +283,8 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('cs6','p-chanson','"Hunting Soul" — HAYASii','Dandadan S2','','0a0a20','a060ff','/image/CHANSON/Hunting.png','/music/Chanson/Hunting.MP3'),
     n('cs7','p-chanson','"Everything I Lost" — Shinji OST','Bleach TYBW','','0a0a14','6080ff','/image/CHANSON/Shinji.png','/music/Chanson/Shinji.MP3'),
     n('cs8','p-chanson',"Thème d'Akaza — Yuki Kajiura",'Demon Slayer: The Movie — Infinity Castle','','200010','ff4060','/image/CHANSON/Akaza.png','/music/Chanson/akazatheme.MP3'),
-    n('cs9','p-chanson','"Jana Doe" — Kenshi Yonezu & Hikaru Utada','Chainsaw Man: The Movie — Reze Arc','','100010','c000ff','/image/FEMININ/Reze.png',''),
-    n('cs10','p-chanson','"Iris Out" — Kenshi Yonezu','Chainsaw Man: The Movie — Reze Arc','','100010','c000ff','/image/FEMININ/Reze.png',''),
+    n('cs9','p-chanson','"Jana Doe" — Kenshi Yonezu & Hikaru Utada','Chainsaw Man: The Movie — Reze Arc','','100010','c000ff','/image/CHANSON/JANA.png','/music/Chanson/JANA.MP3'),
+    n('cs10','p-chanson','"Iris Out" — Kenshi Yonezu','Chainsaw Man: The Movie — Reze Arc','','100010','c000ff','/image/CHANSON/IRIS.png','/music/Chanson/IRIS.MP3'),
   ],
   'p-protagoniste': [
     n('pr1','p-protagoniste','Denji','Chainsaw Man: The Movie — Reze Arc','','100010','c000ff','/image/PROTA/Denji.png'),
