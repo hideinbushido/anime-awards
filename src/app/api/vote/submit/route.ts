@@ -59,8 +59,8 @@ export async function POST(req: NextRequest) {
       } catch { /* non-blocking */ }
     }
 
-    // Send recap email (non-blocking)
-    sendRecapEmail(email, voterName.trim(), answers);
+    // Send recap email (awaited so Vercel doesn't kill it before it sends)
+    await sendRecapEmail(email, voterName.trim(), answers);
 
     return NextResponse.json({ success: true });
   } catch (error) {

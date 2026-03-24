@@ -109,7 +109,7 @@ export async function sendRecapEmail(
   to: string,
   voterName: string,
   answers: VoteAnswer[]
-): Promise<void> {
+): Promise<boolean> {
   const rows = recapRows(answers);
 
   const html = `<!DOCTYPE html>
@@ -171,6 +171,5 @@ export async function sendRecapEmail(
 </body>
 </html>`;
 
-  // Non-blocking
-  sendMail(to, `✅ Récapitulatif de tes votes — Anime Awards 2026`, html).catch(() => {});
+  return sendMail(to, `✅ Récapitulatif de tes votes — Anime Awards 2026`, html);
 }
