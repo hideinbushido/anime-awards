@@ -117,7 +117,6 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('act19','p-action','Kaiju No. 8 S2','','','0a1414','60d0d0','/image/ACTION/KAIJU.png'),
   ],
   'p-animation': [
-    n('an1','p-animation','Demon Slayer: The Movie — Infinity Castle','','','1a0800','ff8060','/image/ANIMATION/Demon.png'),
     n('an3','p-animation','Dandadan S2','','','0a0a20','a060ff','/image/ANIMATION/DANDADAN.png'),
     n('an4','p-animation','Delicious in Dungeon','','','1a0800','ff8030','/image/ANIMATION/Dungeon.png'),
     n('an5','p-animation','Solo Leveling S2','','','1a0800','ffd250','/image/ANIMATION/SOLO.png'),

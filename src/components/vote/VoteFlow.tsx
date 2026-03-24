@@ -52,11 +52,13 @@ export default function VoteFlow({
   const stopAudio = useCallback(() => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
     setPlayingId(null);
+    window.dispatchEvent(new Event('card-audio-stop'));
   }, []);
 
   const playAudio = useCallback((nominee: Nominee) => {
     if (!(nominee as any).audioUrl) return;
     stopAudio();
+    window.dispatchEvent(new Event('card-audio-start'));
     const audio = new Audio((nominee as any).audioUrl);
     audio.volume = 0.5;
     audioRef.current = audio;
