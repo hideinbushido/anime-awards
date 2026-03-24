@@ -70,6 +70,14 @@ const TEAM: {
     photo: '/image/team/Pape.jpeg',
   },
   {
+    nickname: 'Lev',
+    fullName: '',
+    role: '',
+    email: '',
+    tiktok: 'https://www.tiktok.com/@lev.edit.4k',
+    photo: '/image/team/Lev.png',
+  },
+  {
     nickname: 'Jeremiah',
     fullName: '',
     role: '',
