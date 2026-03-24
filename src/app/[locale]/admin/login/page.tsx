@@ -22,7 +22,7 @@ export default function AdminLoginPage() {
     try {
       if (!auth) throw new Error('Firebase not configured');
       await signInWithEmailAndPassword(auth, email, password);
-      router.push(`/${locale}/admin/dashboard`);
+      router.push(`/${locale}`);
     } catch {
       setError('Email ou mot de passe incorrect.');
       setLoading(false);

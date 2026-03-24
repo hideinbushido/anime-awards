@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 import AudioPlayer from '@/components/layout/AudioPlayer';
+import AdminFloatingPanel from '@/components/admin/AdminFloatingPanel';
 
 const locales = ['fr', 'en'];
 
@@ -41,6 +42,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
           <AudioPlayer />
+          <AdminFloatingPanel />
           <Toaster
             position="top-center"
             toastOptions={{

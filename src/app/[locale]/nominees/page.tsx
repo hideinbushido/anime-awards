@@ -140,6 +140,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('mas18','p-masculin','Badeni','Gachiakuta','','1a0800','ff8030','/image/MASCULIN/Badeni.png'),
     n('mas19','p-masculin','Giyu','Demon Slayer: The Movie — Infinity Castle','','0a0a1a','6080ff','/image/MASCULIN/18.png'),
     n('mas20','p-masculin','Tanjiro','Demon Slayer: The Movie — Infinity Castle','','0a0a14','40a0ff','/image/MASCULIN/19.png'),
+    n('mas21','p-masculin','Izuku Midoriya','My Hero Academia — Final Season','','1a0500','40c0ff','/image/MASCULIN/Izuku.png'),
   ],
   'p-feminin': [
     n('fem2','p-feminin','Suika','Dr.STONE SCIENCE FUTURE','','0a1008','80e880','/image/FEMININ/Suika.png'),
@@ -291,6 +292,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('pr12','p-protagoniste','Dante','Devil May Cry','','100010','c000ff','/image/PROTA/Dante.png'),
     n('pr14','p-protagoniste','Subaru','Re:Zero S3','','0a0814','8040c0','/image/PROTA/Subaru.png'),
     n('pr16','p-protagoniste','Natsuko Zenju','Zenshu','','0a0a1a','a0c0ff','/image/PROTA/Zenju.png'),
+    n('pr17','p-protagoniste','Izuku Midoriya','My Hero Academia — Final Season','','1a0500','40c0ff','/image/PROTA/Izuku.png'),
   ],
   'p-secondaire': [
     n('sc1','p-secondaire','Reinhardt','Re:Zero S3','','0a0814','8040c0','/image/SECONDAIRE/Rei.png'),
@@ -374,17 +376,20 @@ export default async function NomineesPage({
 
   let categories: Category[] = [];
   let nomineesByCategory: Record<string, Nominee[]> = {};
+  let votingOpen = false;
 
   try {
     const event = await getActiveEvent();
     if (event) {
+      votingOpen = event.status === 'voting_open';
       categories = await getCategories(event.id);
       for (const cat of categories) {
         nomineesByCategory[cat.id] = await getNominees(cat.id);
       }
     }
   } catch {
-    // Firebase not configured
+    // Firebase not configured — placeholder data = always show
+    votingOpen = true;
   }
 
   if (categories.length === 0) {
@@ -502,6 +507,7 @@ export default async function NomineesPage({
             voteNowLabel={t('voteNow')}
             noNomineesLabel={t('noNominees')}
             fondUrl={activeCat ? CATEGORY_FONDS[activeCat.id] : undefined}
+            votingOpen={votingOpen}
           />
         </div>
       </main>
