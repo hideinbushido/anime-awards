@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createHash, randomUUID } from 'crypto';
-import { createVoteAccess, hasVotedByEmail, hasVoted } from '@/lib/firestore';
+import { randomUUID } from 'crypto';
+import { createVoteAccess, hasVotedByEmail } from '@/lib/firestore';
 import { sendAccessEmail } from '@/lib/email';
 import { db } from '@/lib/firebase';
-
-function getIpHash(req: NextRequest): string {
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-    req.headers.get('x-real-ip') ||
-    'unknown';
-  return createHash('sha256').update(ip).digest('hex');
-}
 
 function getBaseUrl(req: NextRequest): string {
   const host = req.headers.get('host') || 'localhost:3000';
@@ -41,16 +33,6 @@ export async function POST(req: NextRequest) {
     if (alreadyVoted) {
       return NextResponse.json(
         { error: 'Cette adresse email a déjà été utilisée pour voter.' },
-        { status: 429 }
-      );
-    }
-
-    // Check IP
-    const ipHash = getIpHash(req);
-    const ipVoted = await hasVoted('demo', ipHash);
-    if (ipVoted) {
-      return NextResponse.json(
-        { error: 'Un vote a déjà été soumis depuis cette connexion.' },
         { status: 429 }
       );
     }
