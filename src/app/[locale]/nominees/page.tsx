@@ -10,8 +10,7 @@ import type { Category, Nominee } from '@/lib/types';
 // ─── Placeholder 27 catégories ───────────────────────────────────────────────
 const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-drama',       eventId: 'demo', title: 'Meilleur Drama',                  titleFr: 'Meilleur Drama',                  titleEn: 'Best Drama',                    description: '', descriptionFr: 'Le drama le plus marquant',                      descriptionEn: 'The most impactful drama',                    order: 1,  active: true },
-  { id: 'p-romance',     eventId: 'demo', title: 'Meilleure Romance',               titleFr: 'Meilleure Romance',               titleEn: 'Best Romance',                  description: '', descriptionFr: 'La plus belle histoire d\'amour',               descriptionEn: 'The most beautiful love story',               order: 2,  active: true },
-  { id: 'p-decors',      eventId: 'demo', title: 'Meilleurs Décors',                titleFr: 'Meilleurs Décors',                titleEn: 'Best Settings',                 description: '', descriptionFr: 'Les plus beaux univers visuels',               descriptionEn: 'The most stunning visual worlds',             order: 3,  active: true },
+  { id: 'p-romance',     eventId: 'demo', title: 'Meilleure Romance',               titleFr: 'Meilleure Romance',               titleEn: 'Best Romance',                  description: '', descriptionFr: 'La plus belle histoire d\'amour',               descriptionEn: 'The most beautiful love story',               order: 2,  active: true },  
   { id: 'p-seinen',      eventId: 'demo', title: 'Meilleur Seinen',                 titleFr: 'Meilleur Seinen',                 titleEn: 'Best Seinen',                   description: '', descriptionFr: 'Le meilleur seinen de l\'année',               descriptionEn: 'The best seinen of the year',                 order: 4,  active: true },
   { id: 'p-action',      eventId: 'demo', title: 'Meilleur Animé d\'Action',        titleFr: 'Meilleur Animé d\'Action',        titleEn: 'Best Action Anime',             description: '', descriptionFr: 'L\'action la plus explosive',                  descriptionEn: 'The most explosive action',                   order: 5,  active: true },
   { id: 'p-animation',   eventId: 'demo', title: 'Meilleure Animation',             titleFr: 'Meilleure Animation',             titleEn: 'Best Animation',                description: '', descriptionFr: 'La qualité visuelle la plus époustouflante',   descriptionEn: 'The most breathtaking visual quality',        order: 6,  active: true },
@@ -375,10 +374,12 @@ export default async function NomineesPage({
 
   let categories: Category[] = [];
   let nomineesByCategory: Record<string, Nominee[]> = {};
+  let eventStatus = 'preparation';
 
   try {
     const event = await getActiveEvent();
     if (event) {
+      eventStatus = event.status ?? 'preparation';
       categories = await getCategories(event.id);
       for (const cat of categories) {
         nomineesByCategory[cat.id] = await getNominees(cat.id);
@@ -503,6 +504,7 @@ export default async function NomineesPage({
             voteNowLabel={t('voteNow')}
             noNomineesLabel={t('noNominees')}
             fondUrl={activeCat ? CATEGORY_FONDS[activeCat.id] : undefined}
+            eventStatus={eventStatus}
           />
         </div>
       </main>
