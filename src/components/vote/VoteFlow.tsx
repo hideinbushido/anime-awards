@@ -24,8 +24,16 @@ export default function VoteFlow({
   categories, nomineesByCategory, eventId, locale,
   voterName, voterEmail, accessToken,
 }: Props) {
+  const storageKey = accessToken ? `voteProgress_${accessToken}` : null;
+
   const [step, setStep] = useState<Step>('categories');
-  const [votes, setVotes] = useState<Record<string, string>>({});
+  const [votes, setVotes] = useState<Record<string, string>>(() => {
+    if (!accessToken) return {};
+    try {
+      const saved = localStorage.getItem(`voteProgress_${accessToken}`);
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
   const [activeCat, setActiveCat] = useState<Category | null>(null);
   const [selectedNominee, setSelectedNominee] = useState<Nominee | null>(null);
   const [confirmNominee, setConfirmNominee] = useState<Nominee | null>(null);
@@ -72,6 +80,11 @@ export default function VoteFlow({
     setConfirmNominee(null);
     setSelectedNominee(null);
 
+    // Persist progress so user can resume if they close the tab
+    if (storageKey) {
+      try { localStorage.setItem(storageKey, JSON.stringify(newVotes)); } catch {}
+    }
+
     if (Object.keys(newVotes).length === total) {
       // All done — submit
       setSubmitting(true);
@@ -92,6 +105,9 @@ export default function VoteFlow({
         const data = await res.json();
         if (!res.ok) {
           setSubmitError(data.error || 'Erreur lors de la soumission.');
+        } else {
+          // Clear progress on successful submission
+          if (storageKey) { try { localStorage.removeItem(storageKey); } catch {} }
         }
       } catch {
         setSubmitError('Erreur réseau.');
@@ -124,7 +140,7 @@ export default function VoteFlow({
           {votedCount === 0
             ? 'Choisissez une catégorie pour commencer'
             : votedCount < total
-              ? 'Continuez — choisissez la prochaine catégorie'
+              ? `Reprise — ${votedCount} catégorie${votedCount > 1 ? 's' : ''} déjà votée${votedCount > 1 ? 's' : ''}`
               : 'Finalisation…'}
         </h2>
 
