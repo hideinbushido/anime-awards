@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createHash, randomUUID } from 'crypto';
 import { savePendingVote, hasVoted, hasVotedByEmail } from '@/lib/firestore';
 import { db } from '@/lib/firebase';
+import { PLACEHOLDER_CATEGORIES, PLACEHOLDER_NOMINEES } from '@/app/[locale]/nominees/page';
+import type { VoteAnswer } from '@/lib/types';
 
 function getIpHash(req: NextRequest): string {
   const ip =
@@ -17,64 +19,41 @@ function getBaseUrl(req: NextRequest): string {
   return `${proto}://${host}`;
 }
 
-async function sendConfirmationEmail(
-  to: string,
-  voterName: string,
-  confirmUrl: string
-): Promise<boolean> {
+// Resolve category title and nominee name from IDs
+function resolveVotes(answers: VoteAnswer[]) {
+  return PLACEHOLDER_CATEGORIES
+    .filter(cat => answers.some(a => a.categoryId === cat.id))
+    .map(cat => {
+      const answer = answers.find(a => a.categoryId === cat.id)!;
+      const nominees = PLACEHOLDER_NOMINEES[cat.id] ?? [];
+      const nominee = nominees.find(n => n.id === answer.nomineeId);
+      return {
+        category: cat.titleFr,
+        nominee: nominee?.name ?? answer.nomineeId,
+      };
+    });
+}
+
+function buildRecapRows(answers: VoteAnswer[]): string {
+  const resolved = resolveVotes(answers);
+  return resolved.map((row, i) => `
+    <tr style="background:${i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent'};">
+      <td style="padding:10px 16px;color:#9a8870;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04);">${row.category}</td>
+      <td style="padding:10px 16px;color:#f0e8d0;font-size:13px;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;">${row.nominee}</td>
+    </tr>`).join('');
+}
+
+async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
-
-  const html = `<!DOCTYPE html>
-<html lang="fr">
-<body style="margin:0;padding:0;background:#080600;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:480px;margin:0 auto;padding:40px 24px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;background:linear-gradient(135deg,#c9a227,#9e7c1e);border-radius:16px;margin-bottom:16px;">
-        <span style="font-size:28px;">🏆</span>
-      </div>
-      <h1 style="margin:0;color:#c9a227;font-size:22px;font-weight:900;letter-spacing:-0.5px;">Anime Awards 2026</h1>
-    </div>
-
-    <div style="background:#111108;border:1px solid rgba(201,162,39,0.25);border-radius:20px;padding:32px;">
-      <h2 style="margin:0 0 12px;color:#f0e8d0;font-size:20px;font-weight:900;">
-        Confirme ton vote, ${voterName}&nbsp;!
-      </h2>
-      <p style="margin:0 0 24px;color:#9a8870;font-size:15px;line-height:1.6;">
-        Tu as presque terminé ! Clique sur le bouton ci-dessous pour valider définitivement tes votes pour les Anime Awards 2026.
-      </p>
-
-      <div style="text-align:center;margin:24px 0;">
-        <a href="${confirmUrl}"
-          style="display:inline-block;background:linear-gradient(135deg,#c9a227,#9e7c1e);color:#000;text-decoration:none;font-weight:900;font-size:16px;padding:16px 40px;border-radius:14px;letter-spacing:0.3px;">
-          Confirmer mes votes ✓
-        </a>
-      </div>
-
-      <p style="margin:24px 0 0;color:#4a3a2a;font-size:12px;text-align:center;line-height:1.5;">
-        Ce lien est valide pendant <strong style="color:#665544;">24 heures</strong>.<br>
-        Si tu n'as pas participé au vote, ignore cet email.
-      </p>
-    </div>
-
-    <p style="text-align:center;color:#3a2e1e;font-size:11px;margin-top:24px;">
-      Anime Awards 2026 — La communauté anime
-    </p>
-  </div>
-</body>
-</html>`;
-
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: 'Anime Awards <onboarding@resend.dev>',
         to: [to],
-        subject: `${voterName}, confirme ton vote — Anime Awards 2026`,
+        subject,
         html,
       }),
     });
@@ -82,6 +61,83 @@ async function sendConfirmationEmail(
   } catch {
     return false;
   }
+}
+
+export async function sendConfirmationEmail(
+  to: string,
+  voterName: string,
+  confirmUrl: string,
+  answers: VoteAnswer[]
+): Promise<boolean> {
+  const recapRows = buildRecapRows(answers);
+
+  const html = `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080600;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:520px;margin:0 auto;padding:40px 20px;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;background:linear-gradient(135deg,#c9a227,#9e7c1e);border-radius:16px;margin-bottom:14px;">
+        <span style="font-size:28px;">🏆</span>
+      </div>
+      <h1 style="margin:0;color:#c9a227;font-size:22px;font-weight:900;letter-spacing:-0.3px;">Anime Awards 2026</h1>
+      <p style="margin:4px 0 0;color:#665544;font-size:13px;">La communauté anime</p>
+    </div>
+
+    <!-- Main card -->
+    <div style="background:#111108;border:1px solid rgba(201,162,39,0.25);border-radius:20px;overflow:hidden;">
+
+      <!-- Card header -->
+      <div style="padding:28px 28px 0;">
+        <h2 style="margin:0 0 10px;color:#f0e8d0;font-size:20px;font-weight:900;line-height:1.2;">
+          Confirme tes votes, <span style="color:#c9a227;">${voterName}</span>&nbsp;!
+        </h2>
+        <p style="margin:0;color:#9a8870;font-size:14px;line-height:1.6;">
+          Voici le récapitulatif de tes votes. Clique sur le bouton ci-dessous pour les valider définitivement.
+        </p>
+      </div>
+
+      <!-- Recap table -->
+      <div style="margin:24px 0 0;">
+        <div style="padding:0 28px 10px;">
+          <p style="margin:0;color:#c9a227;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">
+            Récapitulatif de tes votes
+          </p>
+        </div>
+        <table style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr style="background:rgba(201,162,39,0.06);">
+              <th style="padding:10px 16px;text-align:left;color:#665544;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;">Catégorie</th>
+              <th style="padding:10px 16px;text-align:right;color:#665544;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;">Ton vote</th>
+            </tr>
+          </thead>
+          <tbody>${recapRows}</tbody>
+        </table>
+      </div>
+
+      <!-- CTA -->
+      <div style="padding:28px;text-align:center;">
+        <a href="${confirmUrl}"
+          style="display:inline-block;background:linear-gradient(135deg,#c9a227,#9e7c1e);color:#000;text-decoration:none;font-weight:900;font-size:16px;padding:16px 48px;border-radius:14px;letter-spacing:0.3px;">
+          ✓ Confirmer mes votes
+        </a>
+        <p style="margin:20px 0 0;color:#4a3a2a;font-size:12px;line-height:1.6;">
+          Ce lien est valide pendant <strong style="color:#665544;">24 heures</strong>.<br>
+          Si tu n'as pas participé au vote, ignore cet email.
+        </p>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:#2a1e0a;font-size:11px;margin-top:20px;">
+      Anime Awards 2026 — Les récompenses de la communauté anime
+    </p>
+  </div>
+</body>
+</html>`;
+
+  return sendEmail(to, `${voterName}, confirme tes votes — Anime Awards 2026`, html);
 }
 
 export async function POST(req: NextRequest) {
@@ -98,12 +154,11 @@ export async function POST(req: NextRequest) {
 
     const email = voterEmail.trim().toLowerCase();
 
-    // No Firebase → skip validation (dev/placeholder mode)
+    // No Firebase → skip (dev/placeholder mode)
     if (!db) {
       return NextResponse.json({ success: true, mode: 'dev' });
     }
 
-    // Check email already voted
     const emailVoted = await hasVotedByEmail(email);
     if (emailVoted) {
       return NextResponse.json(
@@ -112,7 +167,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check IP
     const ipHash = getIpHash(req);
     const ipVoted = await hasVoted(eventId, ipHash);
     if (ipVoted) {
@@ -139,10 +193,10 @@ export async function POST(req: NextRequest) {
     });
 
     const confirmUrl = `${getBaseUrl(req)}/${safeLocale}/vote/confirm?token=${token}`;
-    const sent = await sendConfirmationEmail(email, voterName.trim(), confirmUrl);
+    const sent = await sendConfirmationEmail(email, voterName.trim(), confirmUrl, answers);
 
     if (!sent) {
-      // No Resend key → save vote directly (dev mode)
+      // No Resend key — redirect directly to confirm URL (dev mode)
       return NextResponse.json({ success: true, mode: 'no_email', confirmUrl });
     }
 
