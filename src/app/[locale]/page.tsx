@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { Trophy, Play, ChevronRight, Star, Tv, Users } from 'lucide-react';
+import Image from 'next/image';
+import { Trophy, Play, ChevronRight, Star, Tv } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CountdownTimer from '@/components/home/CountdownTimer';
@@ -297,34 +298,28 @@ export default async function HomePage({
               <AnimateOnScroll animation="fade-left" threshold={0.15}
                 className="flex-shrink-0 flex flex-col sm:flex-row gap-8 items-center justify-center"
               >
-                {/* Cadre 1 */}
+                {/* Cadre 1 — Braizanime */}
                 <div className="group relative flex flex-col items-center gap-4">
-                  <div className="w-56 h-72 sm:w-64 sm:h-80 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                    style={{ border: '1px solid rgba(201,162,39,0.4)', background: 'rgba(15,13,9,0.8)', boxShadow: '0 0 0 1px rgba(201,162,39,0.1), 0 20px 50px rgba(201,162,39,0.12)', backdropFilter: 'blur(14px)' }}
+                  <div className="w-56 h-72 sm:w-64 sm:h-80 rounded-xl overflow-hidden transition-all duration-300 group-hover:scale-105"
+                    style={{ border: '1px solid rgba(201,162,39,0.4)', boxShadow: '0 0 0 1px rgba(201,162,39,0.1), 0 20px 50px rgba(201,162,39,0.12)' }}
                   >
-                    <div className="flex flex-col items-center gap-3 opacity-35">
-                      <Users className="w-14 h-14" style={{ color: '#c9a227' }} />
-                      <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#c9a227' }}>Photo</span>
-                    </div>
+                    <Image src="/image/team/Braizanime.jpeg" alt="Braizanime" width={256} height={320} className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold">Présentateur 1</p>
-                    <p className="text-sm" style={{ color: 'rgba(201,162,39,0.5)' }}>Animateur</p>
+                    <p className="text-white font-bold">Braizanime</p>
+                    <p className="text-sm" style={{ color: 'rgba(201,162,39,0.5)' }}>Animatrice</p>
                   </div>
                 </div>
 
-                {/* Cadre 2 */}
+                {/* Cadre 2 — Tampico */}
                 <div className="group relative flex flex-col items-center gap-4">
-                  <div className="w-56 h-72 sm:w-64 sm:h-80 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                    style={{ border: '1px solid rgba(232,197,74,0.35)', background: 'rgba(15,13,9,0.8)', boxShadow: '0 0 0 1px rgba(232,197,74,0.1), 0 20px 50px rgba(232,197,74,0.1)', backdropFilter: 'blur(14px)' }}
+                  <div className="w-56 h-72 sm:w-64 sm:h-80 rounded-xl overflow-hidden transition-all duration-300 group-hover:scale-105"
+                    style={{ border: '1px solid rgba(232,197,74,0.35)', boxShadow: '0 0 0 1px rgba(232,197,74,0.1), 0 20px 50px rgba(232,197,74,0.1)' }}
                   >
-                    <div className="flex flex-col items-center gap-3 opacity-35">
-                      <Users className="w-14 h-14" style={{ color: '#e8c54a' }} />
-                      <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#e8c54a' }}>Photo</span>
-                    </div>
+                    <Image src="/image/team/Pape.jpeg" alt="Tampico" width={256} height={320} className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold">Présentateur 2</p>
+                    <p className="text-white font-bold">Tampico</p>
                     <p className="text-sm" style={{ color: 'rgba(232,197,74,0.5)' }}>Animateur</p>
                   </div>
                 </div>
