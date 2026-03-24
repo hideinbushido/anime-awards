@@ -278,7 +278,7 @@ export default async function HomePage({
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ opacity: 0.75 }}
           >
-            <source src="/section3_fond.mp4" type="video/mp4" />
+            <source src="/Fond/section.mp4" type="video/mp4" />
           </video>
 
           {/* Overlays */}
