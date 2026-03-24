@@ -176,8 +176,7 @@ export default function DashboardClient() {
                 {recentVotes.map((vote) => (
                   <tr key={vote.id}>
                     <td className="py-3 text-white font-medium">{vote.voterName}</td>
-                    <td className="py-3 text-[#9a8870]">{vote.voterEmail || '—'}</td>
-                    <td className="py-3 text-[#9a8870]">{vote.voterCountry || '—'}</td>
+                    <td className="py-3 text-[#9a8870]">{(vote as any).voterTiktok || '—'}</td>
                     <td className="py-3 text-[#665544] text-xs">
                       {new Date(vote.votedAt).toLocaleDateString('fr-FR', {
                         day: '2-digit',

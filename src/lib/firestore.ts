@@ -142,8 +142,7 @@ export async function deleteNominee(id: string): Promise<void> {
 export async function submitVote(data: {
   eventId: string;
   voterName: string;
-  voterEmail?: string;
-  voterCountry?: string;
+  voterTiktok?: string;
   answers: VoteAnswer[];
   ipHash?: string;
 }): Promise<string> {

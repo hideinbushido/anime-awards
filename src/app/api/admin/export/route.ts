@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
         const cat = catMap[answer.categoryId];
         const nominee = nomineesMap[answer.nomineeId];
         rows.push(
-          `"${vote.voterName}","${vote.voterEmail || ''}","${vote.voterCountry || ''}","${vote.votedAt}","${cat?.titleFr || answer.categoryId}","${nominee?.name || answer.nomineeId}"`
+          `"${vote.voterName}","${(vote as any).voterTiktok || ''}","${vote.votedAt}","${cat?.titleFr || answer.categoryId}","${nominee?.name || answer.nomineeId}"`
         );
       }
     }

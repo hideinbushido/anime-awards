@@ -62,7 +62,7 @@ export default function VotesAdmin() {
   const filteredVotes = votes.filter(
     (v) =>
       v.voterName.toLowerCase().includes(search.toLowerCase()) ||
-      (v.voterEmail || '').toLowerCase().includes(search.toLowerCase())
+      ((v as any).voterTiktok || '').toLowerCase().includes(search.toLowerCase())
   );
 
   const getCategoryTitle = (catId: string) =>
@@ -126,13 +126,7 @@ export default function VotesAdmin() {
                 <div>
                   <p className="font-semibold text-white text-sm">{vote.voterName}</p>
                   <div className="flex items-center gap-2 text-xs text-[#665544]">
-                    {vote.voterEmail && <span>{vote.voterEmail}</span>}
-                    {vote.voterCountry && (
-                      <>
-                        <span>·</span>
-                        <span>{vote.voterCountry}</span>
-                      </>
-                    )}
+                    {(vote as any).voterTiktok && <span>@{(vote as any).voterTiktok.replace(/^@/, '')}</span>}
                     <span>·</span>
                     <span>
                       {new Date(vote.votedAt).toLocaleDateString('fr-FR', {

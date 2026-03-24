@@ -55,8 +55,7 @@ export interface Vote {
   id: string;
   eventId: string;
   voterName: string;
-  voterEmail?: string;
-  voterCountry?: string;
+  voterTiktok?: string;
   votedAt: string;
   answers: VoteAnswer[];
   ipHash?: string;

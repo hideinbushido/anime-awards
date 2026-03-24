@@ -8,7 +8,7 @@ import { getActiveEvent, getCategories, getNominees } from '@/lib/firestore';
 import type { Category, Nominee } from '@/lib/types';
 
 // ─── Placeholder 27 catégories ───────────────────────────────────────────────
-const PLACEHOLDER_CATEGORIES: Category[] = [
+export const PLACEHOLDER_CATEGORIES: Category[] = [
   { id: 'p-drama',       eventId: 'demo', title: 'Meilleur Drama',                  titleFr: 'Meilleur Drama',                  titleEn: 'Best Drama',                    description: '', descriptionFr: 'Le drama le plus marquant',                      descriptionEn: 'The most impactful drama',                    order: 1,  active: true },
   { id: 'p-romance',     eventId: 'demo', title: 'Meilleure Romance',               titleFr: 'Meilleure Romance',               titleEn: 'Best Romance',                  description: '', descriptionFr: 'La plus belle histoire d\'amour',               descriptionEn: 'The most beautiful love story',               order: 2,  active: true },  
   { id: 'p-seinen',      eventId: 'demo', title: 'Meilleur Seinen',                 titleFr: 'Meilleur Seinen',                 titleEn: 'Best Seinen',                   description: '', descriptionFr: 'Le meilleur seinen de l\'année',               descriptionEn: 'The best seinen of the year',                 order: 4,  active: true },
@@ -74,7 +74,7 @@ function n(id: string, catId: string, name: string, anime: string, descFr: strin
   };
 }
 
-const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
+export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
   'p-drama': [
     n('dra1','p-drama','The Apothecary Diaries S2','','','0a0a14','c9a227','/image/DRAME/Carnet.png'),
     n('dra2','p-drama','Bloom','','','0a1414','80e0c0','/image/DRAME/Bloom.png'),
