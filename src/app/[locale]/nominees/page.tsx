@@ -140,6 +140,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('mas19','p-masculin','Giyu','Demon Slayer: The Movie — Infinity Castle','','0a0a1a','6080ff','/image/MASCULIN/18.png'),
     n('mas20','p-masculin','Tanjiro','Demon Slayer: The Movie — Infinity Castle','','0a0a14','40a0ff','/image/MASCULIN/19.png'),
     n('mas21','p-masculin','Izuku Midoriya','My Hero Academia — Final Season','','1a0500','40c0ff','/image/MASCULIN/Izuku.png'),
+    n('mas22','p-masculin','Enjin','Gachiakuta','','1a0800','ff8030','/image/SECONDAIRE/Enjin.png'),
   ],
   'p-feminin': [
     n('fem2','p-feminin','Suika','Dr.STONE SCIENCE FUTURE','','0a1008','80e880','/image/FEMININ/Suika.png'),
