@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { Trophy, Lock, AlertCircle } from 'lucide-react';
+import { Trophy, Lock, AlertCircle, ChevronLeft } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -34,6 +34,12 @@ export default function AdminLoginPage() {
       {/* Projecteur */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.12) 0%, transparent 65%)' }} />
+
+      <a href={`/${locale}`}
+        className="fixed top-5 left-5 flex items-center gap-1.5 text-sm px-3 py-2 rounded-xl transition-all hover:text-white z-20"
+        style={{ color: '#9a8870', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+        <ChevronLeft className="w-4 h-4" /> Accueil
+      </a>
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
