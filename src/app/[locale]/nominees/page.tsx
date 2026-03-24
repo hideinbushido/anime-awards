@@ -374,12 +374,10 @@ export default async function NomineesPage({
 
   let categories: Category[] = [];
   let nomineesByCategory: Record<string, Nominee[]> = {};
-  let eventStatus = 'preparation';
 
   try {
     const event = await getActiveEvent();
     if (event) {
-      eventStatus = event.status ?? 'preparation';
       categories = await getCategories(event.id);
       for (const cat of categories) {
         nomineesByCategory[cat.id] = await getNominees(cat.id);
@@ -504,7 +502,6 @@ export default async function NomineesPage({
             voteNowLabel={t('voteNow')}
             noNomineesLabel={t('noNominees')}
             fondUrl={activeCat ? CATEGORY_FONDS[activeCat.id] : undefined}
-            eventStatus={eventStatus}
           />
         </div>
       </main>
