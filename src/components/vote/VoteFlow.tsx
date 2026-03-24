@@ -62,8 +62,8 @@ export default function VoteFlow({
 
   const total = orderedCats.length;
   const votedCount = Object.keys(votes).length;
-  const cardW = isTouch ? 160 : 220;
-  const cardH = isTouch ? 240 : 330;
+  const cardW = isTouch ? 160 : 320;
+  const cardH = isTouch ? 240 : 480;
 
   const handleVoteConfirmed = async (nominee: Nominee) => {
     stopAudio();
