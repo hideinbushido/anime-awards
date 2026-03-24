@@ -165,8 +165,8 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('cb8','p-combat','Shi Huang Di vs Hades','Valkyrie Apocalypse','','100814','8040c0','/image/COMBAT/HadesvsShang.png'),
     n('cb9','p-combat','Akaza vs Giyu & Tanjiro','Demon Slayer: The Movie — Infinity Castle','','1a0800','ff8060','/image/COMBAT/AkavsTan.png'),
     n('cb10','p-combat','Kocho Shinobu vs Doma','Demon Slayer: The Movie — Infinity Castle','','0a0a1a','a0c0ff','/image/COMBAT/KochvsDom.png'),
-    n('cb11','p-combat','Shigaraki vs Izuku','My Hero Academia — Final Season','','1a0500','ff4020',''),
-    n('cb12','p-combat','All For One vs All Might','My Hero Academia — Final Season','','1a0500','ff4020',''),
+    n('cb11','p-combat','Shigaraki vs Izuku','My Hero Academia — Final Season','','1a0500','ff4020','/image/COMBAT/IzukuvsShiga.png'),
+    n('cb12','p-combat','All For One vs All Might','My Hero Academia — Final Season','','1a0500','ff4020','/image/COMBAT/AFOvsAllmight.png'),
   ],
   'p-deception': [
     n('dec1','p-deception','The Beginning After the End','','','0d0d0d','666666','/image/DECEPTION/TBATE.png'),
