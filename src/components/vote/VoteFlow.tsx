@@ -27,13 +27,7 @@ export default function VoteFlow({
   const storageKey = accessToken ? `voteProgress_${accessToken}` : null;
 
   const [step, setStep] = useState<Step>('categories');
-  const [votes, setVotes] = useState<Record<string, string>>(() => {
-    if (!accessToken) return {};
-    try {
-      const saved = localStorage.getItem(`voteProgress_${accessToken}`);
-      return saved ? JSON.parse(saved) : {};
-    } catch { return {}; }
-  });
+  const [votes, setVotes] = useState<Record<string, string>>({});
   const [activeCat, setActiveCat] = useState<Category | null>(null);
   const [selectedNominee, setSelectedNominee] = useState<Nominee | null>(null);
   const [confirmNominee, setConfirmNominee] = useState<Nominee | null>(null);
@@ -45,6 +39,15 @@ export default function VoteFlow({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setIsTouch(window.matchMedia('(hover: none)').matches); }, []);
+
+  // Restore vote progress from localStorage on mount
+  useEffect(() => {
+    if (!storageKey) return;
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) setVotes(JSON.parse(saved));
+    } catch {}
+  }, [storageKey]);
 
   const stopAudio = useCallback(() => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
