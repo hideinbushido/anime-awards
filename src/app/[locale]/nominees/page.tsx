@@ -292,7 +292,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('pr12','p-protagoniste','Dante','Devil May Cry','','100010','c000ff','/image/PROTA/Dante.png'),
     n('pr14','p-protagoniste','Subaru','Re:Zero S3','','0a0814','8040c0','/image/PROTA/Subaru.png'),
     n('pr16','p-protagoniste','Natsuko Zenju','Zenshu','','0a0a1a','a0c0ff','/image/PROTA/Zenju.png'),
-    n('pr17','p-protagoniste','Izuku Midoriya','My Hero Academia — Final Season','','1a0500','40c0ff','/image/PROTA/Izuku.png'),
+    n('pr17','p-protagoniste','Izuku Midoriya','My Hero Academia — Final Season','','1a0500','40c0ff','/image/PROTA/Midoriya.png'),
   ],
   'p-secondaire': [
     n('sc1','p-secondaire','Reinhardt','Re:Zero S3','','0a0814','8040c0','/image/SECONDAIRE/Rei.png'),
