@@ -55,11 +55,19 @@ const TEAM: {
   },
   {
     nickname: 'Braizanime',
-    fullName: '',
+    fullName: 'Marlene',
     role: '',
     email: '',
     tiktok: 'https://www.tiktok.com/@braizanime',
-    photo: '/image/team/Braizanime.png',
+    photo: '/image/team/Braizanime.jpeg',
+  },
+  {
+    nickname: 'Tampico',
+    fullName: 'Pape',
+    role: '',
+    email: '',
+    tiktok: 'https://www.tiktok.com/@tampico',
+    photo: '/image/team/Pape.jpeg',
   },
   {
     nickname: 'Jeremiah',
