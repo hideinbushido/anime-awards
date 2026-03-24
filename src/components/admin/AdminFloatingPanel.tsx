@@ -90,7 +90,7 @@ export default function AdminFloatingPanel() {
                 <span className="text-sm font-black text-white">Admin Panel</span>
               </div>
               <div className="flex items-center gap-2">
-                <a href={`/${locale}/admin/login`}
+                <a href={`/${locale}/admin/dashboard`}
                   className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg transition-all hover:text-white"
                   style={{ color: '#9a8870', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   Dashboard →

@@ -1,198 +1,382 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { useEffect, useState, useCallback } from 'react';
+import { collection, getDocs, Timestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { PLACEHOLDER_CATEGORIES, PLACEHOLDER_NOMINEES } from '@/app/[locale]/nominees/page';
 import {
-  getActiveEvent,
-  getAllCategories,
-  getAllNominees,
-  getVoteCount,
-  getVotes,
-} from '@/lib/firestore';
-import { Trophy, Tag, Users, Vote, Download, TrendingUp } from 'lucide-react';
-import type { AnimeEvent, Vote as VoteType } from '@/lib/types';
+  Trophy, Users, Vote, RefreshCw, ChevronDown, ChevronUp, Download,
+} from 'lucide-react';
 
-const STATUS_LABELS: Record<string, string> = {
-  draft: 'Brouillon',
-  preparation: 'Préparation',
-  voting_open: 'Votes ouverts',
-  voting_closed: 'Votes fermés',
-  results_published: 'Résultats publiés',
-};
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-const STATUS_COLORS: Record<string, string> = {
-  draft: 'text-[#9a8870] bg-gray-400/10',
-  preparation: 'text-amber-400 bg-amber-400/10',
-  voting_open: 'text-green-400 bg-green-400/10',
-  voting_closed: 'text-red-400 bg-red-400/10',
-  results_published: 'text-blue-400 bg-blue-400/10',
-};
+interface Voter {
+  name: string;
+  tiktok?: string;
+  votedAt: string;
+}
+
+interface NomineeResult {
+  nomineeId: string;
+  nomineeName: string;
+  count: number;
+  voters: Voter[];
+}
+
+interface CategoryResult {
+  categoryId: string;
+  categoryTitle: string;
+  nominees: NomineeResult[];
+  totalVotes: number;
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function buildNameMaps() {
+  const catMap: Record<string, string> = {};
+  const nomMap: Record<string, string> = {};
+  for (const cat of PLACEHOLDER_CATEGORIES) catMap[cat.id] = cat.title;
+  for (const nominees of Object.values(PLACEHOLDER_NOMINEES))
+    for (const nom of nominees) nomMap[nom.id] = nom.name;
+  return { catMap, nomMap };
+}
+
+function fmtDate(iso: string) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('fr-FR', {
+    day: '2-digit', month: '2-digit', year: '2-digit',
+    hour: '2-digit', minute: '2-digit',
+  });
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function DashboardClient() {
-  const locale = useLocale();
-  const [event, setEvent] = useState<AnimeEvent | null>(null);
-  const [voteCount, setVoteCount] = useState(0);
-  const [categoryCount, setCategoryCount] = useState(0);
-  const [nomineeCount, setNomineeCount] = useState(0);
-  const [recentVotes, setRecentVotes] = useState<VoteType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [results, setResults] = useState<CategoryResult[]>([]);
+  const [totalVotes, setTotalVotes] = useState(0);
+  const [totalAnswers, setTotalAnswers] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [expandedCats, setExpandedCats] = useState<Record<string, boolean>>({});
+  const [expandedNoms, setExpandedNoms] = useState<Record<string, boolean>>({});
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const ev = await getActiveEvent();
-        setEvent(ev);
-        if (ev) {
-          const [cats, nominees, count, votes] = await Promise.all([
-            getAllCategories(ev.id),
-            getAllNominees(ev.id),
-            getVoteCount(ev.id),
-            getVotes(ev.id),
-          ]);
-          setCategoryCount(cats.length);
-          setNomineeCount(nominees.length);
-          setVoteCount(count);
-          setRecentVotes(
-            votes
-              .sort((a, b) => new Date(b.votedAt).getTime() - new Date(a.votedAt).getTime())
-              .slice(0, 10)
-          );
+  const load = useCallback(async () => {
+    if (!db) { setError('Firebase non configuré.'); return; }
+    setLoading(true);
+    setError('');
+    try {
+      const snap = await getDocs(collection(db, 'votes'));
+      const votes = snap.docs.map(d => {
+        const data = d.data();
+        return {
+          ...data,
+          id: d.id,
+          votedAt: data.votedAt instanceof Timestamp
+            ? data.votedAt.toDate().toISOString()
+            : (data.votedAt ?? ''),
+        };
+      });
+
+      const { catMap, nomMap } = buildNameMaps();
+      const counts: Record<string, Record<string, { count: number; voters: Voter[] }>> = {};
+
+      for (const vote of votes) {
+        const voter: Voter = {
+          name: (vote as any).voterName ?? 'Anonyme',
+          tiktok: (vote as any).voterTiktok,
+          votedAt: (vote as any).votedAt ?? '',
+        };
+        for (const answer of ((vote as any).answers ?? [])) {
+          if (!counts[answer.categoryId]) counts[answer.categoryId] = {};
+          if (!counts[answer.categoryId][answer.nomineeId])
+            counts[answer.categoryId][answer.nomineeId] = { count: 0, voters: [] };
+          counts[answer.categoryId][answer.nomineeId].count++;
+          counts[answer.categoryId][answer.nomineeId].voters.push(voter);
         }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
       }
+
+      const catOrder: Record<string, number> = {};
+      PLACEHOLDER_CATEGORIES.forEach((c, i) => { catOrder[c.id] = i; });
+
+      const categoryResults: CategoryResult[] = Object.entries(counts)
+        .map(([catId, nomCounts]) => ({
+          categoryId: catId,
+          categoryTitle: catMap[catId] ?? catId,
+          nominees: Object.entries(nomCounts)
+            .map(([nomId, d]) => ({
+              nomineeId: nomId,
+              nomineeName: nomMap[nomId] ?? nomId,
+              count: d.count,
+              voters: d.voters.sort((a, b) => b.votedAt.localeCompare(a.votedAt)),
+            }))
+            .sort((a, b) => b.count - a.count),
+          totalVotes: Object.values(nomCounts).reduce((s, d) => s + d.count, 0),
+        }))
+        .sort((a, b) => (catOrder[a.categoryId] ?? 99) - (catOrder[b.categoryId] ?? 99));
+
+      setResults(categoryResults);
+      setTotalVotes(votes.length);
+      setTotalAnswers(categoryResults.reduce((s, c) => s + c.totalVotes, 0));
+      setLastUpdated(new Date());
+
+      // Auto-expand all categories on first load
+      setExpandedCats(prev => {
+        const next = { ...prev };
+        categoryResults.forEach(c => { if (!(c.categoryId in next)) next[c.categoryId] = true; });
+        return next;
+      });
+    } catch (e: any) {
+      setError(e.message ?? 'Erreur inconnue');
+    } finally {
+      setLoading(false);
     }
-    load();
   }, []);
 
-  const handleExport = async () => {
-    if (!event) return;
-    const res = await fetch(`/api/admin/export?eventId=${event.id}`);
-    const blob = await res.blob();
+  useEffect(() => { load(); }, [load]);
+
+  const handleExportCSV = () => {
+    const rows = ['Catégorie,Rang,Nominé,Votes,%,Votant,TikTok,Date'];
+    for (const cat of results) {
+      cat.nominees.forEach((nom, i) => {
+        const pct = cat.totalVotes > 0 ? ((nom.count / cat.totalVotes) * 100).toFixed(1) : '0.0';
+        if (!nom.voters.length) {
+          rows.push(`"${cat.categoryTitle}",${i + 1},"${nom.nomineeName}",${nom.count},${pct}%,,,`);
+        } else {
+          nom.voters.forEach((v, vi) =>
+            rows.push(vi === 0
+              ? `"${cat.categoryTitle}",${i + 1},"${nom.nomineeName}",${nom.count},${pct}%,"${v.name}","${v.tiktok ?? ''}","${v.votedAt}"`
+              : `,,,,,"${v.name}","${v.tiktok ?? ''}","${v.votedAt}"`
+            )
+          );
+        }
+      });
+    }
+    const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `anime-awards-2026-results.csv`;
-    a.click();
+    a.href = url; a.download = 'anime-awards-votes-detail.csv'; a.click();
     URL.revokeObjectURL(url);
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-2 border-[#c9a227] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  const stats = [
-    { label: 'Votes total', value: voteCount, icon: Vote, color: 'from-purple-600 to-purple-800' },
-    { label: 'Catégories', value: categoryCount, icon: Tag, color: 'from-pink-600 to-pink-800' },
-    { label: 'Nominés', value: nomineeCount, icon: Users, color: 'from-amber-600 to-amber-800' },
-    { label: 'Statut', value: event ? STATUS_LABELS[event.status] : '—', icon: TrendingUp, color: 'from-green-600 to-green-800' },
-  ];
-
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl sm:text-3xl font-black text-white">
-          <span className="gradient-text">Dashboard</span>
-        </h1>
-        <button
-          onClick={handleExport}
-          className="flex items-center gap-2 px-4 py-2 bg-[#c9a227] hover:bg-[#9e7c1e] text-white rounded-xl text-sm font-medium transition-all"
-        >
-          <Download className="w-4 h-4" />
-          Exporter CSV
-        </button>
+      {/* Page header */}
+      <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-2xl font-black text-white">
+            Recensement des <span style={{ color: '#c9a227' }}>votes</span>
+          </h1>
+          {lastUpdated && (
+            <p className="text-xs mt-1" style={{ color: '#4a3a2a' }}>
+              Actualisé à {fmtDate(lastUpdated.toISOString())}
+            </p>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* Stat pills */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold"
+            style={{ background: 'rgba(201,162,39,0.1)', color: '#c9a227', border: '1px solid rgba(201,162,39,0.2)' }}>
+            <Vote className="w-3.5 h-3.5" />
+            {totalVotes} votant{totalVotes !== 1 ? 's' : ''}
+          </div>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold"
+            style={{ background: 'rgba(139,92,246,0.1)', color: '#a78bfa', border: '1px solid rgba(139,92,246,0.2)' }}>
+            <Users className="w-3.5 h-3.5" />
+            {totalAnswers} réponses
+          </div>
+          <button onClick={load} disabled={loading}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:brightness-110 disabled:opacity-50"
+            style={{ background: 'rgba(255,255,255,0.06)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            {loading ? 'Chargement…' : 'Actualiser'}
+          </button>
+          <button onClick={handleExportCSV} disabled={results.length === 0}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:brightness-110 disabled:opacity-50"
+            style={{ background: 'rgba(201,162,39,0.12)', color: '#c9a227', border: '1px solid rgba(201,162,39,0.25)' }}>
+            <Download className="w-3.5 h-3.5" />
+            Export CSV
+          </button>
+        </div>
       </div>
 
-      {/* Event status */}
-      {event && (
-        <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-4 mb-6 flex items-center justify-between">
-          <div>
-            <p className="text-sm text-[#665544]">Événement actif</p>
-            <p className="font-bold text-white">{event.name}</p>
-          </div>
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${STATUS_COLORS[event.status]}`}
-          >
-            {STATUS_LABELS[event.status]}
-          </span>
+      {/* Error */}
+      {error && (
+        <div className="rounded-xl px-4 py-3 text-sm mb-4"
+          style={{ background: 'rgba(239,68,68,0.08)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}>
+          {error}
         </div>
       )}
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {stats.map((stat) => (
-          <div key={stat.label} className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-5">
-            <div
-              className={`w-10 h-10 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3`}
-            >
-              <stat.icon className="w-5 h-5 text-white" />
+      {/* Loading skeleton */}
+      {loading && results.length === 0 && (
+        <div className="space-y-3">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="rounded-2xl h-16 animate-pulse"
+              style={{ background: '#0f0d09', border: '1px solid rgba(201,162,39,0.08)' }} />
+          ))}
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!loading && results.length === 0 && !error && (
+        <div className="rounded-2xl p-12 text-center"
+          style={{ background: '#0f0d09', border: '1px solid rgba(201,162,39,0.1)' }}>
+          <Trophy className="w-10 h-10 mx-auto mb-3 opacity-20" style={{ color: '#c9a227' }} />
+          <p className="text-white font-bold mb-1">Aucun vote pour l'instant</p>
+          <p className="text-sm" style={{ color: '#4a3a2a' }}>
+            Les résultats apparaîtront ici dès que des votes seront soumis.
+          </p>
+        </div>
+      )}
+
+      {/* Categories */}
+      <div className="space-y-3">
+        {results.map((cat) => {
+          const maxVotes = cat.nominees[0]?.count ?? 1;
+          const isExpanded = expandedCats[cat.categoryId] ?? false;
+
+          return (
+            <div key={cat.categoryId} className="rounded-2xl overflow-hidden"
+              style={{ background: '#0f0d09', border: '1px solid rgba(201,162,39,0.12)' }}>
+
+              {/* Category header — clickable */}
+              <button onClick={() => setExpandedCats(p => ({ ...p, [cat.categoryId]: !p[cat.categoryId] }))}
+                className="w-full flex items-center justify-between px-5 py-4 transition-all hover:brightness-110 text-left"
+                style={{ background: 'rgba(201,162,39,0.03)' }}>
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="font-black text-white truncate">{cat.categoryTitle}</span>
+                  <span className="text-xs px-2.5 py-0.5 rounded-full font-bold flex-shrink-0"
+                    style={{ background: 'rgba(201,162,39,0.15)', color: '#c9a227' }}>
+                    {cat.totalVotes} vote{cat.totalVotes !== 1 ? 's' : ''}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+                  <span className="text-xs hidden sm:block" style={{ color: '#3a2e1e' }}>
+                    {cat.nominees.length} nominé{cat.nominees.length !== 1 ? 's' : ''}
+                  </span>
+                  {isExpanded
+                    ? <ChevronUp className="w-4 h-4" style={{ color: '#665544' }} />
+                    : <ChevronDown className="w-4 h-4" style={{ color: '#665544' }} />}
+                </div>
+              </button>
+
+              {/* Nominees */}
+              {isExpanded && (
+                <div>
+                  {cat.nominees.map((nom, i) => {
+                    const pct = cat.totalVotes > 0 ? (nom.count / cat.totalVotes) * 100 : 0;
+                    const nomKey = `${cat.categoryId}__${nom.nomineeId}`;
+                    const votersOpen = expandedNoms[nomKey] ?? false;
+                    const isLeader = i === 0;
+
+                    return (
+                      <div key={nom.nomineeId}
+                        style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+                        {/* Nominee row */}
+                        <div className="flex items-center gap-3 px-5 py-3">
+                          {/* Rank badge */}
+                          <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-black"
+                            style={{
+                              background: isLeader ? 'rgba(201,162,39,0.15)' : 'rgba(255,255,255,0.04)',
+                              color: isLeader ? '#c9a227' : '#3a2e1e',
+                            }}>
+                            {i + 1}
+                          </div>
+
+                          {/* Name + bar */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-1 gap-2">
+                              <span className={`text-sm font-bold truncate ${isLeader ? 'text-white' : 'text-[#c5baa0]'}`}>
+                                {nom.nomineeName}
+                              </span>
+                              <div className="flex items-center gap-2 flex-shrink-0">
+                                <span className="text-xs" style={{ color: '#4a3a2a' }}>
+                                  {pct.toFixed(1)}%
+                                </span>
+                                <span className="text-sm font-black w-6 text-right"
+                                  style={{ color: isLeader ? '#c9a227' : '#665544' }}>
+                                  {nom.count}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="h-1.5 rounded-full overflow-hidden"
+                              style={{ background: 'rgba(255,255,255,0.05)' }}>
+                              <div className="h-full rounded-full transition-all duration-700"
+                                style={{
+                                  width: `${(nom.count / maxVotes) * 100}%`,
+                                  background: isLeader
+                                    ? 'linear-gradient(90deg, #c9a227, #e8c54a)'
+                                    : 'rgba(201,162,39,0.3)',
+                                }} />
+                            </div>
+                          </div>
+
+                          {/* Voters toggle button */}
+                          {nom.voters.length > 0 && (
+                            <button
+                              onClick={() => setExpandedNoms(p => ({ ...p, [nomKey]: !p[nomKey] }))}
+                              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold flex-shrink-0 transition-all hover:brightness-110"
+                              style={{
+                                background: votersOpen ? 'rgba(201,162,39,0.1)' : 'rgba(255,255,255,0.04)',
+                                color: votersOpen ? '#c9a227' : '#665544',
+                                border: votersOpen
+                                  ? '1px solid rgba(201,162,39,0.2)'
+                                  : '1px solid rgba(255,255,255,0.06)',
+                              }}>
+                              <Users className="w-3 h-3" />
+                              {nom.voters.length}
+                              {votersOpen
+                                ? <ChevronUp className="w-3 h-3" />
+                                : <ChevronDown className="w-3 h-3" />}
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Voters table */}
+                        {votersOpen && nom.voters.length > 0 && (
+                          <div className="px-5 pb-3">
+                            <div className="rounded-xl overflow-hidden text-xs"
+                              style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                              {/* Table header */}
+                              <div className="grid grid-cols-[1fr_1fr_auto] px-4 py-2 font-semibold uppercase tracking-wider"
+                                style={{ color: '#4a3a2a', borderBottom: '1px solid rgba(255,255,255,0.04)', gap: '8px' }}>
+                                <span>Nom</span>
+                                <span>TikTok</span>
+                                <span>Date</span>
+                              </div>
+                              {/* Rows */}
+                              {nom.voters.map((v, vi) => (
+                                <div key={vi}
+                                  className="grid grid-cols-[1fr_1fr_auto] px-4 py-2 items-center"
+                                  style={{
+                                    gap: '8px',
+                                    borderBottom: vi < nom.voters.length - 1
+                                      ? '1px solid rgba(255,255,255,0.03)'
+                                      : 'none',
+                                  }}>
+                                  <span className="font-medium text-white truncate">{v.name}</span>
+                                  <span style={{ color: '#9a8870' }} className="truncate">
+                                    {v.tiktok ? `@${v.tiktok.replace(/^@/, '')}` : '—'}
+                                  </span>
+                                  <span style={{ color: '#4a3a2a' }} className="whitespace-nowrap">
+                                    {fmtDate(v.votedAt)}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
-            <p className="text-2xl font-black text-white">{stat.value}</p>
-            <p className="text-xs text-[#665544] mt-1">{stat.label}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
-
-      {/* Quick links */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        {[
-          { href: `/${locale}/admin/categories`, label: 'Gérer les catégories', icon: Tag },
-          { href: `/${locale}/admin/nominees`, label: 'Gérer les nominés', icon: Users },
-          { href: `/${locale}/admin/settings`, label: 'Paramètres', icon: Trophy },
-        ].map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="flex items-center gap-3 bg-[#0f0d09] border border-[#2a1e0a] hover:border-[#c9a227]/50 rounded-xl p-4 text-gray-300 hover:text-white transition-all group"
-          >
-            <item.icon className="w-5 h-5 text-[#c9a227]" />
-            <span className="text-sm font-medium">{item.label}</span>
-          </Link>
-        ))}
-      </div>
-
-      {/* Recent votes */}
-      {recentVotes.length > 0 && (
-        <div className="bg-[#0f0d09] border border-[#2a1e0a] rounded-2xl p-6">
-          <h2 className="font-bold text-white mb-4">Derniers votes</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-[#665544] border-b border-[#2a1e0a]">
-                  <th className="pb-3 text-left font-medium">Votant</th>
-                  <th className="pb-3 text-left font-medium">Email</th>
-                  <th className="pb-3 text-left font-medium">Pays</th>
-                  <th className="pb-3 text-left font-medium">Date</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#1e1e2e]">
-                {recentVotes.map((vote) => (
-                  <tr key={vote.id}>
-                    <td className="py-3 text-white font-medium">{vote.voterName}</td>
-                    <td className="py-3 text-[#9a8870]">{(vote as any).voterTiktok || '—'}</td>
-                    <td className="py-3 text-[#665544] text-xs">
-                      {new Date(vote.votedAt).toLocaleDateString('fr-FR', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
