@@ -12,6 +12,10 @@ function getBaseUrl(req: NextRequest): string {
 
 export async function POST(req: NextRequest) {
   try {
+    if (process.env.VOTE_OPEN !== 'true') {
+      return NextResponse.json({ error: 'Les votes ne sont pas encore ouverts.' }, { status: 403 });
+    }
+
     const { voterName, voterEmail, locale } = await req.json();
 
     if (!voterName?.trim() || !voterEmail?.trim()) {

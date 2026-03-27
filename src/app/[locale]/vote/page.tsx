@@ -1,6 +1,9 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import RequestAccessForm from '@/components/vote/RequestAccessForm';
+import { Clock } from 'lucide-react';
+
+const VOTE_OPEN = process.env.VOTE_OPEN === 'true';
 
 export default async function VotePage({
   params,
@@ -26,7 +29,28 @@ export default async function VotePage({
             </p>
           </div>
 
-          <RequestAccessForm />
+          {VOTE_OPEN ? (
+            <RequestAccessForm />
+          ) : (
+            <div className="max-w-md mx-auto text-center">
+              <div className="rounded-2xl p-10"
+                style={{ background: '#111108', border: '1px solid rgba(201,162,39,0.2)' }}>
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                  style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
+                  <Clock className="w-8 h-8" style={{ color: '#c9a227' }} />
+                </div>
+                <h2 className="text-2xl font-black text-white mb-3">Votes bientôt disponibles</h2>
+                <p className="text-base mb-6" style={{ color: '#9a8870' }}>
+                  La phase de vote n&apos;est pas encore ouverte.<br />
+                  Revenez très bientôt !
+                </p>
+                <div className="rounded-xl px-4 py-3 text-sm font-bold"
+                  style={{ background: 'rgba(201,162,39,0.06)', border: '1px solid rgba(201,162,39,0.15)', color: '#c9a227' }}>
+                  📅 Ouverture annoncée sur TikTok
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
