@@ -54,7 +54,7 @@
   "about": {
     "title": "À propos",
     "subtitle": "Qui sommes-nous ?",
-    "description": "Les Anime Awards sont un événement communautaire annuel célébrant les meilleurs animes, personnages et moments de l'année. Créé par et pour les fans, cet événement donne la parole à la communauté pour élire ses favoris.",
+    "description": "Les Zenkai Anime Awards sont un événement communautaire annuel célébrant les meilleurs animes, personnages et moments de l'année. Créés par Rico (@ricokouame), fondateur de l'événement, les Zenkai Awards donnent la parole à la communauté pour élire ses favoris. 2026 marque la toute première édition.",
     "whyTitle": "Pourquoi cet événement ?",
     "whyDesc": "Parce que les fans méritent d'avoir leur mot à dire. Nous croyons que la communauté est la meilleure juge pour récompenser ce qui l'a fait vibrer tout au long de l'année.",
     "whoTitle": "Qui peut voter ?",
@@ -62,7 +62,7 @@
     "howTitle": "Comment sont choisis les gagnants ?",
     "howDesc": "Les gagnants sont déterminés uniquement par les votes de la communauté. Aucun jury, aucun algorithme — que la voix du public.",
     "ceremonyTitle": "La cérémonie finale",
-    "ceremonyDesc": "Les gagnants sont annoncés lors d'un live TikTok exclusif. Une soirée de célébration pour toute la communauté."
+    "ceremonyDesc": "Les gagnants seront annoncés le 2 mai 2026 lors d'un live TikTok exclusif sur @ricokouame. Une soirée de célébration pour toute la communauté."
   },
   "categories": {
     "title": "Catégories",
@@ -123,8 +123,16 @@
         "a": "Tout le monde peut voter ! L'événement est ouvert à tous les fans d'anime, sans restriction d'âge ni de localisation."
       },
       {
+        "q": "Quels animes sont éligibles ?",
+        "a": "Sont éligibles tous les animes diffusés entre octobre 2024 et décembre 2025. Les films, séries et saisons sortis en dehors de cette période ne sont pas pris en compte."
+      },
+      {
+        "q": "Comment fonctionne le système de vote ?",
+        "a": "Pour voter, tu entres ton prénom et ton adresse email sur la page de vote. Tu reçois ensuite un lien d'accès unique par email — il te suffit de cliquer dessus pour accéder directement aux votes. Ce lien est valable 24h."
+      },
+      {
         "q": "Peut-on voter plusieurs fois ?",
-        "a": "Non, un seul vote par personne est autorisé. Tout vote multiple sera détecté et annulé."
+        "a": "Non, un seul vote par personne est autorisé. Chaque adresse email ne peut être utilisée qu'une seule fois. Tout tentative de vote multiple sera bloquée automatiquement."
       },
       {
         "q": "Comment les gagnants sont-ils choisis ?",
@@ -132,7 +140,7 @@
       },
       {
         "q": "Quand les résultats seront-ils annoncés ?",
-        "a": "Les résultats seront annoncés lors du live TikTok final. La date exacte est indiquée sur la page d'accueil."
+        "a": "Les résultats seront annoncés le 2 mai 2026 en direct sur TikTok (@ricokouame). Prépare-toi pour une soirée de révélations !"
       },
       {
         "q": "Peut-on voir les résultats avant le live ?",
@@ -144,11 +152,11 @@
       },
       {
         "q": "Puis-je modifier mon vote après l'avoir soumis ?",
-        "a": "Non, une fois votre vote soumis, il ne peut pas être modifié. Prenez bien le temps de faire vos choix avant de valider."
+        "a": "Non, une fois ton vote soumis, il ne peut pas être modifié. Prends bien le temps de faire tes choix avant de valider."
       },
       {
-        "q": "Les votes sont-ils vérifiés ?",
-        "a": "Oui, nous mettons en place des systèmes anti-spam pour détecter et supprimer les votes multiples ou frauduleux."
+        "q": "Je n'ai pas reçu mon lien d'accès, que faire ?",
+        "a": "Vérifie d'abord tes spams ou courriers indésirables. Si tu ne trouves toujours pas l'email, retourne sur la page de vote et recommence avec la même adresse email."
       }
     ]
   },

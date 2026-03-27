@@ -7,7 +7,7 @@ import { TeamAvatar } from '@/components/team/TeamAvatar';
 const CREATOR = {
   nickname: 'Rico',
   fullName: 'Kouamé Corentin Paul',
-  role: 'Créateur & Organisateur',
+  role: 'Fondateur & Organisateur',
   email: 'ricokouame92@gmail.com',
   tiktok: 'https://www.tiktok.com/@ricokouame',
   photo: '/image/team/Rico.png',
@@ -19,12 +19,13 @@ const TEAM: {
   role?: string;
   email?: string;
   tiktok?: string;
+  tiktok2?: string;
   photo: string;
 }[] = [
   {
     nickname: 'Mlle Lord',
     fullName: '',
-    role: '',
+    role: 'Partenaire',
     email: '',
     tiktok: 'https://www.tiktok.com/@lord_kymura',
     photo: '/image/team/MlleLord.png',
@@ -32,15 +33,15 @@ const TEAM: {
   {
     nickname: 'Sylver',
     fullName: '',
-    role: '',
+    role: 'Partenaire',
     email: '',
-    tiktok: 'https://www.tiktok.com/@sylver',
+    tiktok: 'https://www.tiktok.com/@kingdechu4',
     photo: '/image/team/Sylver.png',
   },
   {
     nickname: 'Glann',
     fullName: '',
-    role: '',
+    role: 'Partenaire',
     email: '',
     tiktok: 'https://www.tiktok.com/@glann',
     photo: '/image/team/Glann.png',
@@ -48,15 +49,16 @@ const TEAM: {
   {
     nickname: 'Afro_Otaku',
     fullName: '',
-    role: '',
+    role: 'Partenaire',
     email: '',
-    tiktok: 'https://www.tiktok.com/@afro_otaku',
+    tiktok: 'https://www.tiktok.com/@audeanselm',
+    tiktok2: 'https://www.tiktok.com/@aude.no.sekai',
     photo: '/image/team/AfroOtaku.png',
   },
   {
     nickname: 'Braizanime',
     fullName: 'Marlene',
-    role: '',
+    role: 'Partenaire',
     email: '',
     tiktok: 'https://www.tiktok.com/@braizanime',
     photo: '/image/team/Braizanime.jpeg',
@@ -64,7 +66,7 @@ const TEAM: {
   {
     nickname: 'Tampico',
     fullName: 'Pape',
-    role: '',
+    role: 'Partenaire',
     email: '',
     tiktok: 'https://www.tiktok.com/@papemorjf',
     photo: '/image/team/Pape.jpeg',
@@ -72,7 +74,7 @@ const TEAM: {
   {
     nickname: 'Lev',
     fullName: '',
-    role: '',
+    role: 'Monteur',
     email: '',
     tiktok: 'https://www.tiktok.com/@lev.edit.4k',
     photo: '/image/team/Lev.jpg',
@@ -80,15 +82,15 @@ const TEAM: {
   {
     nickname: 'Jeremiah',
     fullName: '',
-    role: '',
+    role: 'Partenaire',
     email: '',
-    tiktok: 'https://www.tiktok.com/@jeremiah',
+    tiktok: 'https://www.tiktok.com/@jeremiah_san_',
     photo: '/image/team/Jeremiah.png',
   },
   {
     nickname: 'Jordy',
     fullName: '',
-    role: '',
+    role: 'Partenaire',
     email: '',
     tiktok: 'https://www.tiktok.com/@jordy',
     photo: '/image/team/Jordy.png',
@@ -272,6 +274,18 @@ export default async function CreateursPage({
                       >
                         <TikTokIcon className="w-3 h-3" />
                         TikTok
+                      </a>
+                    )}
+                    {member.tiktok2 && (
+                      <a
+                        href={member.tiktok2}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-semibold transition-all hover:opacity-80"
+                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.7)' }}
+                      >
+                        <TikTokIcon className="w-3 h-3" />
+                        TikTok 2
                       </a>
                     )}
                   </div>

@@ -45,7 +45,7 @@ import { getActiveEvent, getCategories } from '@/lib/firestore';
 // Mapping image de fond par ID de catégorie
 const CATEGORY_IMAGES: Record<string, string> = {
   'p-romance':     '/FOND_ROMANCE.png',
-  'p-decors':      '/FOND_DECOR.png',
+
   'p-masculin':    '/FOND _MASCULIN.png',
   'p-feminin':     '/FOND_FEMININ.png',
   'p-attachant':   '/FOND_ATTACHANT.png',
@@ -85,7 +85,7 @@ const FALLBACK_GRADIENTS = [
 const PLACEHOLDERS = [
   { id: 'p-drama',        slug: 'meilleur-drama',              titleFr: 'Meilleur Drama',                     titleEn: 'Best Drama',                     descriptionFr: 'Le drama le plus marquant',             descriptionEn: 'The most impactful drama',               nomineeCount: 5 },
   { id: 'p-romance',      slug: 'meilleure-romance',            titleFr: 'Meilleure Romance',                  titleEn: 'Best Romance',                    descriptionFr: 'La plus belle histoire d\'amour',       descriptionEn: 'The most beautiful love story',          nomineeCount: 5 },
-  { id: 'p-decors',       slug: 'meilleurs-decors',             titleFr: 'Meilleurs Décors',                   titleEn: 'Best Settings',                   descriptionFr: 'Les plus beaux univers visuels',        descriptionEn: 'The most stunning visual worlds',        nomineeCount: 5 },
+
   { id: 'p-seinen',       slug: 'meilleur-seinen',              titleFr: 'Meilleur Seinen',                    titleEn: 'Best Seinen',                     descriptionFr: 'Le meilleur seinen de l\'année',        descriptionEn: 'The best seinen of the year',            nomineeCount: 5 },
   { id: 'p-action',       slug: 'meilleur-action',              titleFr: 'Meilleur Animé d\'Action',           titleEn: 'Best Action Anime',               descriptionFr: 'L\'action la plus explosive',           descriptionEn: 'The most explosive action',              nomineeCount: 5 },
   { id: 'p-animation',    slug: 'meilleure-animation',          titleFr: 'Meilleure Animation',                titleEn: 'Best Animation',                  descriptionFr: 'La qualité visuelle la plus époustouflante', descriptionEn: 'The most breathtaking visual quality', nomineeCount: 5 },
