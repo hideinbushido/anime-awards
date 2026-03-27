@@ -43,7 +43,7 @@ const TEAM: {
     fullName: '',
     role: 'Partenaire',
     email: '',
-    tiktok: 'https://www.tiktok.com/@glann',
+    tiktok: 'https://www.tiktok.com/@knight_of_0',
     photo: '/image/team/Glann.png',
   },
   {
@@ -92,8 +92,24 @@ const TEAM: {
     fullName: '',
     role: 'Partenaire',
     email: '',
-    tiktok: 'https://www.tiktok.com/@jordy',
+    tiktok: 'https://www.tiktok.com/@jordy24165',
     photo: '/image/team/Jordy.png',
+  },
+  {
+    nickname: 'FemmedeGojo',
+    fullName: 'Marie',
+    role: 'Partenaire',
+    email: '',
+    tiktok: 'https://www.tiktok.com/@femmedegojo0',
+    photo: '/image/team/FemmedeGojo.png',
+  },
+  {
+    nickname: 'Vetcho',
+    fullName: '',
+    role: 'Partenaire',
+    email: '',
+    tiktok: 'https://www.tiktok.com/@vetcholabise',
+    photo: '/image/team/Vetcho.png',
   },
 ];
 
