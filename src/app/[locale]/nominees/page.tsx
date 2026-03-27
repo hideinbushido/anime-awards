@@ -38,7 +38,7 @@ export const PLACEHOLDER_CATEGORIES: Category[] = [
 
 const CATEGORY_FONDS: Record<string, string> = {
   'p-romance':     '/FOND_ROMANCE.png',
-  'p-decors':      '/FOND_DECOR.png',
+
   'p-chara':       '/FOND_CHARADESIGN.png',
   'p-combat':      '/FOND_COMBAT.png',
   'p-antagoniste': '/FOND_ANTAGONISTE.png',
@@ -93,9 +93,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('rom9','p-romance','Insomniacs After School','','','0a0a20','6080ff','/image/ROMANCE/Insomniac.png'),
     n('rom11','p-romance','Mikadono Sanshimai wa Angai, Choroi','','','0a1010','80d0d0','/image/ROMANCE/Mikadono.png'),
   ],
-  'p-decors': [
-    n('dc1','p-decors','— À venir —','','','0d0d0d','555555'),
-  ],
+
   'p-seinen': [
     n('s1','p-seinen','Ameku Takao no Suiri Karte','','','0a0a14','c9a227','/image/SEINEN/Ameku.png'),
     n('s2','p-seinen','Les Carnets de l\'Apothicaire S2','','','0a0a14','c9a227','/image/SEINEN/Carnet.png'),
