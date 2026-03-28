@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { collection, getDocs, Timestamp } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, Timestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { PLACEHOLDER_CATEGORIES, PLACEHOLDER_NOMINEES } from '@/app/[locale]/nominees/page';
 import {
-  Trophy, Users, Vote, RefreshCw, ChevronDown, ChevronUp, Download,
+  Trophy, Users, Vote, RefreshCw, ChevronDown, ChevronUp, Download, Eye,
 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -55,6 +55,8 @@ export default function DashboardClient() {
   const [results, setResults] = useState<CategoryResult[]>([]);
   const [totalVotes, setTotalVotes] = useState(0);
   const [totalAnswers, setTotalAnswers] = useState(0);
+  const [totalVisits, setTotalVisits] = useState<number | null>(null);
+  const [todayVisits, setTodayVisits] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [expandedCats, setExpandedCats] = useState<Record<string, boolean>>({});
   const [expandedNoms, setExpandedNoms] = useState<Record<string, boolean>>({});
@@ -66,6 +68,18 @@ export default function DashboardClient() {
     setLoading(true);
     setError('');
     try {
+      // Fetch visit stats
+      const statsSnap = await getDoc(doc(db, 'stats', 'pageViews'));
+      if (statsSnap.exists()) {
+        const statsData = statsSnap.data();
+        setTotalVisits(statsData.total ?? 0);
+        const today = new Date().toISOString().slice(0, 10);
+        setTodayVisits(statsData[today] ?? 0);
+      } else {
+        setTotalVisits(0);
+        setTodayVisits(0);
+      }
+
       const snap = await getDocs(collection(db, 'votes'));
       const votes = snap.docs.map(d => {
         const data = d.data();
@@ -176,6 +190,17 @@ export default function DashboardClient() {
 
         <div className="flex items-center gap-2 flex-wrap">
           {/* Stat pills */}
+          {totalVisits !== null && (
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold"
+              style={{ background: 'rgba(34,197,94,0.1)', color: '#4ade80', border: '1px solid rgba(34,197,94,0.2)' }}
+              title={`Aujourd'hui : ${todayVisits ?? 0} visite${(todayVisits ?? 0) !== 1 ? 's' : ''}`}>
+              <Eye className="w-3.5 h-3.5" />
+              {totalVisits} visite{totalVisits !== 1 ? 's' : ''}
+              {todayVisits !== null && todayVisits > 0 && (
+                <span style={{ opacity: 0.7 }}>(+{todayVisits} auj.)</span>
+              )}
+            </div>
+          )}
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold"
             style={{ background: 'rgba(201,162,39,0.1)', color: '#c9a227', border: '1px solid rgba(201,162,39,0.2)' }}>
             <Vote className="w-3.5 h-3.5" />

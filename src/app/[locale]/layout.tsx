@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 import AudioPlayer from '@/components/layout/AudioPlayer';
 import AdminFloatingPanel from '@/components/admin/AdminFloatingPanel';
+import VisitTracker from '@/components/layout/VisitTracker';
 
 const locales = ['fr', 'en'];
 
@@ -41,6 +42,7 @@ export default async function LocaleLayout({
       <body className="anime-bg min-h-screen">
         <NextIntlClientProvider messages={messages}>
           {children}
+          <VisitTracker />
           <AudioPlayer />
           <AdminFloatingPanel />
           <Toaster
