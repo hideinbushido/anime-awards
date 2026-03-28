@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CountdownTimer from '@/components/home/CountdownTimer';
 import AnimateOnScroll from '@/components/home/AnimateOnScroll';
+import CommentsSection from '@/components/home/CommentsSection';
 import { getActiveEvent, getCategories } from '@/lib/firestore';
 
 export default async function HomePage({
@@ -361,71 +362,9 @@ export default async function HomePage({
         </section>
 
         {/* ════════════════════════════════════════════════════════════
-            SECTION 4 — TIKTOK CTA
+            SECTION 4 — COMMENTAIRES
         ════════════════════════════════════════════════════════════ */}
-        <section className="relative py-20 overflow-hidden" style={{
-          borderTop: '1px solid rgba(201,162,39,0.12)',
-          background: 'linear-gradient(160deg, #0e0b05 0%, #080600 40%, #120e04 70%, #080600 100%)',
-        }}>
-          {/* Projecteurs */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[350px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.14) 0%, transparent 65%)' }} />
-          <div className="absolute bottom-0 left-0 w-[450px] h-[300px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(201,162,39,0.08) 0%, transparent 65%)' }} />
-          <div className="absolute bottom-0 right-0 w-[450px] h-[300px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at bottom right, rgba(201,162,39,0.08) 0%, transparent 65%)' }} />
-          {/* Particules or */}
-          <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage:`
-            radial-gradient(1px 1px at 8% 20%, rgba(232,197,74,0.5) 0%, transparent 100%),
-            radial-gradient(2px 2px at 90% 15%, rgba(201,162,39,0.45) 0%, transparent 100%),
-            radial-gradient(1px 1px at 50% 85%, rgba(245,224,144,0.4) 0%, transparent 100%),
-            radial-gradient(1px 1px at 75% 35%, rgba(232,197,74,0.35) 0%, transparent 100%),
-            radial-gradient(1px 1px at 22% 65%, rgba(201,162,39,0.35) 0%, transparent 100%)
-          `}} />
-
-          <div className="container-mobile relative z-10">
-            <AnimateOnScroll animation="cosmic" threshold={0.15}>
-              <div className="relative rounded-2xl p-8 sm:p-12 text-center overflow-hidden"
-                style={{ background: 'rgba(15,13,9,0.8)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 0 1px rgba(201,162,39,0.08), 0 0 80px rgba(201,162,39,0.1)', backdropFilter: 'blur(18px)' }}
-              >
-                {/* Glow interne */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 pointer-events-none"
-                  style={{ background: 'radial-gradient(ellipse at top, rgba(201,162,39,0.08) 0%, transparent 70%)' }} />
-
-                {/* Icône TikTok avec anneau or */}
-                <AnimateOnScroll animation="portal-in" delay={200} className="flex justify-center">
-                  <div className="relative w-20 h-20 mb-6">
-                    <div className="absolute inset-0 rounded-full pointer-events-none" style={{ border: '1px solid rgba(201,162,39,0.4)', animation: 'portal-spin 8s linear infinite' }} />
-                    <div className="absolute inset-1.5 rounded-full pointer-events-none" style={{ border: '1px solid rgba(232,197,74,0.25)', animation: 'portal-spin-reverse 5s linear infinite' }} />
-                    <div className="absolute inset-0 rounded-full flex items-center justify-center"
-                      style={{ background: 'rgba(15,13,9,0.95)', border: '1px solid rgba(201,162,39,0.35)', boxShadow: '0 0 25px rgba(201,162,39,0.25)' }}
-                    >
-                      <svg viewBox="0 0 24 24" className="w-9 h-9 fill-white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" /></svg>
-                    </div>
-                  </div>
-                </AnimateOnScroll>
-
-                <AnimateOnScroll animation="fade-up" delay={350}>
-                  <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">{t('tiktok.title')}</h2>
-                </AnimateOnScroll>
-
-                <AnimateOnScroll animation="fade-up" delay={500}>
-                  <p className="max-w-xl mx-auto mb-8" style={{ color: '#9a8870' }}>{t('tiktok.subtitle')}</p>
-                </AnimateOnScroll>
-
-                <AnimateOnScroll animation="scale-in" delay={700} className="flex justify-center">
-                  <a href="https://www.tiktok.com/@ricokouame" target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded font-bold transition-all btn-gold"
-                    style={{ boxShadow: '0 0 30px rgba(201,162,39,0.4)' }}
-                  >
-                    <svg viewBox="0 0 24 24" className="w-5 h-5 fill-black"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z" /></svg>
-                    {t('tiktok.follow')}
-                  </a>
-                </AnimateOnScroll>
-              </div>
-            </AnimateOnScroll>
-          </div>
-        </section>
+        <CommentsSection locale={locale} />
 
       </main>
       <Footer />
