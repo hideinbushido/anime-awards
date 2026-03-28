@@ -57,6 +57,7 @@ export default function DashboardClient() {
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalVisits, setTotalVisits] = useState<number | null>(null);
   const [todayVisits, setTodayVisits] = useState<number | null>(null);
+  const [visitStats, setVisitStats] = useState<{ countries: [string,number][]; sources: [string,number][]; devices: [string,number][] } | null>(null);
   const [loading, setLoading] = useState(false);
   const [expandedCats, setExpandedCats] = useState<Record<string, boolean>>({});
   const [expandedNoms, setExpandedNoms] = useState<Record<string, boolean>>({});
@@ -71,13 +72,26 @@ export default function DashboardClient() {
       // Fetch visit stats
       const statsSnap = await getDoc(doc(db, 'stats', 'pageViews'));
       if (statsSnap.exists()) {
-        const statsData = statsSnap.data();
-        setTotalVisits(statsData.total ?? 0);
+        const d = statsSnap.data();
+        setTotalVisits(d.total ?? 0);
         const today = new Date().toISOString().slice(0, 10);
-        setTodayVisits(statsData[today] ?? 0);
+        setTodayVisits(d[today] ?? 0);
+
+        const pick = (prefix: string) =>
+          Object.entries(d)
+            .filter(([k]) => k.startsWith(prefix))
+            .map(([k, v]) => [k.slice(prefix.length), v as number] as [string, number])
+            .sort((a, b) => b[1] - a[1]);
+
+        setVisitStats({
+          countries: pick('c_'),
+          sources: pick('s_'),
+          devices: pick('d_'),
+        });
       } else {
         setTotalVisits(0);
         setTodayVisits(0);
+        setVisitStats({ countries: [], sources: [], devices: [] });
       }
 
       const snap = await getDocs(collection(db, 'votes'));
@@ -225,6 +239,50 @@ export default function DashboardClient() {
           </button>
         </div>
       </div>
+
+      {/* Visit breakdown */}
+      {visitStats && (visitStats.countries.length > 0 || visitStats.sources.length > 0) && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+          {/* Sources */}
+          <div className="rounded-2xl p-4" style={{ background: '#0f0d09', border: '1px solid rgba(34,197,94,0.12)' }}>
+            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#4ade80' }}>Source</p>
+            <div className="space-y-1.5">
+              {visitStats.sources.map(([src, count]) => (
+                <div key={src} className="flex items-center justify-between text-xs">
+                  <span style={{ color: '#9a8870' }} className="capitalize">{src === 'direct' ? '🔗 Direct' : src === 'tiktok' ? '🎵 TikTok' : src === 'instagram' ? '📷 Instagram' : src === 'facebook' ? '👥 Facebook' : src === 'twitter' ? '🐦 Twitter' : src === 'youtube' ? '▶️ YouTube' : `🌐 ${src}`}</span>
+                  <span className="font-bold text-white">{count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pays */}
+          <div className="rounded-2xl p-4" style={{ background: '#0f0d09', border: '1px solid rgba(34,197,94,0.12)' }}>
+            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#4ade80' }}>Pays</p>
+            <div className="space-y-1.5">
+              {visitStats.countries.slice(0, 8).map(([country, count]) => (
+                <div key={country} className="flex items-center justify-between text-xs">
+                  <span style={{ color: '#9a8870' }}>{country === 'unknown' ? '❓ Inconnu' : `${country}`}</span>
+                  <span className="font-bold text-white">{count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Appareils */}
+          <div className="rounded-2xl p-4" style={{ background: '#0f0d09', border: '1px solid rgba(34,197,94,0.12)' }}>
+            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#4ade80' }}>Appareil</p>
+            <div className="space-y-1.5">
+              {visitStats.devices.map(([device, count]) => (
+                <div key={device} className="flex items-center justify-between text-xs">
+                  <span style={{ color: '#9a8870' }}>{device === 'mobile' ? '📱 Mobile' : '🖥️ Desktop'}</span>
+                  <span className="font-bold text-white">{count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Error */}
       {error && (
