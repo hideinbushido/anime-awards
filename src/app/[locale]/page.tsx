@@ -5,6 +5,7 @@ import { Trophy, Play, ChevronRight, Star, Tv } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CountdownTimer from '@/components/home/CountdownTimer';
+import VoteCountdown from '@/components/vote/VoteCountdown';
 import AnimateOnScroll from '@/components/home/AnimateOnScroll';
 import CommentsSection from '@/components/home/CommentsSection';
 import { getActiveEvent, getCategories } from '@/lib/firestore';
@@ -17,6 +18,7 @@ export default async function HomePage({
   const { locale } = await params;
   const t = await getTranslations('home');
 
+  const VOTE_OPEN = process.env.VOTE_OPEN === 'true';
   let event = null;
 
   try {
@@ -165,16 +167,22 @@ export default async function HomePage({
                 </div>
               </AnimateOnScroll>
             )}
-            {/* Countdown live — Firebase event ou fallback 2 mai 2026 */}
+            {/* Countdown votes ou live */}
             {(!event || (!isVotingOpen && !isVotingClosed)) && (
               <AnimateOnScroll animation="scale-in" delay={1000}>
-                <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
+                <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8 text-center"
                   style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
                 >
-                  <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
-                    Résultats en direct le 2 mai
-                  </p>
-                  <CountdownTimer targetDate="2026-05-02T20:00:00" label={t('countdown.live')} />
+                  {!VOTE_OPEN ? (
+                    <VoteCountdown />
+                  ) : (
+                    <>
+                      <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
+                        Résultats en direct le 2 mai
+                      </p>
+                      <CountdownTimer targetDate="2026-05-02T20:00:00" label={t('countdown.live')} />
+                    </>
+                  )}
                 </div>
               </AnimateOnScroll>
             )}
