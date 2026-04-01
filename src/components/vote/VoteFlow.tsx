@@ -33,6 +33,7 @@ export default function VoteFlow({
   const [confirmNominee, setConfirmNominee] = useState<Nominee | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [showFinConfirm, setShowFinConfirm] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -78,6 +79,30 @@ export default function VoteFlow({
   const cardW = isTouch ? 160 : 320;
   const cardH = isTouch ? 240 : 480;
 
+  const submitVotes = async (currentVotes: Record<string, string>) => {
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const answers = Object.entries(currentVotes).map(([categoryId, nomineeId]) => ({ categoryId, nomineeId }));
+      const res = await fetch('/api/vote/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eventId, voterName, voterEmail, answers, token: accessToken }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setSubmitError(data.error || 'Erreur lors de la soumission.');
+      } else {
+        if (storageKey) { try { localStorage.removeItem(storageKey); } catch {} }
+      }
+    } catch {
+      setSubmitError('Erreur réseau.');
+    } finally {
+      setSubmitting(false);
+      setStep('success');
+    }
+  };
+
   const handleVoteConfirmed = async (nominee: Nominee) => {
     stopAudio();
     const newVotes = { ...votes, [nominee.categoryId]: nominee.id };
@@ -85,41 +110,12 @@ export default function VoteFlow({
     setConfirmNominee(null);
     setSelectedNominee(null);
 
-    // Persist progress so user can resume if they close the tab
     if (storageKey) {
       try { localStorage.setItem(storageKey, JSON.stringify(newVotes)); } catch {}
     }
 
     if (Object.keys(newVotes).length === total) {
-      // All done — submit
-      setSubmitting(true);
-      setSubmitError('');
-      try {
-        const answers = Object.entries(newVotes).map(([categoryId, nomineeId]) => ({ categoryId, nomineeId }));
-        const res = await fetch('/api/vote/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            eventId,
-            voterName,
-            voterEmail,
-            answers,
-            token: accessToken,
-          }),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          setSubmitError(data.error || 'Erreur lors de la soumission.');
-        } else {
-          // Clear progress on successful submission
-          if (storageKey) { try { localStorage.removeItem(storageKey); } catch {} }
-        }
-      } catch {
-        setSubmitError('Erreur réseau.');
-      } finally {
-        setSubmitting(false);
-        setStep('success');
-      }
+      await submitVotes(newVotes);
     } else {
       setStep('categories');
       setActiveCat(null);
@@ -187,6 +183,50 @@ export default function VoteFlow({
             );
           })}
         </div>
+
+        {/* FIN DE VOTE — visible dès qu'au moins 1 catégorie votée et pas toutes */}
+        {votedCount > 0 && votedCount < total && (
+          <div className="mt-8 text-center">
+            <button onClick={() => setShowFinConfirm(true)}
+              className="px-8 py-3.5 rounded-xl font-black text-sm transition-all hover:brightness-110"
+              style={{ background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.3)', color: '#c9a227' }}>
+              Terminer et envoyer mon récap ({votedCount}/{total}) →
+            </button>
+            <p className="text-xs mt-2" style={{ color: '#4a3a2a' }}>
+              Les catégories non votées ne seront pas comptées.
+            </p>
+          </div>
+        )}
+
+        {/* Confirmation FIN DE VOTE */}
+        {showFinConfirm && (
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+            style={{ background: 'rgba(4,3,0,0.94)', backdropFilter: 'blur(16px)' }}>
+            <div className="w-full rounded-t-2xl sm:rounded-2xl p-6 sm:p-8 text-center"
+              style={{ maxWidth: '420px', background: '#111108', border: '2px solid rgba(201,162,39,0.4)' }}>
+              <p className="text-lg font-black text-white mb-2">Terminer le vote ?</p>
+              <p className="text-sm mb-1" style={{ color: '#9a8870' }}>
+                Tu as voté dans <span style={{ color: '#c9a227' }}>{votedCount} catégorie{votedCount > 1 ? 's' : ''}</span> sur {total}.
+              </p>
+              <p className="text-sm mb-6" style={{ color: '#9a8870' }}>
+                Ton récap sera envoyé par mail. Ce choix est définitif.
+              </p>
+              <div className="flex gap-3">
+                <button onClick={() => setShowFinConfirm(false)}
+                  className="flex-1 py-3 rounded-xl text-sm font-semibold"
+                  style={{ background: 'rgba(255,255,255,0.04)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  Continuer à voter
+                </button>
+                <button onClick={async () => { setShowFinConfirm(false); await submitVotes(votes); }}
+                  disabled={submitting}
+                  className="flex-1 py-3 rounded-xl font-black text-sm text-black"
+                  style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', opacity: submitting ? 0.6 : 1 }}>
+                  {submitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : 'Confirmer ✓'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
