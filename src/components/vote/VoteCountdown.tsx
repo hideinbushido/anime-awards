@@ -3,31 +3,48 @@
 import { useEffect, useState } from 'react';
 
 // April 3 2026 at 18:00 Eastern Time (UTC-4)
-const TARGET = new Date('2026-04-03T22:00:00Z');
+const VOTE_OPEN  = new Date('2026-04-03T22:00:00Z');
+// April 29 2026 at 23:59 Eastern Time (UTC-4)
+const VOTE_CLOSE = new Date('2026-04-30T03:59:00Z');
 
-function getTimeLeft() {
-  const diff = TARGET.getTime() - Date.now();
+function getTimeLeft(target: Date) {
+  const diff = target.getTime() - Date.now();
   if (diff <= 0) return null;
   const totalSeconds = Math.floor(diff / 1000);
-  const days    = Math.floor(totalSeconds / 86400);
-  const hours   = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  return { days, hours, minutes, seconds };
+  return {
+    days:    Math.floor(totalSeconds / 86400),
+    hours:   Math.floor((totalSeconds % 86400) / 3600),
+    minutes: Math.floor((totalSeconds % 3600) / 60),
+    seconds: totalSeconds % 60,
+  };
 }
 
 export default function VoteCountdown() {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+  const [phase, setPhase] = useState<'opening' | 'closing' | 'done'>('opening');
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(VOTE_OPEN));
 
   useEffect(() => {
-    const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    const tick = () => {
+      const now = Date.now();
+      if (now < VOTE_OPEN.getTime()) {
+        setPhase('opening');
+        setTimeLeft(getTimeLeft(VOTE_OPEN));
+      } else if (now < VOTE_CLOSE.getTime()) {
+        setPhase('closing');
+        setTimeLeft(getTimeLeft(VOTE_CLOSE));
+      } else {
+        setPhase('done');
+        setTimeLeft(null);
+      }
+    };
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 
-  if (!timeLeft) return null;
+  if (phase === 'done' || !timeLeft) return null;
 
   const pad = (n: number) => String(n).padStart(2, '0');
-
   const units = [
     { label: 'Jours',    value: timeLeft.days },
     { label: 'Heures',   value: timeLeft.hours },
@@ -38,7 +55,7 @@ export default function VoteCountdown() {
   return (
     <div className="mt-6">
       <p className="text-xs uppercase tracking-widest mb-4 font-bold" style={{ color: '#c9a227' }}>
-        Ouverture dans
+        {phase === 'opening' ? 'Ouverture des votes dans' : 'Fermeture des votes dans'}
       </p>
       <div className="flex items-center justify-center gap-3">
         {units.map(({ label, value }, i) => (
@@ -59,7 +76,9 @@ export default function VoteCountdown() {
         ))}
       </div>
       <p className="text-xs mt-4" style={{ color: '#6b5e3a' }}>
-        Le 3 avril 2026 à 18h00 (heure du Canada)
+        {phase === 'opening'
+          ? 'Le 3 avril 2026 à 18h00 (heure du Canada)'
+          : 'Le 29 avril 2026 à 23h59 (heure du Canada)'}
       </p>
     </div>
   );
