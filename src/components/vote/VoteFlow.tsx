@@ -271,7 +271,7 @@ export default function VoteFlow({
                     if (isAudioCat && !isTouch) stopAudio();
                   }}
                   onClick={() => {
-                    if (isAudioCat && isTouch) { isPlaying ? stopAudio() : playAudio(nominee); }
+                    if (isAudioCat && isTouch) { playAudio(nominee); }
                     else { stopAudio(); setSelectedNominee(nominee); }
                   }}>
                   {nominee.imageUrl
@@ -286,6 +286,14 @@ export default function VoteFlow({
                       style={{ background: isPlaying ? '#c9a227' : 'rgba(8,6,0,0.7)', border: '1px solid rgba(201,162,39,0.4)', transition: 'background 0.2s' }}>
                       <Volume2 className="w-4 h-4" style={{ color: isPlaying ? '#000' : '#c9a227' }} />
                     </div>
+                  )}
+                  {isAudioCat && isTouch && isPlaying && (
+                    <button
+                      onClick={e => { e.stopPropagation(); stopAudio(); setSelectedNominee(nominee); }}
+                      className="absolute bottom-10 inset-x-2 py-2 rounded-xl font-black text-xs text-black text-center z-10"
+                      style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
+                      VOTER ★
+                    </button>
                   )}
                   {!isAudioCat && (
                     <div className="absolute inset-x-0 bottom-16 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -304,18 +312,6 @@ export default function VoteFlow({
           </div>
         </div>
 
-        {isAudioCat && isTouch && playingId && (
-          <div className="mt-5 flex justify-center">
-            <button onClick={() => {
-              const nom = catNominees.find(n => n.id === playingId);
-              if (nom) { stopAudio(); setSelectedNominee(nom); }
-            }}
-              className="px-8 py-3.5 rounded-xl font-black text-sm text-black"
-              style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
-              Voter pour ce nominé ★
-            </button>
-          </div>
-        )}
 
         {/* Portrait modal */}
         {selectedNominee && (
