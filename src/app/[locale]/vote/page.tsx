@@ -1,6 +1,7 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import RequestAccessForm from '@/components/vote/RequestAccessForm';
+import VoteCountdown from '@/components/vote/VoteCountdown';
 import { Clock } from 'lucide-react';
 
 const VOTE_OPEN = process.env.VOTE_OPEN === 'true';
@@ -44,10 +45,7 @@ export default async function VotePage({
                   La phase de vote n&apos;est pas encore ouverte.<br />
                   Revenez très bientôt !
                 </p>
-                <div className="rounded-xl px-4 py-3 text-sm font-bold"
-                  style={{ background: 'rgba(201,162,39,0.06)', border: '1px solid rgba(201,162,39,0.15)', color: '#c9a227' }}>
-                  📅 Ouverture annoncée sur TikTok
-                </div>
+                <VoteCountdown />
               </div>
             </div>
           )}
