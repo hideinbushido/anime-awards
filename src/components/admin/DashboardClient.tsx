@@ -57,7 +57,7 @@ export default function DashboardClient() {
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalVisits, setTotalVisits] = useState<number | null>(null);
   const [todayVisits, setTodayVisits] = useState<number | null>(null);
-  const [visitStats, setVisitStats] = useState<{ countries: [string,number][]; sources: [string,number][]; devices: [string,number][] } | null>(null);
+  const [visitStats, setVisitStats] = useState<{ countries: [string,number][]; sources: [string,number][]; devices: [string,number][]; os: [string,number][] } | null>(null);
   const [loading, setLoading] = useState(false);
   const [expandedCats, setExpandedCats] = useState<Record<string, boolean>>({});
   const [expandedNoms, setExpandedNoms] = useState<Record<string, boolean>>({});
@@ -87,11 +87,12 @@ export default function DashboardClient() {
           countries: pick('c_'),
           sources: pick('s_'),
           devices: pick('d_'),
+          os: pick('o_'),
         });
       } else {
         setTotalVisits(0);
         setTodayVisits(0);
-        setVisitStats({ countries: [], sources: [], devices: [] });
+        setVisitStats({ countries: [], sources: [], devices: [], os: [] });
       }
 
       const snap = await getDocs(collection(db, 'votes'));
@@ -280,6 +281,31 @@ export default function DashboardClient() {
                 </div>
               ))}
             </div>
+            {visitStats.os.length > 0 && (
+              <>
+                <div className="my-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
+                <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#4ade80' }}>Système</p>
+                <div className="space-y-1.5">
+                  {visitStats.os.map(([os, count]) => {
+                    const labels: Record<string, string> = {
+                      iphone: '🍎 iPhone',
+                      ipad: '🍎 iPad',
+                      android: '🤖 Android',
+                      windows: '🪟 Windows',
+                      mac: '🍏 Mac',
+                      linux: '🐧 Linux',
+                      other: '❓ Autre',
+                    };
+                    return (
+                      <div key={os} className="flex items-center justify-between text-xs">
+                        <span style={{ color: '#9a8870' }}>{labels[os] ?? os}</span>
+                        <span className="font-bold text-white">{count}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

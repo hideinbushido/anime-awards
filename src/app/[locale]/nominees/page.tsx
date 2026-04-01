@@ -174,6 +174,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('dec4','p-deception','Fairy Tail: 100 Years Quest','','','0d0d0d','555555','/image/DECEPTION/Fairy.png'),
     n('dec5','p-deception','Blue Lock S2','','','0d0d0d','6080ff','/image/DECEPTION/Blue Lock S2.png'),
     n('dec6','p-deception','The Rising of the Shield Hero S4','','','0d0d0d','c9a227','/image/DECEPTION/Shield.png'),
+    n('dec7','p-deception','Tougen Anki','','','0d0d0d','8040c0','/image/DECEPTION/Tougen.png'),
   ],
   'p-comedie': [
     n('com1','p-comedie','The 100 Girlfriends Who Really Love You S2','','','1a0a14','ff80b4','/image/COMEDIE/100.png'),
@@ -260,6 +261,7 @@ export const PLACEHOLDER_NOMINEES: Record<string, Nominee[]> = {
     n('op12','p-opening','"Frontiers" — Shangri-La Frontier S2 OP2','AWICH','','100814','8040c0','/image/OPENING/Frontier.png','/music/Opening/Frontier.MP3'),
     n('op13','p-opening','"Shounen" — Danmachi S5 OP','GRe4N BOYZ','','100814','8040c0','/image/OPENING/Shounen.png','/music/Opening/Shounen.MP3'),
     n('op15','p-opening','"Same Blue" — Blue Box OP','Official HIGE DANdism','','0a0a1a','80c0ff','/image/OPENING/Sameblue.png','/music/Opening/SameBlue.MP3'),
+    n('op16','p-opening','"OVERNIGHT" — Tougen Anki OP','THE ORAL CIGARETTES','','0d0a1a','8040c0','/image/OPENING/Overnight.png','/music/Opening/OVERNIGHT.MP3'),
   ],
   'p-ending': [
     n('en1','p-ending','"The 1" — One Piece Ending 24','Muque','','1a0800','ff7030','/image/ENDING/Muque.png','/music/ending/Muque.MP3'),
