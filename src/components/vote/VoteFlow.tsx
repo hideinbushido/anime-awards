@@ -360,37 +360,39 @@ export default function VoteFlow({
 
         {/* Confirm modal */}
         {confirmNominee && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
             style={{ background: 'rgba(4,3,0,0.94)', backdropFilter: 'blur(16px)' }}>
-            <div className="relative w-full rounded-2xl overflow-hidden"
-              style={{ maxWidth: '720px', background: '#111108', border: '2px solid rgba(201,162,39,0.4)', boxShadow: '0 0 80px rgba(201,162,39,0.2)' }}>
+            <div className="relative w-full rounded-t-2xl sm:rounded-2xl overflow-hidden"
+              style={{ maxWidth: '500px', background: '#111108', border: '2px solid rgba(201,162,39,0.4)', boxShadow: '0 0 80px rgba(201,162,39,0.2)' }}>
               <button onClick={() => setConfirmNominee(null)}
-                className="absolute top-4 right-4 z-10 w-9 h-9 rounded-xl flex items-center justify-center hover:text-white transition-all"
+                className="absolute top-3 right-3 z-10 w-9 h-9 rounded-xl flex items-center justify-center hover:text-white transition-all"
                 style={{ color: '#665544', background: 'rgba(8,6,0,0.7)' }}>
                 <X className="w-5 h-5" />
               </button>
-              <div className="flex">
+              {/* Mobile: vertical layout / Desktop: horizontal */}
+              <div className="flex flex-col sm:flex-row">
                 {confirmNominee.imageUrl && (
-                  <div className="relative flex-shrink-0" style={{ width: '300px', minHeight: '400px' }}>
-                    <Image src={confirmNominee.imageUrl} alt={confirmNominee.name} fill className="object-cover" />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 65%, rgba(17,17,8,1) 100%)' }} />
+                  <div className="relative w-full sm:w-48 flex-shrink-0" style={{ height: '180px', minHeight: 'unset' }}>
+                    <Image src={confirmNominee.imageUrl} alt={confirmNominee.name} fill className="object-cover object-top" />
+                    <div className="absolute inset-0 sm:hidden" style={{ background: 'linear-gradient(to bottom, transparent 50%, #111108 100%)' }} />
+                    <div className="absolute inset-0 hidden sm:block" style={{ background: 'linear-gradient(to right, transparent 65%, #111108 100%)' }} />
                   </div>
                 )}
-                <div className="flex-1 p-8 flex flex-col justify-between" style={{ minHeight: '400px' }}>
+                <div className="flex-1 px-5 pb-5 pt-3 sm:p-6 flex flex-col justify-between">
                   <div>
-                    <p className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: '#c9a227' }}>{activeCat?.titleFr}</p>
-                    <h3 className="text-3xl font-black text-white mb-2 leading-tight">{confirmNominee.name}</h3>
-                    {confirmNominee.anime && <p className="text-base mb-4" style={{ color: '#9a8870' }}>{confirmNominee.anime}</p>}
-                    <p className="text-sm" style={{ color: '#665544' }}>Ce vote est définitif.</p>
+                    <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#c9a227' }}>{activeCat?.titleFr}</p>
+                    <h3 className="text-xl font-black text-white mb-1 leading-tight">{confirmNominee.name}</h3>
+                    {confirmNominee.anime && <p className="text-sm mb-2" style={{ color: '#9a8870' }}>{confirmNominee.anime}</p>}
+                    <p className="text-xs" style={{ color: '#665544' }}>Ce vote est définitif.</p>
                   </div>
-                  <div className="flex gap-3 mt-6">
+                  <div className="flex gap-3 mt-4">
                     <button onClick={() => setConfirmNominee(null)}
-                      className="px-5 py-4 rounded-xl text-base font-semibold transition-all"
+                      className="px-4 py-3 rounded-xl text-sm font-semibold transition-all"
                       style={{ background: 'rgba(255,255,255,0.04)', color: '#9a8870', border: '1px solid rgba(255,255,255,0.08)' }}>
                       Changer
                     </button>
                     <button onClick={() => handleVoteConfirmed(confirmNominee)} disabled={submitting}
-                      className="flex-1 py-4 rounded-xl font-black text-base text-black transition-all hover:brightness-110"
+                      className="flex-1 py-3 rounded-xl font-black text-sm text-black transition-all hover:brightness-110"
                       style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)', opacity: submitting ? 0.6 : 1 }}>
                       {submitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : 'Confirmer ✓'}
                     </button>
