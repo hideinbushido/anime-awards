@@ -234,12 +234,13 @@ export default function VoteFlow({
             </button>
           )}
 
-          <div ref={scrollRef} className="flex gap-4 pb-3"
-            style={{
+          {/* Mobile: grille 2 colonnes scroll vertical / Desktop: scroll horizontal */}
+          <div ref={scrollRef}
+            className={isTouch ? 'grid grid-cols-2 gap-3 pb-3' : 'flex gap-4 pb-3'}
+            style={isTouch ? {} : {
               overflowX: 'auto', scrollSnapType: 'x mandatory',
               WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none',
-              paddingLeft: isTouch ? '0' : '44px',
-              paddingRight: isTouch ? '0' : '44px',
+              paddingLeft: '44px', paddingRight: '44px',
             }}>
             {catNominees.map((nominee) => {
               const isPlaying = playingId === nominee.id;
@@ -247,10 +248,12 @@ export default function VoteFlow({
 
               return (
                 <div key={nominee.id}
-                  className="relative flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer group"
+                  className="relative rounded-2xl overflow-hidden cursor-pointer group"
                   style={{
-                    width: `${cardW}px`, height: `${cardH}px`,
-                    scrollSnapAlign: 'start',
+                    width: isTouch ? '100%' : `${cardW}px`,
+                    height: isTouch ? '200px' : `${cardH}px`,
+                    flexShrink: isTouch ? undefined : 0,
+                    scrollSnapAlign: isTouch ? undefined : 'start',
                     border: '1px solid rgba(255,255,255,0.07)',
                     background: '#111108',
                     transition: 'transform 0.2s, border-color 0.2s, box-shadow 0.2s',
