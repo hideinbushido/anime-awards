@@ -1,7 +1,6 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import RequestAccessForm from '@/components/vote/RequestAccessForm';
-import VoteCountdown from '@/components/vote/VoteCountdown';
 import { Clock } from 'lucide-react';
 
 const VOTE_OPEN = process.env.VOTE_OPEN === 'true';
@@ -45,7 +44,7 @@ export default async function VotePage({
                   La phase de vote n&apos;est pas encore ouverte.<br />
                   Revenez très bientôt !
                 </p>
-                <VoteCountdown />
+
               </div>
             </div>
           )}
