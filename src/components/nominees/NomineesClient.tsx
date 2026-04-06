@@ -202,31 +202,9 @@ export default function NomineesClient({
 
   if (!category) return null;
 
-  // Bloque le public si vote pas ouvert — admin voit toujours
-  if (authChecked && !isAdmin && !votingOpen) {
-    const CategoryIcon = getCategoryIcon(category.titleFr, category.titleEn);
-    const animClass = getCategoryAnimClass(category.titleFr, category.titleEn);
+  if (false) {
     return (
       <div>
-        <div className="relative flex items-center gap-3 mb-8 rounded-2xl overflow-hidden"
-          style={fondUrl ? { padding: '20px', backgroundImage: `url('${fondUrl}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}>
-          {fondUrl && <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(8,6,0,0.85) 0%, rgba(8,6,0,0.6) 60%, rgba(8,6,0,0.3) 100%)' }} />}
-          <div className={`relative flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${animClass}`}
-            style={{ background: 'linear-gradient(135deg, #c9a227, #9e7c1e)' }}>
-            <CategoryIcon className="w-5 h-5 text-black" />
-          </div>
-          <h2 className="relative text-2xl font-black text-white">{locale === 'fr' ? category.titleFr : category.titleEn}</h2>
-        </div>
-        <div className="flex flex-col items-center justify-center py-24 gap-4">
-          <div className="w-20 h-20 rounded-full flex items-center justify-center"
-            style={{ background: 'rgba(201,162,39,0.08)', border: '2px solid rgba(201,162,39,0.2)' }}>
-            <Trophy className="w-9 h-9" style={{ color: '#c9a227' }} />
-          </div>
-          <h3 className="text-2xl font-black text-white">Bientôt disponible</h3>
-          <p className="text-center max-w-xs" style={{ color: '#9a8870' }}>
-            Les nominés seront révélés lors de l&apos;ouverture du vote.
-          </p>
-        </div>
       </div>
     );
   }
