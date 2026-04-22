@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 // April 3 2026 at 18:00 Eastern Time (UTC-4)
 const VOTE_OPEN  = new Date('2026-04-03T22:00:00Z');
-// April 29 2026 at 23:59 Eastern Time (UTC-4)
-const VOTE_CLOSE = new Date('2026-04-30T03:59:00Z');
+// April 25 2026 at 23:59 Eastern Time (UTC-4)
+const VOTE_CLOSE = new Date('2026-04-26T03:59:00Z');
 
 function getTimeLeft(target: Date) {
   const diff = target.getTime() - Date.now();
