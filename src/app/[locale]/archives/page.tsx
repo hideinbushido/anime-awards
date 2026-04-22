@@ -103,7 +103,7 @@ export default async function ArchivesPage({
             <div className="rounded-2xl p-8 text-center"
               style={{ background: 'rgba(201,162,39,0.03)', border: '1px dashed rgba(201,162,39,0.2)' }}>
               <Star className="w-8 h-8 mx-auto mb-3" style={{ color: '#4a3a2a' }} />
-              <p className="font-black text-white mb-1">Zenkai Anime Awards 2027</p>
+              <p className="font-black text-white mb-1">????? Awards</p>
               <p className="text-sm" style={{ color: '#4a3a2a' }}>Prochaine édition à venir…</p>
             </div>
           </div>
