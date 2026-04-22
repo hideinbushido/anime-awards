@@ -173,9 +173,9 @@ export default async function HomePage({
                   style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
-                    Résultats en direct le 2 mai
+                    Fin des votes le 25 avril à 23h59
                   </p>
-                  <CountdownTimer targetDate="2026-05-02T20:00:00" label={t('countdown.live')} />
+                  <CountdownTimer targetDate="2026-04-26T03:59:00Z" label={t('countdown.voteClose')} />
                 </div>
               </AnimateOnScroll>
             )}
