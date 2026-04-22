@@ -21,6 +21,8 @@ export default function Navbar() {
     { href: `/${locale}/about`, label: t('about') },
     { href: `/${locale}/categories`, label: t('categories') },
     { href: `/${locale}/vote`, label: t('vote'), highlight: true },
+    { href: `/${locale}/resultats`, label: 'Résultats' },
+    { href: `/${locale}/archives`, label: 'Archives' },
     { href: `/${locale}/faq`, label: t('faq') },
     { href: `/${locale}/createurs`, label: t('team') },
   ];
