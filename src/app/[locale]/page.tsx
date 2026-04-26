@@ -157,7 +157,7 @@ export default async function HomePage({
                   style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
-                    Résultats en direct le 2 mai à 14h
+                    Résultats en direct le 2 mai
                   </p>
                   <CountdownTimer targetDate="2026-05-02T18:00:00Z" label={t('countdown.live')} />
                 </div>
