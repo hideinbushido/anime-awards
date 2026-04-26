@@ -85,22 +85,6 @@ export default async function HomePage({
 
           <div className="container-mobile text-center z-10 py-20">
 
-            {/* Badge prestige */}
-            <AnimateOnScroll animation="fade-down" delay={150} className="flex justify-center mb-8">
-              <div className="inline-flex items-center gap-2 px-6 py-2 text-sm font-semibold tracking-[0.25em] uppercase"
-                style={{
-                  background: 'rgba(201,162,39,0.08)',
-                  border: '1px solid rgba(201,162,39,0.35)',
-                  color: '#e8c54a',
-                  boxShadow: '0 0 20px rgba(201,162,39,0.15)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '4px',
-                }}
-              >
-                <Star className="w-3 h-3" />
-                ✦ {heroLabel} ✦
-              </div>
-            </AnimateOnScroll>
 
             {/* Titre */}
             <AnimateOnScroll animation="cosmic" delay={350} duration={900}>
