@@ -1,7 +1,7 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import RequestAccessForm from '@/components/vote/RequestAccessForm';
-import { Clock } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 
 const VOTE_OPEN = process.env.VOTE_OPEN === 'true';
 
@@ -37,12 +37,11 @@ export default async function VotePage({
                 style={{ background: '#111108', border: '1px solid rgba(201,162,39,0.2)' }}>
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
                   style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
-                  <Clock className="w-8 h-8" style={{ color: '#c9a227' }} />
+                  <Trophy className="w-8 h-8" style={{ color: '#c9a227' }} />
                 </div>
-                <h2 className="text-2xl font-black text-white mb-3">Votes bientôt disponibles</h2>
-                <p className="text-base mb-6" style={{ color: '#9a8870' }}>
-                  La phase de vote n&apos;est pas encore ouverte.<br />
-                  Revenez très bientôt !
+                <h2 className="text-2xl font-black text-white mb-3">Les votes sont terminés !</h2>
+                <p className="text-base" style={{ color: '#9a8870' }}>
+                  Rendez-vous le <strong style={{ color: '#f0e8d0' }}>2 mai</strong> pour découvrir les résultats en direct. 🏆
                 </p>
 
               </div>
