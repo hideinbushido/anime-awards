@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { db } from '@/lib/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 
 export async function POST(req: NextRequest) {
   if (!db) return NextResponse.json({ error: 'Firebase non configuré.' }, { status: 500 });
@@ -17,12 +17,14 @@ export async function POST(req: NextRequest) {
 
   const transport = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
 
-  // Fetch all voters
+  // Fetch only voters who haven't received the reminder yet
   const snap = await getDocs(collection(db, 'votes'));
-  const voters: { name: string; email: string }[] = [];
+  const voters: { id: string; name: string; email: string }[] = [];
   snap.docs.forEach(d => {
     const data = d.data();
-    if (data.voterEmail) voters.push({ name: data.voterName || 'Votant', email: data.voterEmail });
+    if (data.voterEmail && !data.reminderSent) {
+      voters.push({ id: d.id, name: data.voterName || 'Votant', email: data.voterEmail });
+    }
   });
 
   let sent = 0;
@@ -82,6 +84,7 @@ export async function POST(req: NextRequest) {
         subject: `📅 Le Live c'est le 2 Mai — Zenkai Anime Awards 2026`,
         html,
       });
+      await updateDoc(doc(db, 'votes', voter.id), { reminderSent: true });
       sent++;
     } catch {
       failed++;
