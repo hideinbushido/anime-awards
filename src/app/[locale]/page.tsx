@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Trophy, Play, ChevronRight, Star, Tv } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import CountdownTimer from '@/components/home/CountdownTimer';
 
 import AnimateOnScroll from '@/components/home/AnimateOnScroll';
 import CommentsSection from '@/components/home/CommentsSection';
@@ -26,16 +25,6 @@ export default async function HomePage({
   } catch {
     // Firebase not configured yet
   }
-
-  const isVotingOpen = event?.status === 'voting_open';
-  const isVotingClosed =
-    event?.status === 'voting_closed' || event?.status === 'results_published';
-
-  const heroLabel = isVotingOpen
-    ? t('hero.votingOpen')
-    : isVotingClosed
-    ? t('hero.votingClosed')
-    : t('hero.votingOpensSoon');
 
   return (
     <>
@@ -140,41 +129,6 @@ export default async function HomePage({
               </div>
             </AnimateOnScroll>
 
-            {/* Countdown */}
-            {event && isVotingOpen && (
-              <AnimateOnScroll animation="scale-in" delay={1000}>
-                <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
-                  style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
-                >
-                  <CountdownTimer targetDate={event.voteCloseDate} label={t('countdown.voteClose')} />
-                </div>
-              </AnimateOnScroll>
-            )}
-            {/* Countdown live */}
-            {(!event || (!isVotingOpen && !isVotingClosed)) && (
-              <AnimateOnScroll animation="scale-in" delay={1000}>
-                <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8 text-center"
-                  style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
-                >
-                  <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
-                    Résultats en direct le 2 mai
-                  </p>
-                  <CountdownTimer targetDate="2026-05-02T18:00:00Z" label={t('countdown.live')} />
-                </div>
-              </AnimateOnScroll>
-            )}
-            {event && !isVotingOpen && event.liveDate && (
-              <AnimateOnScroll animation="scale-in" delay={1000}>
-                <div className="rounded-xl p-6 sm:p-8 max-w-lg mx-auto mb-8"
-                  style={{ background: 'rgba(15,13,9,0.88)', border: '1px solid rgba(201,162,39,0.25)', boxShadow: '0 0 40px rgba(201,162,39,0.1)', backdropFilter: 'blur(14px)' }}
-                >
-                  <p className="text-xs font-bold uppercase tracking-widest text-center mb-3" style={{ color: '#c9a227' }}>
-                    Résultats en direct le 2 mai
-                  </p>
-                  <CountdownTimer targetDate={event.liveDate} label={t('countdown.live')} />
-                </div>
-              </AnimateOnScroll>
-            )}
           </div>
 
           {/* Fondu bas */}
