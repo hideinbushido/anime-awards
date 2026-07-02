@@ -242,6 +242,31 @@ export async function getVotes(eventId: string): Promise<Vote[]> {
   });
 }
 
+// ─── Comments ─────────────────────────────────────────────────────────────────
+
+export async function getAllComments(): Promise<{ id: string; name: string; text: string; createdAt: string }[]> {
+  const firestore = getDb();
+  const q = query(collection(firestore, 'comments'), orderBy('createdAt', 'desc'));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => {
+    const data = d.data();
+    return {
+      id: d.id,
+      name: data.name ?? 'Anonyme',
+      text: data.text ?? '',
+      createdAt:
+        data.createdAt instanceof Timestamp
+          ? data.createdAt.toDate().toISOString()
+          : (data.createdAt ?? ''),
+    };
+  });
+}
+
+export async function deleteComment(id: string): Promise<void> {
+  const firestore = getDb();
+  await deleteDoc(doc(firestore, 'comments', id));
+}
+
 export async function getVoteCount(eventId: string): Promise<number> {
   const firestore = getDb();
   const q = query(collection(firestore, 'votes'), where('eventId', '==', eventId));

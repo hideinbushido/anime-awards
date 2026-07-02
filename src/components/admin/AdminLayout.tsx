@@ -12,6 +12,7 @@ import {
   Tag,
   Users,
   Vote,
+  MessageSquare,
   Settings,
   LogOut,
   Menu,
@@ -24,6 +25,7 @@ const navItems = [
   { href: 'categories', label: 'Catégories', icon: Tag },
   { href: 'nominees', label: 'Nominés', icon: Users },
   { href: 'votes', label: 'Votes', icon: Vote },
+  { href: 'comments', label: 'Commentaires', icon: MessageSquare },
   { href: 'settings', label: 'Paramètres', icon: Settings },
 ];
 
