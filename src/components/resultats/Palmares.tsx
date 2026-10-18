@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 import '@fontsource-variable/bodoni-moda/wght.css';
 import '@fontsource-variable/bodoni-moda/wght-italic.css';
 import './palmares.css';
@@ -63,8 +62,8 @@ const TXT = {
 };
 type Lang = keyof typeof TXT;
 
-const POSTER_SIZES = '(max-width: 820px) 60vw, 320px';
-const SMALL_SIZES = '(max-width: 820px) 40vw, 200px';
+const POSTER_SIZES = '(max-width: 820px) 76vw, 460px';
+const SMALL_SIZES = '(max-width: 820px) 44vw, 280px';
 
 function Avatar({ p, size }: { p: Presenter; size: number }) {
   return (
@@ -132,7 +131,9 @@ function Scene({ c, i, t, lang }: { c: PalmaresCategory; i: number; t: (typeof T
   return (
     <section className="pm-scene" id={c.id} data-side={i % 2 ? 'r' : 'l'} aria-labelledby={`${c.id}-t`}>
       <div className="pm-scene__bg" aria-hidden>
-        <Image src={c.bg} alt="" fill sizes="50vw" quality={35} />
+        {/* fond pré-flouté (léger, sans filtre CSS) */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`/image/palmares-bg/${c.id}.webp`} alt="" loading="lazy" decoding="async" />
       </div>
       <div className="pm-scene__scrim" aria-hidden />
       <div className="pm-scene__inner">
@@ -140,15 +141,22 @@ function Scene({ c, i, t, lang }: { c: PalmaresCategory; i: number; t: (typeof T
           <p className="pm-kicker" data-pm="head">{t.envelope(i + 1)}</p>
           <h2 className="pm-scene__title" id={`${c.id}-t`} data-pm="head">{title}</h2>
           <div className="pm-presenter" data-pm="head">
-            <Avatar p={c.presenter} size={56} />
+            <Avatar p={c.presenter} size={76} />
             <span>
               <small>{t.givenBy}</small>
               <b>{c.presenter.name}</b>
               {c.presenter.handle && <i>{c.presenter.handle}</i>}
             </span>
           </div>
-          <button type="button" className="pm-replay" data-pm="replay">{t.replay}</button>
         </header>
+
+        <div className="pm-wincap" data-pm="cap">
+          <span className="pm-place pm-place--1">{t.first}</span>
+          <Words text={c.winner.name} className="pm-win__name" />
+          {c.winner.sub && <em>{c.winner.sub}</em>}
+          {c.winner.credit && <small>{c.winner.credit}</small>}
+          <button type="button" className="pm-replay" data-pm="replay">{t.replay}</button>
+        </div>
 
         <div className="pm-podium">
           {c.second && <SmallCard e={c.second} place={2} label={t.second} />}
@@ -165,12 +173,6 @@ function Scene({ c, i, t, lang }: { c: PalmaresCategory; i: number; t: (typeof T
               </div>
               <span className="pm-win__flash" data-pm="flash" aria-hidden />
             </div>
-            <figcaption data-pm="cap">
-              <span className="pm-place pm-place--1">{t.first}</span>
-              <Words text={c.winner.name} className="pm-win__name" />
-              {c.winner.sub && <em>{c.winner.sub}</em>}
-              {c.winner.credit && <small>{c.winner.credit}</small>}
-            </figcaption>
           </figure>
           {c.third && <SmallCard e={c.third} place={3} label={t.third} />}
         </div>
@@ -184,7 +186,6 @@ export default function Palmares({ locale }: { locale: string }) {
   const t = TXT[lang];
   const root = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(-1);
-  const lenisRef = useRef<Lenis | null>(null);
   const all = [...PALMARES_2026, ANIME_DE_L_ANNEE];
 
   useEffect(() => {
@@ -194,16 +195,6 @@ export default function Palmares({ locale }: { locale: string }) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     el.classList.add(reduced ? 'pm-static' : 'pm-js');
 
-    let lenis: Lenis | null = null;
-    let raf: ((time: number) => void) | null = null;
-    if (!reduced) {
-      lenis = new Lenis({ lerp: 0.11, smoothWheel: true });
-      lenisRef.current = lenis;
-      lenis.on('scroll', ScrollTrigger.update);
-      raf = (time: number) => lenis!.raf(time * 1000);
-      gsap.ticker.add(raf);
-      gsap.ticker.lagSmoothing(0);
-    }
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
@@ -256,16 +247,14 @@ export default function Palmares({ locale }: { locale: string }) {
           .to(q('flapR'), { xPercent: 102, duration: 0.85, ease: 'power4.inOut' }, at + 0.42)
           .fromTo(q('flash'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.4, duration: 0.25, ease: 'power2.out' }, at + 0.55)
           .to(q('flash'), { opacity: 0, duration: 0.7, ease: 'power2.out' }, at + 0.8)
-          .fromTo(q('poster'), { scale: 1.12, filter: 'brightness(1.8)' }, { scale: 1, filter: 'brightness(1)', duration: 1.2 }, at + 0.55)
-          .fromTo(s.querySelectorAll('.pm-win figcaption .pm-place, .pm-win figcaption em, .pm-win figcaption small'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08 }, at + 0.95)
+          .fromTo(q('poster'), { scale: 1.12 }, { scale: 1, duration: 1.2 }, at + 0.55)
+          .fromTo(s.querySelectorAll('.pm-wincap .pm-place, .pm-wincap em, .pm-wincap small'), { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08 }, at + 0.95)
           .fromTo(s.querySelectorAll('.pm-win__name .pm-w__in'), { yPercent: 110 }, { yPercent: 0, duration: 0.9, stagger: 0.06 }, at + 0.9);
 
         if (reduced) { tl.progress(1); s.classList.add('is-done'); return; }
         ScrollTrigger.create({ trigger: s, start: 'top 58%', once: true, onEnter: () => tl.play() });
         const btn = s.querySelector('[data-pm="replay"]');
         btn?.addEventListener('click', () => { s.classList.remove('is-done'); tl.restart(); });
-        // fond : dérive lente
-        gsap.fromTo(s.querySelector('.pm-scene__bg'), { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: 'bottom top', scrub: true } });
       });
 
       /* ---------- Pic : animé de l'année ---------- */
@@ -284,7 +273,7 @@ export default function Palmares({ locale }: { locale: string }) {
           .to('.pm-peak__lead', { opacity: 0, y: -30, duration: 0.08 }, 0.2)
           .fromTo('.pm-peak__pillar', { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.2 }, 0.12)
           .fromTo('.pm-peak__bg', { opacity: 0, scale: 1.15 }, { opacity: 0.55, scale: 1, duration: 0.35 }, 0.15)
-          .fromTo('.pm-peak__poster', { yPercent: 60, scale: 0.72, opacity: 0, filter: 'brightness(2.2)' }, { yPercent: 0, scale: 1, opacity: 1, filter: 'brightness(1)', duration: 0.3, ease: 'power2.out' }, 0.26)
+          .fromTo('.pm-peak__poster', { yPercent: 60, scale: 0.72, opacity: 0 }, { yPercent: 0, scale: 1, opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.26)
           .fromTo('.pm-peak__frame', { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.16, ease: 'power2.out' }, 0.5)
           .fromTo('.pm-peak__kicker', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.08 }, 0.55)
           .fromTo('.pm-peak__name .pm-w__in', { yPercent: 115 }, { yPercent: 0, duration: 0.14, stagger: 0.025, ease: 'power3.out' }, 0.58)
@@ -307,9 +296,6 @@ export default function Palmares({ locale }: { locale: string }) {
       clearTimeout(tmo);
       window.removeEventListener('load', refresh);
       ctx.revert();
-      if (raf) gsap.ticker.remove(raf);
-      lenis?.destroy();
-      lenisRef.current = null;
     };
   }, []);
 
@@ -324,8 +310,8 @@ export default function Palmares({ locale }: { locale: string }) {
   const go = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     const target = document.getElementById(id); if (!target) return;
-    if (lenisRef.current) lenisRef.current.scrollTo(target, { offset: -110, duration: 1.4 });
-    else target.scrollIntoView({ behavior: 'auto' });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 110, behavior: reduced ? 'auto' : 'smooth' });
   };
 
   const peakTitle = lang === 'en' ? ANIME_DE_L_ANNEE.titleEn : ANIME_DE_L_ANNEE.titleFr;
@@ -335,7 +321,8 @@ export default function Palmares({ locale }: { locale: string }) {
       {/* ---------- HERO ---------- */}
       <section className="pm-hero" aria-labelledby="pm-h1">
         <div className="pm-hero__bg" aria-hidden>
-          <Image src="/FOND_ANIME.png" alt="" fill priority sizes="100vw" quality={55} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/image/palmares-bg/hero.webp" alt="" fetchPriority="high" decoding="async" />
         </div>
         <div className="pm-hero__veil" aria-hidden />
         <div className="pm-hero__posters" aria-hidden>
@@ -370,7 +357,8 @@ export default function Palmares({ locale }: { locale: string }) {
       <section className="pm-peak" id={ANIME_DE_L_ANNEE.id} aria-labelledby="pm-peak-t">
         <div className="pm-peak__stage">
           <div className="pm-peak__bg" aria-hidden>
-            <Image src={ANIME_DE_L_ANNEE.bg} alt="" fill sizes="100vw" quality={50} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/image/palmares-bg/hero.webp" alt="" loading="lazy" decoding="async" />
           </div>
           <div className="pm-peak__pillar" aria-hidden />
           <p className="pm-peak__lead" aria-hidden>{t.peakLead}…</p>
